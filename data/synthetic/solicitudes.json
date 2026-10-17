@@ -1,0 +1,132 @@
+[
+  {
+    "caso": "Juan - perforacion de frente (ambar)",
+    "nombre": "Juan Mamani",
+    "solicitud": {
+      "tarea": "perforación de frente",
+      "labor": "NV-3820 TJ-12",
+      "turno": "noche",
+      "trabajador_id": "T-001",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "María - carguío en tajo (verde)",
+    "nombre": "María Condori",
+    "solicitud": {
+      "tarea": "carguío de mineral con pala",
+      "labor": "TA-FASE4 BC-3400",
+      "turno": "dia",
+      "trabajador_id": "T-002",
+      "altitud_msnm": 3400,
+      "tipo_mineria": "tajo_abierto",
+      "empleador": "titular"
+    }
+  },
+  {
+    "caso": "Pedro - desatado (rojo por aptitud)",
+    "nombre": "Pedro Huamán",
+    "solicitud": {
+      "tarea": "desatado de rocas",
+      "labor": "NV-3900 GA-05",
+      "turno": "noche",
+      "trabajador_id": "T-003",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "Luis - shotcrete en chimenea (rojo por atmósfera)",
+    "nombre": "Luis Ccahuana",
+    "solicitud": {
+      "tarea": "sostenimiento con shotcrete",
+      "labor": "NV-3700 CH-02",
+      "turno": "dia",
+      "trabajador_id": "T-004",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "titular"
+    }
+  },
+  {
+    "caso": "Carlos Huanca - aleatorio",
+    "nombre": "Carlos Huanca",
+    "solicitud": {
+      "tarea": "limpieza con scoop",
+      "labor": "NV-4620 XC-26",
+      "turno": "dia",
+      "trabajador_id": "T-101",
+      "altitud_msnm": 4620,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "Rosa Poma - aleatorio",
+    "nombre": "Rosa Poma",
+    "solicitud": {
+      "tarea": "desatado de rocas",
+      "labor": "NV-3820 TJ-12",
+      "turno": "dia",
+      "trabajador_id": "T-102",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "Edwin Poma - aleatorio",
+    "nombre": "Edwin Poma",
+    "solicitud": {
+      "tarea": "carguío de taladros",
+      "labor": "NV-3820 TJ-12",
+      "turno": "noche",
+      "trabajador_id": "T-103",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "titular"
+    }
+  },
+  {
+    "caso": "Yeni Apaza - aleatorio",
+    "nombre": "Yeni Apaza",
+    "solicitud": {
+      "tarea": "mantenimiento de bombas",
+      "labor": "NV-3900 GA-20",
+      "turno": "dia",
+      "trabajador_id": "T-104",
+      "altitud_msnm": 3900,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "Wilber Ramos - aleatorio",
+    "nombre": "Wilber Ramos",
+    "solicitud": {
+      "tarea": "carguío de taladros",
+      "labor": "NV-4520 XC-22",
+      "turno": "noche",
+      "trabajador_id": "T-105",
+      "altitud_msnm": 4620,
+      "tipo_mineria": "subterranea",
+      "empleador": "contratista"
+    }
+  },
+  {
+    "caso": "Nely Huanca - aleatorio",
+    "nombre": "Nely Huanca",
+    "solicitud": {
+      "tarea": "desatado de rocas",
+      "labor": "NV-4010 RP-25",
+      "turno": "noche",
+      "trabajador_id": "T-106",
+      "altitud_msnm": 4210,
+      "tipo_mineria": "subterranea",
+      "empleador": "titular"
+    }
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "trabajador_id": "T-001",
+    "nombre": "Juan Mamani",
+    "puesto": "perforista",
+    "empleador": "contratista",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-002",
+    "nombre": "María Condori",
+    "puesto": "operadora de pala",
+    "empleador": "titular",
+    "unidad": "UM Pampa Roja"
+  },
+  {
+    "trabajador_id": "T-003",
+    "nombre": "Pedro Huamán",
+    "puesto": "desatador",
+    "empleador": "contratista",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-004",
+    "nombre": "Luis Ccahuana",
+    "puesto": "operador de shotcrete",
+    "empleador": "titular",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-101",
+    "nombre": "Carlos Huanca",
+    "puesto": "perforista",
+    "empleador": "contratista",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-102",
+    "nombre": "Rosa Poma",
+    "puesto": "ayudante de perforación",
+    "empleador": "contratista",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-103",
+    "nombre": "Edwin Poma",
+    "puesto": "perforista",
+    "empleador": "titular",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-104",
+    "nombre": "Yeni Apaza",
+    "puesto": "operador de shotcrete",
+    "empleador": "contratista",
+    "unidad": "UM Ccori Huayco"
+  },
+  {
+    "trabajador_id": "T-105",
+    "nombre": "Wilber Ramos",
+    "puesto": "mecánico",
+    "empleador": "contratista",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-106",
+    "nombre": "Nely Huanca",
+    "puesto": "electricista",
+    "empleador": "titular",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-107",
+    "nombre": "Hugo Quispe",
+    "puesto": "operador de shotcrete",
+    "empleador": "titular",
+    "unidad": "UM Ccori Huayco"
+  },
+  {
+    "trabajador_id": "T-108",
+    "nombre": "Elsa Flores",
+    "puesto": "mecánico",
+    "empleador": "titular",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-109",
+    "nombre": "Percy Flores",
+    "puesto": "ayudante de perforación",
+    "empleador": "titular",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-110",
+    "nombre": "Gladys Torres",
+    "puesto": "operador de scoop",
+    "empleador": "contratista",
+    "unidad": "UM Ccori Huayco"
+  },
+  {
+    "trabajador_id": "T-111",
+    "nombre": "Fredy Huanca",
+    "puesto": "operador de scoop",
+    "empleador": "titular",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-112",
+    "nombre": "Delia Poma",
+    "puesto": "desatador",
+    "empleador": "contratista",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-113",
+    "nombre": "Rolando Quispe",
+    "puesto": "mecánico",
+    "empleador": "contratista",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-114",
+    "nombre": "Marisol Torres",
+    "puesto": "desatador",
+    "empleador": "contratista",
+    "unidad": "UM Santa Rita"
+  },
+  {
+    "trabajador_id": "T-115",
+    "nombre": "Teodoro Flores",
+    "puesto": "operador de scoop",
+    "empleador": "titular",
+    "unidad": "UM Cerro Vigia"
+  },
+  {
+    "trabajador_id": "T-116",
+    "nombre": "Celia Yupanqui",
+    "puesto": "electricista",
+    "empleador": "contratista",
+    "unidad": "UM Santa Rita"
+  }
+]

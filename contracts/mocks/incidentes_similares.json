@@ -1,0 +1,25 @@
+{
+  "casos_similares": 3,
+  "patron": "3 casos de desprendimiento de roca en frentes de avance durante el turno noche, asociados a desatado insuficiente o sostenimiento pendiente.",
+  "riesgo_potencial_max": "alto",
+  "casos": [
+    {
+      "id": "INC-0007",
+      "resumen_es": "Desprendimiento de roca del techo durante la perforación del frente en turno noche; el perforista sufrió una contusión en el hombro.",
+      "riesgo_critico": "desprendimiento_de_roca",
+      "causa_probable": "Desatado insuficiente después de la voladura del turno anterior."
+    },
+    {
+      "id": "INC-0012",
+      "resumen_es": "Caída de un planchón desde la corona mientras se perforaba el frente de avance de noche; sin lesionados, daño a la perforadora.",
+      "riesgo_critico": "desprendimiento_de_roca",
+      "causa_probable": "Sostenimiento con pernos pendiente en los últimos 2 m del frente."
+    },
+    {
+      "id": "INC-0019",
+      "resumen_es": "Lesión en la mano por roca suelta desprendida del hastial durante la perforación nocturna del frente.",
+      "riesgo_critico": "desprendimiento_de_roca",
+      "causa_probable": "Iluminación deficiente que impidió identificar roca suelta durante el desatado."
+    }
+  ]
+}

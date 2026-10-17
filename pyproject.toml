@@ -1,0 +1,10 @@
+[project]
+name = "vigia"
+version = "0.1.0"
+description = "Vigia: PETAR / IPERC continuo dinamico con gemelos digitales (Reto M1, mineria peruana)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["contracts", "nanda_index", "agents"]
+addopts = "--import-mode=importlib -q"

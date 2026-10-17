@@ -1,0 +1,6 @@
+id,agente,limite,unidad,tipo,tipo_mineria,base_legal,fuente,estado
+LA-01,o2_pct,19.5,%,min_rojo,todas,DS 024-2016-EM art. 246 lit. b,F-01,ejemplo
+LA-02,co_ppm,25,ppm,max_rojo,todas,DS 024-2016-EM Anexo 15: CO 25 ppm TWA,F-03,ejemplo
+LA-03,ruido_dBA,85,dBA,max_ambar,todas,DS 024-2016-EM Anexo 12: 85 dB(A) por 8 h; art. 103,F-04,ejemplo
+LA-04,ultimo_desatado_h,12,h,max_ambar,subterranea,DS 024-2016-EM art. 224: desatar antes de perforar; 12 h = un turno (criterio técnico),F-01,ejemplo
+LA-05,ventilacion,operativa,,igual_rojo,subterranea,DS 024-2016-EM arts. 246-248: ventilación,F-01,ejemplo

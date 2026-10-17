@@ -1,0 +1,16 @@
+id,titulo,link,origen,dato_que_aporta,fecha_consulta
+F-01,Reglamento de Seguridad y Salud Ocupacional en Minería (DS 024-2016-EM) - texto consolidado Ed. 2026,https://cdn.www.gob.pe/uploads/document/file/6437172/5631689-rsso-reglamento-2026.pdf,MINEM,"Arts. 95, 96, 129, 130, 224, 246-248, 273",2026-10-17
+F-02,Anexos del DS 024-2016-EM - texto consolidado,https://cdn.www.gob.pe/uploads/document/file/9704804/5631689-anexos-ds-024-2016-em.pdf,MINEM,"Anexo 7 (IPERC continuo), Anexo 15 (sílice), Anexo 16-A (altitud), Anexo 18 (PETAR)",2026-10-17
+F-03,DS 024-2016-EM Anexo 15 - Límites de exposición ocupacional para agentes químicos,https://spij.minjus.gob.pe/Graficos/Peru/2016/Julio/28/DS-024-2016-EM-ANEXO-15.pdf,SPIJ Minjus,CO 25 ppm TWA (ítem 33),2026-10-17
+F-04,DS 024-2016-EM Anexo 12 - Límites de exposición a ruido,https://spij.minjus.gob.pe/Graficos/Peru/2016/Julio/28/DS-024-2016-EM-ANEXO-12.pdf,SPIJ Minjus,85 dB(A) por 8 h; 83 dB(A) por 12 h,2026-10-17
+F-05,DS 023-2017-EM - modificatoria del DS 024-2016-EM (El Peruano 18/08/2017),https://faolex.fao.org/docs/pdf/per173452.pdf,FAOLEX (El Peruano),Modificaciones a los arts. 224 y 246,2026-10-17
+F-06,DS 024-2016-EM - norma original con anexos,https://www.gob.pe/institucion/osinergmin/normas-legales/741887-024-2016-em,Osinergmin,Texto original publicado,2026-10-17
+F-07,Industrial Safety and Health Analytics Database (IHM Stefanini),https://www.kaggle.com/datasets/ihmstefanini/industrial-safety-and-health-analytics-database,Kaggle,Descripciones de accidentes para etiquetar (no son datos de Perú),2026-10-17
+F-08,Estadística de accidentes mortales en minería,https://www.minem.gob.pe/_estadistica.php?idSector=1&idEstadistica=12464,MINEM,Accidentes mortales por año 2000-2023,2026-10-17
+F-09,Notificaciones de accidentes de trabajo mortales (SAT),https://www.datosabiertos.gob.pe/dataset/notificaciones-de-accidentes-de-trabajo-mortales-fuente-sistema-inform%C3%A1tico-de-accidentes-de,MTPE - Datos Abiertos,CSV 2012-2024 con diccionario de datos,2026-10-17
+F-10,Boletín estadístico SAT,https://www.gob.pe/institucion/mtpe/informes-publicaciones/7748528-boletin-sat-diciembre-2025,MTPE,Notificaciones mensuales por actividad económica,2026-10-17
+F-11,projnanda/adapter,https://github.com/projnanda/adapter,Project NANDA,API del registry: POST /register y GET /lookup/{agent_id},2026-10-17
+F-12,projnanda/agentfacts-format,https://github.com/projnanda/agentfacts-format,Project NANDA,Campos de AgentFacts,2026-10-17
+F-13,NANDA: The Internet of AI Agents (arXiv 2507.14263),https://arxiv.org/abs/2507.14263,arXiv,AgentFacts firmadas como credenciales verificables,2026-10-17
+F-14,Datos sintéticos de Vigia,data/synthetic/generar.py,interno,"Trabajadores, labores, solicitudes e incidentes de demo",2026-10-17
+F-15,Criterio técnico del equipo Vigia (pendiente de validación con médico ocupacional),,interno,Umbrales de sueño y rotación,2026-10-17

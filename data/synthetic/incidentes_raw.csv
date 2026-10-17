@@ -1,0 +1,22 @@
+id,fecha,unidad,descripcion
+INC-0001,2024-01-15,UM Santa Rita,Turno noche. Detonación prematura durante el carguío de taladros del frente; dos trabajadores con trauma acústico. Causa identificada: Fulminante dañado y circuito sin verificar antes del carguío.
+INC-0002,2024-02-21,UM Santa Rita,Turno noche. Un scoop golpeó a un ayudante que transitaba por la galería con baja visibilidad. Causa identificada: Sin vigía ni separación entre tránsito peatonal y de equipos.
+INC-0003,2024-03-29,UM Ccori Huayco,Turno día. Roca suelta cayó cerca del perforista durante la perforación del frente en turno día; sin lesiones. Causa identificada: Desatado incompleto en la corona.
+INC-0004,2024-05-05,UM Cerro Vigia,Turno día. Durante la instalación de pernos se desprendió un bloque del hastial y golpeó el equipo. Causa identificada: Secuencia de sostenimiento no respetada.
+INC-0005,2024-06-11,UM Santa Rita,Turno noche. Un bloque de roca cayó sobre la barretilla del desatador y le provocó un esguince de muñeca. Causa identificada: Barretilla de longitud inadecuada y posición debajo de la roca suelta.
+INC-0006,2024-07-18,UM Santa Rita,Turno día. Descarga eléctrica leve al manipular un tablero de bombas en la rampa. Causa identificada: No se aplicó bloqueo y etiquetado.
+INC-0007,2024-08-24,UM Santa Rita,Turno noche. Desprendimiento de roca del techo durante la perforación del frente en turno noche; el perforista sufrió una contusión en el hombro. Causa identificada: Desatado insuficiente después de la voladura del turno anterior.
+INC-0008,2024-09-30,UM Cerro Vigia,Turno noche. El perforista presentó mareos por acumulación de gases después de la voladura en el tajeo. Causa identificada: Ventilación auxiliar apagada y sin medición de gases antes del ingreso.
+INC-0009,2024-11-06,UM Pampa Roja,Turno noche. Un camión de acarreo se salió de la vía en la rampa del tajo durante el turno noche. Causa identificada: Fatiga del operador al final del turno.
+INC-0010,2024-12-13,UM Pampa Roja,Turno día. La pala golpeó la tolva del camión durante el carguío; el operador resultó ileso. Causa identificada: Comunicación radial deficiente entre pala y camión.
+INC-0011,2025-01-19,UM Santa Rita,Turno día. Falla del freno del winche durante el izaje de materiales en la chimenea. Causa identificada: Mantenimiento preventivo vencido.
+INC-0012,2025-02-25,UM Santa Rita,"Turno noche. Caída de un planchón desde la corona mientras se perforaba el frente de avance de noche; sin lesionados, daño a la perforadora. Causa identificada: Sostenimiento con pernos pendiente en los últimos 2 m del frente."
+INC-0013,2025-04-03,UM Ccori Huayco,Turno día. El operador de shotcrete presentó síntomas de hipoxia en una chimenea con ventilación deficiente. Causa identificada: Ingreso sin medición de oxígeno.
+INC-0014,2025-05-10,UM Ccori Huayco,Turno día. Amago de incendio por chispas de soldadura sobre material combustible en la galería. Causa identificada: Área de trabajo en caliente sin limpieza ni extintor.
+INC-0015,2025-06-16,UM Santa Rita,Turno noche. Un volquete y una camioneta casi colisionan en la rampa por exceso de velocidad. Causa identificada: Incumplimiento de los límites de velocidad.
+INC-0016,2025-07-23,UM Ccori Huayco,Turno día. Un trabajador resbaló en la plataforma de la chimenea; el arnés detuvo la caída. Causa identificada: Plataforma húmeda y sin baranda.
+INC-0017,2025-08-29,UM Pampa Roja,Turno día. Exposición a polvo durante la perforación en seco en el banco. Causa identificada: Sistema de supresión de polvo inoperativo.
+INC-0018,2025-10-05,UM Cerro Vigia,Turno noche. Desatador lesionado por un planchón en el frente de avance durante el turno noche. Causa identificada: Iluminación insuficiente en el frente.
+INC-0019,2025-11-11,UM Cerro Vigia,Turno noche. Lesión en la mano por roca suelta desprendida del hastial durante la perforación nocturna del frente. Causa identificada: Iluminación deficiente que impidió identificar roca suelta durante el desatado.
+INC-0020,2025-12-18,UM Cerro Vigia,Turno día. Un trabajador ingresó a una tolva sin permiso para destrabar mineral. Causa identificada: Ausencia de PETAR y de vigía en el ingreso.
+INC-0021,2026-01-24,UM Ccori Huayco,Turno día. Proyección de rocas alcanzó la zona de un vigía mal ubicado. Causa identificada: Vigía ubicado a distancia insegura.

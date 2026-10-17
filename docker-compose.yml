@@ -1,0 +1,125 @@
+name: vigia
+
+x-postgres: &postgres
+  image: postgres:16-alpine
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+    interval: 3s
+    timeout: 3s
+    retries: 20
+
+x-servicio: &servicio
+  restart: unless-stopped
+
+services:
+  # Proyecto `operacion`: incidentes, PETAR y checkpoints de LangGraph.
+  db_operacion:
+    <<: *postgres
+    environment:
+      POSTGRES_DB: operacion
+      POSTGRES_USER: vigia
+      POSTGRES_PASSWORD: vigia_local
+    volumes: [db_operacion:/var/lib/postgresql/data]
+    ports: ["5433:5432"]
+    networks: [operacion]
+
+  # Proyecto `clinica`: solo el gemelo. Red interna sin puerto publicado.
+  db_clinica:
+    <<: *postgres
+    environment:
+      POSTGRES_DB: clinica
+      POSTGRES_USER: vigia_clinica
+      POSTGRES_PASSWORD: vigia_clinica_local
+    volumes: [db_clinica:/var/lib/postgresql/data]
+    networks: [clinica]
+
+  nanda_index:
+    <<: *servicio
+    build: {context: ., dockerfile: nanda_index/Dockerfile}
+    environment:
+      NANDA_OFICIAL_URL: ${NANDA_OFICIAL_URL:-}
+    ports: ["8010:8000"]
+    networks: [operacion]
+
+  incidentes:
+    <<: *servicio
+    build: {context: ., dockerfile: agents/incidentes/Dockerfile}
+    environment:
+      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
+      NANDA_URL: http://nanda_index:8000
+      AGENT_URL: http://incidentes:8000
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    depends_on:
+      db_operacion: {condition: service_healthy}
+    ports: ["8011:8000"]
+    networks: [operacion]
+
+  area:
+    <<: *servicio
+    build: {context: ., dockerfile: agents/area/Dockerfile}
+    environment:
+      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
+      NANDA_URL: http://nanda_index:8000
+      AGENT_URL: http://area:8000
+    depends_on:
+      db_operacion: {condition: service_healthy}
+    ports: ["8012:8000"]
+    networks: [operacion]
+
+  # Zona clinica: sin puerto publicado; solo ptw lo llama. No recibe la clave de Claude.
+  gemelo:
+    <<: *servicio
+    build: {context: ., dockerfile: agents/gemelo/Dockerfile}
+    environment:
+      DATABASE_URL: postgresql://vigia_clinica:vigia_clinica_local@db_clinica:5432/clinica
+      NANDA_URL: http://nanda_index:8000
+      AGENT_URL: http://gemelo:8000
+      SHEETS_REGLAS_ZONA_CLINICA_URL: ${SHEETS_REGLAS_ZONA_CLINICA_URL:-}
+    depends_on:
+      db_clinica: {condition: service_healthy}
+    networks: [operacion, clinica]
+
+  ptw:
+    <<: *servicio
+    build: {context: ., dockerfile: agents/ptw/Dockerfile}
+    environment:
+      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
+      NANDA_URL: http://nanda_index:8000
+      AGENT_URL: http://ptw:8000
+      INCIDENTES_URL: http://incidentes:8000
+      AREA_URL: http://area:8000
+      GEMELO_URL: http://gemelo:8000
+      MOCK_MODE: ${MOCK_MODE:-false}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_HOST: ${LANGFUSE_HOST:-https://cloud.langfuse.com}
+      SHEETS_LIMITES_AREA_URL: ${SHEETS_LIMITES_AREA_URL:-}
+      SHEETS_CONTROLES_IPERC_URL: ${SHEETS_CONTROLES_IPERC_URL:-}
+    depends_on:
+      db_operacion: {condition: service_healthy}
+      nanda_index: {condition: service_started}
+      incidentes: {condition: service_started}
+      area: {condition: service_started}
+      gemelo: {condition: service_started}
+    ports: ["8000:8000"]
+    networks: [operacion]
+
+  ui:
+    <<: *servicio
+    build: {context: ., dockerfile: ui/Dockerfile}
+    environment:
+      PTW_URL: http://ptw:8000
+    depends_on: [ptw]
+    ports: ["8501:8501"]
+    networks: [operacion]
+
+networks:
+  operacion:
+  clinica:
+    internal: true
+
+volumes:
+  db_operacion:
+  db_clinica:

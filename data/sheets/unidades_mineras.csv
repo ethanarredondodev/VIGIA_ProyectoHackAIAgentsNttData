@@ -1,0 +1,5 @@
+unidad,empresa,region,tipo_mineria,estrato,altitud_msnm,regimen_turno,fuente
+UM Cerro Vigia,Minera Andina Sintetica S.A.,Pasco,subterranea,mediana_mineria,4210,14x7,sintetico
+UM Pampa Roja,Cobre del Sur Sintetico S.A.,Arequipa,tajo_abierto,gran_mineria,3400,14x7,sintetico
+UM Ccori Huayco,Aurifera Huayco Sintetica S.A.C.,La Libertad,subterranea,mediana_mineria,3900,10x4,sintetico
+UM Santa Rita,Polimetalica Rita Sintetica S.A.,Junin,subterranea,pequena_productora,4620,20x10,sintetico

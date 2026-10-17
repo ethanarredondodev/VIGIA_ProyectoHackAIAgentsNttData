@@ -1,0 +1,110 @@
+[
+  {
+    "labor": "NV-3820 TJ-12",
+    "unidad": "UM Cerro Vigia",
+    "co_ppm": 12,
+    "o2_pct": 20.1,
+    "ventilacion": "operativa",
+    "ruido_dBA": 91,
+    "ultimo_desatado_h": 26
+  },
+  {
+    "labor": "TA-FASE4 BC-3400",
+    "unidad": "UM Pampa Roja",
+    "co_ppm": 3,
+    "o2_pct": 20.9,
+    "ventilacion": "natural",
+    "ruido_dBA": 80,
+    "ultimo_desatado_h": 6
+  },
+  {
+    "labor": "NV-3900 GA-05",
+    "unidad": "UM Cerro Vigia",
+    "co_ppm": 6,
+    "o2_pct": 20.6,
+    "ventilacion": "operativa",
+    "ruido_dBA": 84,
+    "ultimo_desatado_h": 4
+  },
+  {
+    "labor": "NV-3700 CH-02",
+    "unidad": "UM Cerro Vigia",
+    "co_ppm": 18,
+    "o2_pct": 19.2,
+    "ventilacion": "deficiente",
+    "ruido_dBA": 88,
+    "ultimo_desatado_h": 8
+  },
+  {
+    "labor": "NV-3900 GA-20",
+    "unidad": "UM Ccori Huayco",
+    "co_ppm": 1,
+    "o2_pct": 20.7,
+    "ventilacion": "operativa",
+    "ruido_dBA": 95,
+    "ultimo_desatado_h": 6
+  },
+  {
+    "labor": "NV-4520 RP-21",
+    "unidad": "UM Santa Rita",
+    "co_ppm": 19,
+    "o2_pct": 19.7,
+    "ventilacion": "deficiente",
+    "ruido_dBA": 94,
+    "ultimo_desatado_h": 15
+  },
+  {
+    "labor": "NV-4520 XC-22",
+    "unidad": "UM Santa Rita",
+    "co_ppm": 17,
+    "o2_pct": 20.7,
+    "ventilacion": "operativa",
+    "ruido_dBA": 96,
+    "ultimo_desatado_h": 24
+  },
+  {
+    "labor": "NV-4010 TJ-23",
+    "unidad": "UM Cerro Vigia",
+    "co_ppm": 17,
+    "o2_pct": 20.6,
+    "ventilacion": "operativa",
+    "ruido_dBA": 78,
+    "ultimo_desatado_h": 10
+  },
+  {
+    "labor": "NV-3900 GA-24",
+    "unidad": "UM Ccori Huayco",
+    "co_ppm": 14,
+    "o2_pct": 19.6,
+    "ventilacion": "operativa",
+    "ruido_dBA": 91,
+    "ultimo_desatado_h": 25
+  },
+  {
+    "labor": "NV-4010 RP-25",
+    "unidad": "UM Cerro Vigia",
+    "co_ppm": 3,
+    "o2_pct": 20.7,
+    "ventilacion": "operativa",
+    "ruido_dBA": 95,
+    "ultimo_desatado_h": 17
+  },
+  {
+    "labor": "NV-4620 XC-26",
+    "unidad": "UM Santa Rita",
+    "co_ppm": 4,
+    "o2_pct": 20.1,
+    "ventilacion": "operativa",
+    "ruido_dBA": 92,
+    "ultimo_desatado_h": 25
+  },
+  {
+    "labor": "NV-4620 TJ-27",
+    "unidad": "UM Santa Rita",
+    "co_ppm": 19,
+    "o2_pct": 20.0,
+    "ventilacion": "operativa",
+    "ruido_dBA": 78,
+    "ultimo_desatado_h": 30
+  }
+]

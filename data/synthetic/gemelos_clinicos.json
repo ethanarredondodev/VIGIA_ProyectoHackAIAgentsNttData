@@ -1,0 +1,248 @@
+[
+  {
+    "trabajador_id": "T-001",
+    "sueno_h": 5.1,
+    "dia_rotacion": 12,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [
+        "Hipoacusia neurosensorial leve bilateral"
+      ],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-02-15"
+    }
+  },
+  {
+    "trabajador_id": "T-002",
+    "sueno_h": 7.4,
+    "dia_rotacion": 4,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-05-30"
+    }
+  },
+  {
+    "trabajador_id": "T-003",
+    "sueno_h": 3.8,
+    "dia_rotacion": 9,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [
+        "Lumbalgia mecánica"
+      ],
+      "restricciones": [
+        "Evitar cargas > 25 kg"
+      ],
+      "emo_vigente_hasta": "2026-12-20"
+    }
+  },
+  {
+    "trabajador_id": "T-004",
+    "sueno_h": 7.0,
+    "dia_rotacion": 6,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-01-10"
+    }
+  },
+  {
+    "trabajador_id": "T-101",
+    "sueno_h": 5.5,
+    "dia_rotacion": 3,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-102",
+    "sueno_h": 4.6,
+    "dia_rotacion": 2,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-103",
+    "sueno_h": 7.4,
+    "dia_rotacion": 12,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-104",
+    "sueno_h": 7.7,
+    "dia_rotacion": 1,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-105",
+    "sueno_h": 5.1,
+    "dia_rotacion": 13,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-106",
+    "sueno_h": 5.9,
+    "dia_rotacion": 6,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-107",
+    "sueno_h": 8.4,
+    "dia_rotacion": 7,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-108",
+    "sueno_h": 7.3,
+    "dia_rotacion": 1,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-109",
+    "sueno_h": 8.0,
+    "dia_rotacion": 7,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-110",
+    "sueno_h": 5.9,
+    "dia_rotacion": 11,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-111",
+    "sueno_h": 5.2,
+    "dia_rotacion": 7,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-112",
+    "sueno_h": 7.9,
+    "dia_rotacion": 13,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-113",
+    "sueno_h": 5.6,
+    "dia_rotacion": 4,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-114",
+    "sueno_h": 6.1,
+    "dia_rotacion": 11,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-115",
+    "sueno_h": 7.5,
+    "dia_rotacion": 9,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  },
+  {
+    "trabajador_id": "T-116",
+    "sueno_h": 5.9,
+    "dia_rotacion": 3,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    }
+  }
+]

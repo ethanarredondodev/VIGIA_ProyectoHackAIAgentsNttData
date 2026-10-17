@@ -1,0 +1,3 @@
+-r agents/ptw/requirements.txt
+streamlit==1.66.0
+pytest==9.1.1
