@@ -9,6 +9,7 @@ COPY agents/comun/ agents/comun/
 COPY agents/ptw/ agents/ptw/
 COPY data/sheets/limites_area.csv data/sheets/
 COPY data/sheets/controles_iperc.csv data/sheets/
+COPY data/synthetic/trabajadores.json data/synthetic/trabajos.json data/synthetic/historial_trabajos.json data/synthetic/
 RUN useradd --create-home vigia
 USER vigia
 EXPOSE 8000

@@ -17,6 +17,7 @@ from contracts.vocabulario import clasificar_labor
 
 MIN_CASOS_CON_TURNO = 2
 MAX_CASOS_DEVUELTOS = 5
+TEXTO_RESERVADO = "Reporte de campo del trabajador (texto libre reservado)."
 
 SISTEMA_PATRON = (
     "Eres analista de seguridad minera en Peru. Resume en UNA oracion (maximo 35 palabras), en espanol "
@@ -42,7 +43,7 @@ async def lifespan(app: FastAPI):
     registro.cancel()
 
 
-app = FastAPI(title="Vigia - Agente de incidentes", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Vigía - Agente de incidentes", version="0.1.0", lifespan=lifespan)
 publicador.montar(app)
 
 
@@ -63,8 +64,10 @@ def patron_determinista(filas: list[dict], labor_tipo: str, turno: str | None) -
 def resumir_patron(filas: list[dict], labor_tipo: str, turno: str | None) -> str:
     if not filas:
         return "Sin incidentes similares registrados."
+    # El texto libre que escribe el trabajador al cerrar un PETAR puede traer datos de salud: no va a Claude.
     casos = [
-        {k: f[k] for k in ("turno", "riesgo_critico", "causa_probable", "potencial", "resumen_es")}
+        {**{k: f[k] for k in ("turno", "riesgo_critico", "causa_probable", "potencial")},
+         "resumen_es": TEXTO_RESERVADO if f.get("origen") == "petar" else f["resumen_es"]}
         for f in filas[:MAX_CASOS_DEVUELTOS]
     ]
     contexto = {"labor_tipo": labor_tipo, "casos": casos}
@@ -113,6 +116,8 @@ def registrar(registro: RegistroIncidente, repo=Depends(obtener_repo)) -> dict:
         "potencial": registro.potencial,
         "resumen_es": registro.resumen_es,
         "origen": "petar",
+        "ptw_id": registro.petar_id,
+        "estado": "en_investigacion",
     }
     repo.registrar(fila)
     return {"id": fila["id"]}

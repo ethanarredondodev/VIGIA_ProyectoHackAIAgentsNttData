@@ -4,3 +4,4 @@ ZC-02,sueno_h,<,6,h,apto_con_observaciones,Descanso por debajo del umbral recome
 ZC-03,dia_rotacion,>=,12,dia,apto_con_observaciones,Tramo final de la rotación,DS 024-2016-EM arts. 31-32 (jornadas) y art. 273; umbral: criterio técnico,F-15,ejemplo
 ZC-04,exposicion_silice,==,alta,,apto_con_observaciones,Requiere protección respiratoria reforzada,DS 024-2016-EM Anexo 15 (sílice cristalina 0.05 mg/m3 TWA) y art. 96,F-02,ejemplo
 ZC-05,altitud_msnm,>=,4500,msnm,apto_con_observaciones,Labor a gran altitud: pausas de recuperación,DS 024-2016-EM Anexo 16-A (ascenso a grandes altitudes); umbral: criterio técnico,F-02,ejemplo
+ZC-06,tarea_restringida,==,si,,no_apto,Restricción médica vigente para esta tarea: consultar a salud ocupacional,Aptitud con restricciones del examen médico ocupacional (EMO); tareas restringidas: criterio técnico,F-15,ejemplo

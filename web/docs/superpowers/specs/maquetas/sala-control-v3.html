@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vigía: sala de control del admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #e2e5e0; --superficie: #f7f8f5; --superficie-2: #eceee9; --tinta: #1b232b; --tinta-2: #4b5560; --linea-clara: #d5d9d4;
+    --tablero: #1f2730; --nodo: #2b343e; --nodo-on: #323d48; --borde: #4a5866; --texto: #edefea; --texto-2: #a9b2ba;
+    --flujo: #8db4ff; --azurita: #1f4e9c; --lampara: #ffd45c; --ambar: #f5be3c; --sobre-ambar: #2a1e00; --verde: #1a6c35;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Barlow, system-ui, sans-serif; background: var(--fondo); color: var(--tinta); padding: 32px 20px 72px; }
+  main { max-width: 1180px; margin: 0 auto; }
+  h1 { font-family: 'Barlow Semi Condensed', Barlow, sans-serif; font-size: 34px; font-weight: 700; line-height: 1.1; }
+  .subtitulo { color: var(--tinta-2); font-size: 18px; margin-top: 8px; max-width: 78ch; line-height: 1.45; }
+
+  .tablero { position: relative; background: var(--tablero); border-radius: 12px; padding: 18px; margin-top: 24px; }
+  .sala { width: 100%; height: auto; display: block; overflow: visible; }
+  .pie { margin-top: 12px; color: var(--tinta-2); font-size: 16px; }
+
+  .tubo { fill: none; stroke: var(--borde); stroke-width: 2.5; stroke-dasharray: 5 6; transition: stroke .4s; }
+  .tubo.on { stroke: var(--flujo); stroke-dasharray: none; }
+  .chispa { fill: var(--lampara); filter: url(#brillo); }
+
+  [data-detalle] { cursor: pointer; outline: none; }
+  .nodo rect { fill: var(--nodo); stroke: var(--borde); stroke-width: 2; stroke-dasharray: 5 4; transition: fill .4s, stroke .4s; }
+  .nodo.on rect { fill: var(--nodo-on); stroke: var(--texto-2); stroke-dasharray: none; }
+  .nodo.mirando rect, .nodo:focus-visible rect { stroke: var(--flujo); stroke-width: 3; }
+  .nodo text { font-family: Barlow, sans-serif; }
+  .titulo { fill: var(--texto); font-weight: 700; font-size: 15px; }
+  .estado { fill: var(--texto-2); font-size: 12.5px; }
+  .hecho { opacity: 0; transition: opacity .4s; }
+  .espera { transition: opacity .4s; }
+  .on .hecho { opacity: 1; }
+  .on .espera { opacity: 0; }
+  .decision.on rect { fill: var(--ambar); stroke: var(--ambar); transform-box: fill-box; transform-origin: center; animation: sello .55s cubic-bezier(.2, 1.4, .4, 1); }
+  .decision.on text { fill: var(--sobre-ambar); }
+  .grande { font: 700 24px 'Barlow Semi Condensed', sans-serif; }
+  @keyframes sello { from { transform: scale(1.3); } to { transform: scale(1); } }
+
+  .juan .anillo { fill: none; stroke: var(--borde); stroke-width: 6; transition: stroke .6s; }
+  .juan.gemelo .anillo { stroke: var(--ambar); }
+  .juan.mirando .anillo, .juan:focus-visible .anillo { stroke-width: 8; }
+  .juan .insignia { opacity: 0; transition: opacity .5s; }
+  .juan.gemelo .insignia { opacity: 1; }
+  .juan .brillo { opacity: .12; transition: opacity .5s; }
+  .juan.encendida .brillo { opacity: .95; }
+  .juan .lente { fill: #5e5747; transition: fill .4s; }
+  .juan.encendida .lente { fill: #fff6cf; }
+  .juan .haz { opacity: 0; }
+  .juan.encendida .haz { animation: destello 1.4s ease-out; }
+  .juan .parpado { transform-box: fill-box; transform-origin: top; transform: scaleY(0); opacity: 0; transition: transform .7s, opacity .7s; }
+  .juan.gemelo .parpado { transform: scaleY(1); opacity: 1; }
+  .juan .nombre { fill: var(--texto); font: 700 15px Barlow, sans-serif; }
+  .juan .cargo { fill: var(--texto-2); font: 12.5px Barlow, sans-serif; }
+  @keyframes destello { 0% { opacity: 0; } 25% { opacity: .9; } 100% { opacity: 0; } }
+
+  .burbuja { opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s; }
+  .burbuja.on { opacity: 1; transform: none; }
+  .burbuja rect, .burbuja path { fill: var(--superficie); }
+  .burbuja text { fill: var(--tinta); font: 600 13px Barlow, sans-serif; }
+
+  /* Detalle en vivo */
+  .detalle { position: absolute; z-index: 5; width: 330px; background: var(--superficie); color: var(--tinta); border-radius: 10px;
+             padding: 12px 16px 16px; box-shadow: 0 14px 34px rgba(0, 0, 0, .38); font-size: 14.5px; line-height: 1.4; }
+  .detalle.ancho { width: 430px; }
+  .fase { display: flex; align-items: center; gap: 8px; font: 600 14px Barlow, sans-serif; color: var(--tinta-2); margin-bottom: 6px; }
+  .fase .punto { width: 10px; height: 10px; border-radius: 50%; background: #9aa3ab; }
+  .fase[data-fase='proceso'] { color: var(--azurita); }
+  .fase[data-fase='proceso'] .punto { background: var(--azurita); animation: latido 1s ease-in-out infinite; }
+  .fase[data-fase='listo'] { color: var(--verde); }
+  .fase[data-fase='listo'] .punto { background: var(--verde); }
+  @keyframes latido { 50% { opacity: .3; } }
+  .detalle h3 { font: 700 19px 'Barlow Semi Condensed', sans-serif; }
+  .detalle .rol { color: var(--tinta-2); font-size: 13.5px; margin-bottom: 8px; }
+  .pasos { padding-left: 18px; display: grid; gap: 4px; }
+  .pasos li { opacity: 0; transform: translateY(4px); transition: opacity .35s, transform .35s; }
+  .pasos li.on { opacity: 1; transform: none; }
+  .detalle code { background: var(--superficie-2); border-radius: 4px; padding: 0 4px; font-size: 13.5px; }
+  .detalle q { font-style: italic; }
+
+  .tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .tabla th { text-align: left; font-weight: 600; color: var(--tinta-2); font-size: 12.5px; padding: 0 6px 6px; }
+  .tabla td { padding: 5px 6px; border-top: 1px solid var(--linea-clara); }
+  .tabla .valor { font: 600 15px 'Barlow Semi Condensed', sans-serif; }
+  .tabla .limite { color: var(--tinta-2); }
+  .tabla .valor-oculto { opacity: 0; transition: opacity .35s; }
+  .tabla tr.on .valor-oculto { opacity: 1; }
+  .res { display: inline-flex; align-items: center; gap: 4px; border-radius: 4px; padding: 0 7px; font: 700 13.5px 'Barlow Semi Condensed', sans-serif;
+         color: var(--tinta-2); min-width: 66px; transition: background .35s, color .35s; }
+  .res::before { content: '…'; }
+  tr.on .res.ok { color: var(--verde); }
+  tr.on .res.ok::before { content: '✓'; }
+  tr.on .res.am { background: var(--ambar); color: var(--sobre-ambar); }
+  tr.on .res.am::before { content: '!'; }
+  .res .txt { opacity: 0; transition: opacity .35s; }
+  tr.on .res .txt { opacity: 1; }
+  .veredicto { margin-top: 8px; opacity: 0; transition: opacity .35s; }
+  .veredicto.on { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>¿Así quieres la sala de control del admin?</h1>
+  <p class="subtitulo">Juan es el punto de partida: la luz de su lámpara es la solicitud que recorre Vigía, su gemelo cambia en vivo cuando responde y la decisión vuelve a él. Pasa el mouse o toca cualquier etapa: verás en vivo lo que está procesando, paso a paso.</p>
+
+  <div class="tablero" id="tablero">
+    <svg class="sala" viewBox="0 0 1100 380" role="img" aria-label="Recorrido de la solicitud de Juan por los agentes de Vigía">
+      <defs>
+        <filter id="brillo" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="3.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="luz">
+          <stop offset="0" stop-color="#fff6cf"/>
+          <stop offset=".35" stop-color="#ffd45c" stop-opacity=".6"/>
+          <stop offset="1" stop-color="#ffd45c" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="haz-luz" x1="0" x2="1">
+          <stop offset="0" stop-color="#ffd45c" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#ffd45c" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="marco"><circle cx="100" cy="100" r="86"/></clipPath>
+      </defs>
+
+      <path class="tubo" data-t="500" data-dura="800" d="M96 170 C140 166 150 190 185 190"/>
+      <path class="tubo" data-t="1600" data-dura="500" d="M315 190 H345"/>
+      <path class="tubo" data-t="2700" data-dura="600" d="M480 190 H500 V90 H520"/>
+      <path class="tubo" data-t="2700" data-dura="500" d="M480 190 H520"/>
+      <path class="tubo" data-t="2700" data-dura="600" d="M480 190 H500 V290 H520"/>
+      <path class="tubo" data-t="5300" data-dura="600" d="M670 90 H688 V190 H705"/>
+      <path class="tubo" data-t="5300" data-dura="500" d="M670 190 H705"/>
+      <path class="tubo" data-t="5300" data-dura="600" d="M670 290 H688 V190 H705"/>
+      <path class="tubo" data-t="7800" data-dura="500" d="M810 190 H845"/>
+      <path class="tubo" data-t="8500" data-dura="500" d="M945 190 H975"/>
+      <path class="tubo" data-t="8500" data-dura="2000" d="M895 228 V352 H20 V190 H36"/>
+
+      <g class="juan" id="juan" data-detalle="juan" data-inicio="0" data-t="10500" data-textos="Por pedir|Esperando la respuesta|Notificado"
+         tabindex="0" role="button" aria-label="Juan Mamani: ver detalle">
+        <polygon class="haz" points="90,170 330,96 330,250" fill="url(#haz-luz)"/>
+        <circle class="anillo" cx="90" cy="190" r="54"/>
+        <g transform="translate(90 190) scale(0.58) translate(-100 -100)">
+          <g clip-path="url(#marco)">
+            <rect width="200" height="200" fill="#26303a"/>
+            <path d="M10 72L50 38L70 80L28 114Z" fill="#2e3944"/>
+            <path d="M148 26L192 62L178 112L138 84Z" fill="#212a33"/>
+            <path d="M22 200C26 162 58 146 100 146C142 146 174 162 178 200Z" fill="#3e4a5a"/>
+            <rect x="88" y="120" width="24" height="32" rx="6" fill="#8d6240"/>
+            <path d="M30 200C34 170 54 154 82 149L90 200Z" fill="#d3e23a"/>
+            <path d="M170 200C166 170 146 154 118 149L110 200Z" fill="#d3e23a"/>
+            <rect x="34" y="176" width="55" height="6" fill="#c9ced6"/>
+            <rect x="111" y="176" width="55" height="6" fill="#c9ced6"/>
+            <path d="M84 140Q88 152 91 160M116 140Q112 152 109 160" stroke="#3a4148" stroke-width="2" fill="none"/>
+            <path d="M89 160Q100 153 111 160L109 174Q100 180 91 174Z" fill="#8e979f"/>
+            <circle cx="86" cy="171" r="7" fill="#c23b78"/>
+            <circle cx="114" cy="171" r="7" fill="#c23b78"/>
+            <ellipse cx="70" cy="103" rx="5" ry="8" fill="#8d6240"/>
+            <ellipse cx="130" cy="103" rx="5" ry="8" fill="#8d6240"/>
+            <ellipse cx="100" cy="100" rx="29" ry="33" fill="#b07a4f"/>
+            <rect x="71" y="84" width="6" height="17" rx="2" fill="#1b1714"/>
+            <rect x="123" y="84" width="6" height="17" rx="2" fill="#1b1714"/>
+            <path d="M83 93Q89 89.5 95 93M105 93Q111 89.5 117 93" stroke="#1b1714" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <ellipse cx="89" cy="101" rx="4.4" ry="3.3" fill="#f3efe8"/>
+            <ellipse cx="111" cy="101" rx="4.4" ry="3.3" fill="#f3efe8"/>
+            <circle cx="89" cy="101.4" r="2.3" fill="#2a1d16"/>
+            <circle cx="111" cy="101.4" r="2.3" fill="#2a1d16"/>
+            <path class="parpado" d="M83.8 101.4A5.2 4.6 0 0 1 94.2 101.4Z" fill="#b07a4f" stroke="#8d6240" stroke-width="1.2"/>
+            <path class="parpado" d="M105.8 101.4A5.2 4.6 0 0 1 116.2 101.4Z" fill="#b07a4f" stroke="#8d6240" stroke-width="1.2"/>
+            <path d="M100 104Q104 111 98 114" stroke="#8d6240" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M93 124Q100 126 107 124" stroke="#5a2e22" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M64 86C64 58 80 44 100 44C120 44 136 58 136 86Z" fill="#ee7d2b" stroke="#9b5119" stroke-width="1.5"/>
+            <rect x="54" y="82" width="92" height="9" rx="4.5" fill="#ee7d2b" stroke="#9b5119" stroke-width="1.5"/>
+            <rect x="88" y="58" width="24" height="17" rx="5" fill="#2e353d"/>
+            <circle class="lente" cx="100" cy="66.5" r="6.2"/>
+          </g>
+        </g>
+        <circle class="brillo" cx="90" cy="170.6" r="30" fill="url(#luz)"/>
+        <g class="insignia"><circle cx="128" cy="228" r="12" fill="#f5be3c" stroke="#1f2730" stroke-width="3"/><path d="M128 222v7" stroke="#2a1e00" stroke-width="3" stroke-linecap="round"/><circle cx="128" cy="233" r="1.6" fill="#2a1e00"/></g>
+        <text class="nombre" x="90" y="268" text-anchor="middle">Juan Mamani</text>
+        <text class="cargo" x="90" y="285" text-anchor="middle">perforista, contratista</text>
+      </g>
+
+      <g class="burbuja" data-t="10500">
+        <rect x="8" y="58" width="196" height="38" rx="8"/>
+        <path d="M80 95 L90 112 L100 95 Z"/>
+        <text x="22" y="82">Tu supervisor está revisando</text>
+      </g>
+
+      <g class="nodo" data-detalle="ptw" data-inicio="1300" data-t="1500" tabindex="0" role="button" aria-label="Agente PTW: ver detalle">
+        <rect x="185" y="162" width="130" height="56" rx="8"/>
+        <text class="titulo" x="198" y="185">Agente PTW</text>
+        <text class="estado espera" x="198" y="205">esperando…</text>
+        <text class="estado hecho" x="198" y="205">perforación</text>
+      </g>
+      <g class="nodo" data-detalle="nanda" data-inicio="2100" data-t="2600" tabindex="0" role="button" aria-label="NANDA: ver detalle">
+        <rect x="345" y="162" width="135" height="56" rx="8"/>
+        <text class="titulo" x="358" y="185">NANDA</text>
+        <text class="estado espera" x="358" y="205">verificando…</text>
+        <text class="estado hecho" x="358" y="205">3 fichas válidas</text>
+      </g>
+      <g class="nodo" data-detalle="incidentes" data-inicio="3300" data-t="4600" tabindex="0" role="button" aria-label="Incidentes: ver detalle">
+        <rect x="520" y="62" width="150" height="56" rx="8"/>
+        <text class="titulo" x="533" y="85">Incidentes</text>
+        <text class="estado espera" x="533" y="105">consultando…</text>
+        <text class="estado hecho" x="533" y="105">3 casos parecidos</text>
+      </g>
+      <g class="nodo" data-detalle="area" data-inicio="3200" data-t="4000" tabindex="0" role="button" aria-label="Área: ver detalle">
+        <rect x="520" y="162" width="150" height="56" rx="8"/>
+        <text class="titulo" x="533" y="185">Área</text>
+        <text class="estado espera" x="533" y="205">consultando…</text>
+        <text class="estado hecho" x="533" y="205">91 dBA, desatado 26 h</text>
+      </g>
+      <g class="nodo" data-detalle="gemelo" data-inicio="3300" data-t="5200" tabindex="0" role="button" aria-label="Gemelo: ver detalle">
+        <rect x="520" y="262" width="150" height="56" rx="8"/>
+        <text class="titulo" x="533" y="285">Gemelo</text>
+        <text class="estado espera" x="533" y="305">consultando…</text>
+        <text class="estado hecho" x="533" y="305">con observaciones</text>
+      </g>
+      <g class="nodo" data-detalle="reglas" data-inicio="5900" data-t="7700" tabindex="0" role="button" aria-label="Reglas: ver detalle">
+        <rect x="705" y="162" width="105" height="56" rx="8"/>
+        <text class="titulo" x="718" y="185">Reglas</text>
+        <text class="estado espera" x="718" y="205">calculando…</text>
+        <text class="estado hecho" x="718" y="205">4 en ámbar</text>
+      </g>
+      <g class="nodo decision" data-detalle="decision" data-inicio="8300" data-t="8300" tabindex="0" role="button" aria-label="Decisión: ver detalle">
+        <rect x="845" y="152" width="100" height="76" rx="10"/>
+        <text class="titulo espera" x="895" y="195" text-anchor="middle">Decisión</text>
+        <text class="grande hecho" x="895" y="192" text-anchor="middle">! Ámbar</text>
+        <text class="estado hecho" x="895" y="212" text-anchor="middle">con controles</text>
+      </g>
+      <g class="nodo" data-detalle="supervisor" data-inicio="9000" data-t="9000" data-textos="En espera|Llegando…|Por revisar"
+         tabindex="0" role="button" aria-label="Bandeja de la supervisora: ver detalle">
+        <rect x="975" y="162" width="120" height="56" rx="8"/>
+        <text class="titulo" x="988" y="185">Bandeja</text>
+        <text class="estado espera" x="988" y="205">en espera</text>
+        <text class="estado hecho" x="988" y="205">Ing. Rosa Quispe</text>
+      </g>
+
+      <g id="chispas"></g>
+    </svg>
+    <div class="detalle" id="detalle" role="tooltip" aria-live="polite" hidden>
+      <p class="fase" id="fase"><span class="punto"></span><span id="fase-texto"></span></p>
+      <div id="cuerpo"></div>
+    </div>
+  </div>
+  <p class="pie">El detalle se actualiza mientras la etapa trabaja. Con datos reales, cada paso aparece cuando el backend lo hace.</p>
+</main>
+
+<template id="d-juan">
+  <h3>Juan Mamani Quispe</h3>
+  <p class="rol">Perforista, Perforaciones Rumi S.A.C. (contratista)</p>
+  <ul class="pasos">
+    <li data-t="0">Escribió: <q>voy a perforar el frente del TJ-12</q></li>
+    <li data-t="0">Turno noche, 4210 msnm, minería subterránea</li>
+    <li data-t="5200">Su gemelo respondió: apto con observaciones, día 12 de 14, energía 35/100</li>
+    <li data-t="10500">Recibió en su celular: "Tu supervisor está revisando"</li>
+  </ul>
+</template>
+<template id="d-ptw">
+  <h3>Agente PTW</h3>
+  <p class="rol">Orquesta el permiso</p>
+  <ul class="pasos">
+    <li data-t="1300">Lee lo que escribió Juan: <q>voy a perforar el frente del TJ-12</q></li>
+    <li data-t="1400">Lo compara con las tareas disponibles de la mina</li>
+    <li data-t="1500">Elige <b>perforación</b> en <b>frente de avance</b> y abre el permiso PTW-4D00F68A</li>
+  </ul>
+</template>
+<template id="d-nanda">
+  <h3>NANDA</h3>
+  <p class="rol">Verifica a quién consultar</p>
+  <ul class="pasos">
+    <li data-t="2200">vigia-incidentes: credencial vigente, firma válida</li>
+    <li data-t="2400">vigia-area: credencial vigente, firma válida</li>
+    <li data-t="2600">vigia-gemelo: credencial vigente, firma válida</li>
+  </ul>
+</template>
+<template id="d-incidentes">
+  <h3>Incidentes</h3>
+  <p class="rol">Historial de la mina</p>
+  <ul class="pasos">
+    <li data-t="3300">Busca casos de perforación en frente de avance, turno noche</li>
+    <li data-t="3700">INC-0007: roca del techo, contusión en el hombro</li>
+    <li data-t="4100">INC-0012: caída de un planchón desde la corona</li>
+    <li data-t="4400">INC-0019: roca suelta del hastial, lesión en la mano</li>
+    <li data-t="4600">Patrón: desprendimiento de roca de noche. Riesgo potencial alto.</li>
+  </ul>
+</template>
+<template id="d-area">
+  <h3>Área</h3>
+  <p class="rol">Sensores de NV-3820 TJ-12</p>
+  <table class="tabla">
+    <thead><tr><th>Medida</th><th>Valor</th><th>Límite</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr data-t="3300"><td>CO</td><td class="valor valor-oculto">12 ppm</td><td class="limite">máx. 25</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="3500"><td>O₂</td><td class="valor valor-oculto">20.1 %</td><td class="limite">mín. 19.5</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="3650"><td>Ventilación</td><td class="valor valor-oculto">operativa</td><td class="limite">operativa</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="3800"><td>Ruido</td><td class="valor valor-oculto">91 dBA</td><td class="limite">máx. 85</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+      <tr data-t="4000"><td>Desatado</td><td class="valor valor-oculto">hace 26 h</td><td class="limite">máx. 12 h</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+    </tbody>
+  </table>
+</template>
+<template id="d-gemelo">
+  <h3>Gemelo digital</h3>
+  <p class="rol">Zona clínica cerrada</p>
+  <ul class="pasos">
+    <li data-t="3300">Pide la aptitud de Juan para perforación, turno noche, 4210 msnm</li>
+    <li data-t="5000">Responde: apto con observaciones</li>
+    <li data-t="5100">Motivo: descanso por debajo del umbral y tramo final de la rotación</li>
+    <li data-t="5200"><code>diagnostico: null</code>: ningún dato clínico sale de su zona</li>
+  </ul>
+</template>
+<template id="d-reglas">
+  <h3>Reglas</h3>
+  <p class="rol">Cálculo con base legal; aquí no decide la IA</p>
+  <table class="tabla">
+    <thead><tr><th>Dato</th><th>Valor</th><th>Límite</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr data-t="6000"><td>O₂</td><td class="valor">20.1 %</td><td class="limite">mín. 19.5 %</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="6250"><td>CO</td><td class="valor">12 ppm</td><td class="limite">máx. 25 ppm</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="6500"><td>Ventilación</td><td class="valor">operativa</td><td class="limite">operativa</td><td><span class="res ok"><span class="txt">Dentro</span></span></td></tr>
+      <tr data-t="6750"><td>Ruido</td><td class="valor">91 dBA</td><td class="limite">máx. 85 dBA</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+      <tr data-t="7000"><td>Último desatado</td><td class="valor">26 h</td><td class="limite">máx. 12 h</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+      <tr data-t="7250"><td>Casos parecidos</td><td class="valor">3, alto</td><td class="limite">menos de 3</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+      <tr data-t="7500"><td>Gemelo</td><td class="valor">observaciones</td><td class="limite">apto</td><td><span class="res am"><span class="txt">Ámbar</span></span></td></tr>
+    </tbody>
+  </table>
+  <p class="veredicto" data-t="7700">Ninguna regla llega a rojo: el nivel es el más alto, <b>ámbar</b> (DS 024-2016-EM).</p>
+</template>
+<template id="d-decision">
+  <h3>Decisión</h3>
+  <p class="rol">Autorizar con controles</p>
+  <ul class="pasos">
+    <li data-t="7900">Toma el nivel más alto: ámbar</li>
+    <li data-t="8100">Arma el PETAR: 4 controles base IPERC y 5 controles extra</li>
+    <li data-t="8300">Como es ámbar, necesita la firma del supervisor</li>
+  </ul>
+</template>
+<template id="d-supervisor">
+  <h3>Ing. Rosa Quispe</h3>
+  <p class="rol">Supervisora de turno</p>
+  <ul class="pasos">
+    <li data-t="9000">El caso llega a "Por revisar"</li>
+    <li data-t="9000">Puede aceptar, ajustar los controles extra o rechazar</li>
+    <li data-t="10500">Juan ya ve: "Tu supervisor está revisando"</li>
+  </ul>
+</template>
+
+<script>
+  const TOTAL = 14500
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const svgNS = 'http://www.w3.org/2000/svg'
+  const juan = document.getElementById('juan')
+  const capaChispas = document.getElementById('chispas')
+  const estados = [...document.querySelectorAll('.sala [data-t]:not(.tubo)')]
+  const suave = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)
+  const tubos = [...document.querySelectorAll('.tubo')].map((p) => ({
+    p,
+    t0: Number(p.dataset.t),
+    dura: Number(p.dataset.dura),
+    largo: p.getTotalLength(),
+    chispas: [0, 1, 2].map((i) => {
+      const c = document.createElementNS(svgNS, 'circle')
+      c.setAttribute('r', String(5 - i * 1.4))
+      c.setAttribute('class', 'chispa')
+      c.setAttribute('opacity', '0')
+      capaChispas.appendChild(c)
+      return c
+    }),
+  }))
+
+  const tablero = document.getElementById('tablero')
+  const detalle = document.getElementById('detalle')
+  const fase = document.getElementById('fase')
+  const faseTexto = document.getElementById('fase-texto')
+  const cuerpo = document.getElementById('cuerpo')
+  let mirando = null
+  let t = quieto ? TOTAL - 1 : 0
+  let previo = performance.now()
+
+  function pintarDetalle() {
+    if (!mirando) return
+    const inicio = Number(mirando.dataset.inicio)
+    const fin = Number(mirando.dataset.t)
+    const [espera, proceso, listo] = (mirando.dataset.textos || 'En espera|Procesando…|Listo').split('|')
+    const etapa = t < inicio ? 'espera' : t < fin ? 'proceso' : 'listo'
+    fase.dataset.fase = etapa
+    faseTexto.textContent = { espera, proceso, listo }[etapa]
+    cuerpo.querySelectorAll('[data-t]').forEach((e) => e.classList.toggle('on', t >= Number(e.dataset.t)))
+  }
+
+  function cuadro(ahora) {
+    if (!quieto) t = (t + (ahora - previo)) % TOTAL
+    previo = ahora
+    estados.forEach((e) => e.classList.toggle('on', t >= Number(e.dataset.t)))
+    juan.classList.toggle('encendida', t >= 200)
+    juan.classList.toggle('gemelo', t >= 5200)
+    tubos.forEach(({ p, t0, dura, largo, chispas }) => {
+      const avance = (t - t0) / dura
+      p.classList.toggle('on', avance >= 1)
+      chispas.forEach((c, i) => {
+        const a = avance - i * 0.05
+        if (quieto || a < 0 || a > 1) return c.setAttribute('opacity', '0')
+        const punto = p.getPointAtLength(suave(a) * largo)
+        c.setAttribute('cx', punto.x)
+        c.setAttribute('cy', punto.y)
+        c.setAttribute('opacity', String(1 - i * 0.3))
+      })
+    })
+    pintarDetalle()
+    requestAnimationFrame(cuadro)
+  }
+  requestAnimationFrame(cuadro)
+
+  function ocultar() {
+    if (mirando) mirando.classList.remove('mirando')
+    mirando = null
+    detalle.hidden = true
+  }
+  document.querySelectorAll('[data-detalle]').forEach((nodo) => {
+    const mostrar = () => {
+      if (mirando) mirando.classList.remove('mirando')
+      mirando = nodo
+      nodo.classList.add('mirando')
+      cuerpo.innerHTML = document.getElementById('d-' + nodo.dataset.detalle).innerHTML
+      detalle.classList.toggle('ancho', nodo.dataset.detalle === 'reglas' || nodo.dataset.detalle === 'area')
+      detalle.hidden = false
+      pintarDetalle()
+      // Al costado de la etapa y dentro del tablero, para no tapar el flujo que se está mirando.
+      const r = nodo.getBoundingClientRect()
+      const base = tablero.getBoundingClientRect()
+      const ancho = detalle.offsetWidth
+      const alto = detalle.offsetHeight
+      const derecha = r.right - base.left + 14
+      const x = derecha + ancho <= base.width - 8 ? derecha : r.left - base.left - ancho - 14
+      const y = r.top - base.top + r.height / 2 - alto / 2
+      detalle.style.left = Math.max(8, x) + 'px'
+      detalle.style.top = Math.max(8, Math.min(y, base.height - alto - 8)) + 'px'
+    }
+    nodo.addEventListener('mouseenter', mostrar)
+    nodo.addEventListener('focus', mostrar)
+    nodo.addEventListener('click', mostrar)
+    nodo.addEventListener('mouseleave', ocultar)
+    nodo.addEventListener('blur', ocultar)
+  })
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && ocultar())
+</script>
+</body>
+</html>

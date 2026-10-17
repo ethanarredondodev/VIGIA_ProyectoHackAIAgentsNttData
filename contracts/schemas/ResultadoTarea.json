@@ -1,0 +1,30 @@
+{
+  "additionalProperties": false,
+  "description": "POST /ptw/{id}/resultado",
+  "properties": {
+    "resultado": {
+      "enum": [
+        "sin_novedad",
+        "casi_incidente",
+        "incidente"
+      ],
+      "title": "Resultado",
+      "type": "string"
+    },
+    "controles_cumplidos": {
+      "title": "Controles Cumplidos",
+      "type": "boolean"
+    },
+    "observacion": {
+      "default": "",
+      "title": "Observacion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "resultado",
+    "controles_cumplidos"
+  ],
+  "title": "ResultadoTarea",
+  "type": "object"
+}

@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI):
     registro.cancel()
 
 
-app = FastAPI(title="Vigia - Agente de area", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Vigía - Agente de area", version="0.1.0", lifespan=lifespan)
 publicador.montar(app)
 
 

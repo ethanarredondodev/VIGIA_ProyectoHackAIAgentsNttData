@@ -1,11 +1,75 @@
 [
   {
     "trabajador_id": "T-001",
+    "nombre": "Juan Mamani",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "juan-mamani",
+    "color_casco": "#F57C00",
     "sueno_h": 5.1,
     "dia_rotacion": 12,
     "regimen_turno": "14x7",
     "exposicion_silice": "alta",
+    "historial_energia": [
+      90,
+      88,
+      84,
+      81,
+      78,
+      74,
+      70,
+      66,
+      61,
+      56,
+      50,
+      45,
+      40,
+      35
+    ],
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [
+        "Hipoacusia neurosensorial leve bilateral"
+      ],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-02-15"
+    }
+  },
+  {
+    "trabajador_id": "T-001-D3",
+    "nombre": "Juan Mamani",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "juan-mamani",
+    "color_casco": "#F57C00",
+    "sueno_h": 7.5,
+    "dia_rotacion": 3,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "historial_energia": [
+      72,
+      78,
+      84,
+      88,
+      90,
+      91,
+      89,
+      92,
+      90,
+      91,
+      92,
+      90,
+      88,
+      85
+    ],
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [
         "Hipoacusia neurosensorial leve bilateral"
       ],
@@ -15,23 +79,57 @@
   },
   {
     "trabajador_id": "T-002",
+    "nombre": "María Condori",
+    "cargo": "Operadora de pala",
+    "empleador": "titular",
+    "empresa": "Cobre del Sur Sintetico S.A.",
+    "seed": "maria-condori",
+    "color_casco": "#FFFFFF",
     "sueno_h": 7.4,
     "dia_rotacion": 4,
     "regimen_turno": "14x7",
     "exposicion_silice": "baja",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-05-30"
-    }
+    },
+    "historial_energia": [
+      58,
+      58,
+      62,
+      68,
+      73,
+      66,
+      70,
+      73,
+      75,
+      74,
+      73,
+      71,
+      77,
+      80
+    ]
   },
   {
     "trabajador_id": "T-003",
+    "nombre": "Pedro Huamán",
+    "cargo": "Desatador",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "pedro-huaman",
+    "color_casco": "#F57C00",
     "sueno_h": 3.8,
     "dia_rotacion": 9,
     "regimen_turno": "14x7",
     "exposicion_silice": "media",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [
         "Lumbalgia mecánica"
       ],
@@ -39,210 +137,891 @@
         "Evitar cargas > 25 kg"
       ],
       "emo_vigente_hasta": "2026-12-20"
-    }
+    },
+    "historial_energia": [
+      32,
+      34,
+      32,
+      28,
+      21,
+      22,
+      28,
+      26,
+      18,
+      17,
+      10,
+      10,
+      10,
+      5
+    ]
   },
   {
-    "trabajador_id": "T-004",
-    "sueno_h": 7.0,
+    "trabajador_id": "T-011",
+    "nombre": "Raúl Ticona Apaza",
+    "cargo": "Operador de scooptram",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "raul-ticona",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 5.5,
     "dia_rotacion": 6,
     "regimen_turno": "14x7",
-    "exposicion_silice": "media",
+    "exposicion_silice": "alta",
+    "historial_energia": [
+      62,
+      60,
+      61,
+      57,
+      55,
+      56,
+      52,
+      50,
+      51,
+      47,
+      45,
+      44,
+      42,
+      40
+    ],
     "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-01-10"
+      "alergias": "Ácaros del polvo doméstico",
+      "medicacion_habitual": "Corticoide inhalado + broncodilatador de acción prolongada; salbutamol de rescate",
+      "controles_vencidos": 0,
+      "diagnosticos": [
+        "Asma bronquial persistente moderada (2019), parcialmente controlada",
+        "Lumbalgia crónica mecánica",
+        "Secuela de esguince de tobillo izquierdo (2024): inestabilidad ocasional en terreno irregular",
+        "Hallazgo sugerente de neumoconiosis incipiente (lectura OIT pendiente)"
+      ],
+      "restricciones": [
+        "Pendiente de dictamen del médico ocupacional"
+      ],
+      "tareas_restringidas": [
+        "perforacion",
+        "voladura",
+        "desatado",
+        "sostenimiento",
+        "carguio",
+        "acarreo",
+        "trabajo_en_altura",
+        "espacio_confinado",
+        "trabajo_en_caliente"
+      ],
+      "emo_vigente_hasta": "2027-04-28",
+      "descansos_medicos": [
+        {
+          "incidente_id": "INC-0022",
+          "dias": 45
+        },
+        {
+          "incidente_id": "INC-0023",
+          "dias": 3
+        }
+      ],
+      "evaluaciones": [
+        {
+          "salud_id": 18,
+          "fecha": "2026-04-28",
+          "tipo": "Examen ocupacional anual",
+          "restricciones": "Pendiente de dictamen del médico ocupacional",
+          "resultado": "Alterado: saturación 94 % en reposo; sibilancias leves",
+          "observaciones": "Asma bronquial persistente moderada (diagnosticada en 2019), parcialmente controlada: tos, sibilancias y falta de aire, con síntomas diurnos varias veces por semana y despertares nocturnos ocasionales; la falta de aire aparece al caminar en subida. Desencadenantes: polvo, humo, aire frío y esfuerzo intenso. Lumbalgia crónica mecánica: dolor al permanecer sentado más de 2 horas y con vibración. Antecedente de esguince de tobillo izquierdo (2024) con inestabilidad ocasional en terreno irregular."
+        },
+        {
+          "salud_id": 19,
+          "fecha": "2026-04-28",
+          "tipo": "Espirometría",
+          "restricciones": "Pendiente de dictamen del médico ocupacional",
+          "resultado": "Alterado: VEF1/CVF 0,68; VEF1 71 % del predicho",
+          "observaciones": "Mejora de 14 % tras broncodilatador (obstrucción parcialmente reversible)."
+        },
+        {
+          "salud_id": 20,
+          "fecha": "2026-04-28",
+          "tipo": "Radiografía de tórax",
+          "restricciones": "Pendiente de dictamen del médico ocupacional",
+          "resultado": "Pendiente: opacidades micronodulares en campos superiores",
+          "observaciones": "Hallazgo sugerente de neumoconiosis incipiente, con exposición prolongada a polvo de mina. Lectura OIT pendiente por neumólogo ocupacional."
+        },
+        {
+          "salud_id": 21,
+          "fecha": "2026-04-28",
+          "tipo": "Audiometría",
+          "restricciones": "Ninguna",
+          "resultado": "Normal",
+          "observaciones": "Dentro de límites normales."
+        },
+        {
+          "salud_id": 22,
+          "fecha": "2026-08-20",
+          "tipo": "Control de lumbalgia",
+          "restricciones": "Pendiente de dictamen del médico ocupacional",
+          "resultado": "Activa",
+          "observaciones": "En fisioterapia con analgésico a demanda; sin irradiación a las piernas ni déficit neurológico. Próximo control el 20/11/2026."
+        },
+        {
+          "salud_id": 23,
+          "fecha": "2026-09-05",
+          "tipo": "Espirometría de control",
+          "restricciones": "Pendiente de dictamen del médico ocupacional",
+          "resultado": "Alterado: VEF1 68 % del predicho",
+          "observaciones": "Mejora de 12 % tras broncodilatador. Control posterior a la crisis respiratoria del 02/09/2026. Próximo control el 30/10/2026."
+        }
+      ],
+      "observaciones_de_campo": [
+        {
+          "fecha": "2024-03-18",
+          "texto": "Caída en la rampa; esguince de tobillo izquierdo grado II tratado con inmovilización y fisioterapia; alta el 02/05/2024 (45 días de descanso)."
+        },
+        {
+          "fecha": "2026-08-24",
+          "texto": "El operador refirió falta de aire al caminar en subida durante el turno."
+        },
+        {
+          "fecha": "2026-09-02",
+          "texto": "Crisis con falta de aire durante la labor; atendido en el tópico con broncodilatador y retirado de la tarea (3 días de descanso, en seguimiento médico)."
+        }
+      ]
     }
   },
   {
     "trabajador_id": "T-101",
-    "sueno_h": 5.5,
-    "dia_rotacion": 3,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "alta",
+    "nombre": "Carlos Huanca",
+    "cargo": "Ayudante de perforación",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "carlos-huanca",
+    "color_casco": "#F57C00",
+    "sueno_h": 4.9,
+    "dia_rotacion": 14,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      27,
+      24,
+      23,
+      28,
+      32,
+      32,
+      27,
+      24,
+      28,
+      22,
+      25,
+      17,
+      22,
+      20
+    ]
   },
   {
     "trabajador_id": "T-102",
-    "sueno_h": 4.6,
-    "dia_rotacion": 2,
+    "nombre": "Rosa Huanca",
+    "cargo": "Electricista",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "rosa-huanca",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 5.6,
+    "dia_rotacion": 11,
     "regimen_turno": "14x7",
-    "exposicion_silice": "baja",
+    "exposicion_silice": "media",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      58,
+      57,
+      55,
+      49,
+      41,
+      42,
+      41,
+      42,
+      46,
+      44,
+      44,
+      39,
+      34,
+      35
+    ]
   },
   {
     "trabajador_id": "T-103",
-    "sueno_h": 7.4,
+    "nombre": "Edwin Quispe",
+    "cargo": "Desatador",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "edwin-quispe",
+    "color_casco": "#F57C00",
+    "sueno_h": 7.7,
+    "dia_rotacion": 13,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      95,
+      95,
+      94,
+      93,
+      95,
+      93,
+      95,
+      90,
+      84,
+      75,
+      75,
+      71,
+      71,
+      75
+    ]
+  },
+  {
+    "trabajador_id": "T-104",
+    "nombre": "Yeni Torres",
+    "cargo": "Desatador",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "yeni-torres",
+    "color_casco": "#F57C00",
+    "sueno_h": 6.5,
+    "dia_rotacion": 3,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      81,
+      77,
+      75,
+      78,
+      84,
+      82,
+      74,
+      68,
+      62,
+      66,
+      59,
+      60,
+      62,
+      65
+    ]
+  },
+  {
+    "trabajador_id": "T-105",
+    "nombre": "Wilber Ramos",
+    "cargo": "Operador de scoop",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "wilber-ramos",
+    "color_casco": "#F57C00",
+    "sueno_h": 4.5,
     "dia_rotacion": 12,
     "regimen_turno": "14x7",
     "exposicion_silice": "alta",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
-  },
-  {
-    "trabajador_id": "T-104",
-    "sueno_h": 7.7,
-    "dia_rotacion": 1,
-    "regimen_turno": "10x4",
-    "exposicion_silice": "baja",
-    "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-06-30"
-    }
-  },
-  {
-    "trabajador_id": "T-105",
-    "sueno_h": 5.1,
-    "dia_rotacion": 13,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "media",
-    "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      21,
+      24,
+      30,
+      21,
+      17,
+      23,
+      24,
+      19,
+      21,
+      21,
+      18,
+      21,
+      22,
+      20
+    ]
   },
   {
     "trabajador_id": "T-106",
-    "sueno_h": 5.9,
-    "dia_rotacion": 6,
-    "regimen_turno": "14x7",
-    "exposicion_silice": "alta",
+    "nombre": "Nely Apaza",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "nely-apaza",
+    "color_casco": "#F57C00",
+    "sueno_h": 8.0,
+    "dia_rotacion": 2,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      94,
+      95,
+      86,
+      88,
+      90,
+      94,
+      85
+    ]
   },
   {
     "trabajador_id": "T-107",
-    "sueno_h": 8.4,
-    "dia_rotacion": 7,
+    "nombre": "Hugo Huanca",
+    "cargo": "Desatador",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "hugo-huanca",
+    "color_casco": "#F57C00",
+    "sueno_h": 4.8,
+    "dia_rotacion": 1,
     "regimen_turno": "10x4",
-    "exposicion_silice": "baja",
+    "exposicion_silice": "alta",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      22,
+      13,
+      11,
+      10,
+      14,
+      10,
+      14,
+      18,
+      17,
+      22,
+      26,
+      32,
+      31,
+      30
+    ]
   },
   {
     "trabajador_id": "T-108",
-    "sueno_h": 7.3,
-    "dia_rotacion": 1,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "alta",
-    "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-06-30"
-    }
-  },
-  {
-    "trabajador_id": "T-109",
-    "sueno_h": 8.0,
-    "dia_rotacion": 7,
+    "nombre": "Elsa Yupanqui",
+    "cargo": "Operador de shotcrete",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "elsa-yupanqui",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 5.5,
+    "dia_rotacion": 8,
     "regimen_turno": "14x7",
     "exposicion_silice": "media",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      60,
+      56,
+      50,
+      55,
+      58,
+      63,
+      55,
+      48,
+      41,
+      36,
+      29,
+      32,
+      35,
+      35
+    ]
+  },
+  {
+    "trabajador_id": "T-109",
+    "nombre": "Percy Apaza",
+    "cargo": "Desatador",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "percy-apaza",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 6.6,
+    "dia_rotacion": 3,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      68,
+      61,
+      62,
+      61,
+      65,
+      71,
+      76,
+      79,
+      71,
+      75,
+      74,
+      66,
+      64,
+      65
+    ]
   },
   {
     "trabajador_id": "T-110",
-    "sueno_h": 5.9,
-    "dia_rotacion": 11,
+    "nombre": "Gladys Apaza",
+    "cargo": "Electricista",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "gladys-apaza",
+    "color_casco": "#F57C00",
+    "sueno_h": 5.2,
+    "dia_rotacion": 1,
     "regimen_turno": "10x4",
     "exposicion_silice": "media",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      64,
+      69,
+      65,
+      70,
+      75,
+      75,
+      72,
+      72,
+      74,
+      65,
+      58,
+      55,
+      47,
+      45
+    ]
   },
   {
     "trabajador_id": "T-111",
-    "sueno_h": 5.2,
-    "dia_rotacion": 7,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "media",
+    "nombre": "Fredy Poma",
+    "cargo": "Operador de scoop",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "fredy-poma",
+    "color_casco": "#F57C00",
+    "sueno_h": 8.3,
+    "dia_rotacion": 2,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "baja",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      90,
+      86,
+      86,
+      84,
+      80,
+      73,
+      77,
+      82,
+      81,
+      84,
+      78,
+      77,
+      81,
+      85
+    ]
   },
   {
     "trabajador_id": "T-112",
-    "sueno_h": 7.9,
+    "nombre": "Delia Ramos",
+    "cargo": "Operador de scoop",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "delia-ramos",
+    "color_casco": "#F57C00",
+    "sueno_h": 6.3,
     "dia_rotacion": 13,
-    "regimen_turno": "20x10",
+    "regimen_turno": "14x7",
     "exposicion_silice": "baja",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      59,
+      60,
+      57,
+      52,
+      51,
+      55,
+      50,
+      52,
+      50,
+      50,
+      54,
+      57,
+      49,
+      55
+    ]
   },
   {
     "trabajador_id": "T-113",
-    "sueno_h": 5.6,
+    "nombre": "Rolando Yupanqui",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "rolando-yupanqui",
+    "color_casco": "#F57C00",
+    "sueno_h": 8.2,
+    "dia_rotacion": 2,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      90,
+      95,
+      95,
+      90,
+      88,
+      88,
+      84,
+      84,
+      81,
+      79,
+      81,
+      84,
+      87,
+      85
+    ]
+  },
+  {
+    "trabajador_id": "T-114",
+    "nombre": "Marisol Flores",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "marisol-flores",
+    "color_casco": "#F57C00",
+    "sueno_h": 5.8,
+    "dia_rotacion": 3,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      49,
+      51,
+      44,
+      46,
+      41,
+      46,
+      48,
+      52,
+      55,
+      61,
+      54,
+      46,
+      47,
+      45
+    ]
+  },
+  {
+    "trabajador_id": "T-115",
+    "nombre": "Teodoro Torres",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "teodoro-torres",
+    "color_casco": "#F57C00",
+    "sueno_h": 5.3,
     "dia_rotacion": 4,
     "regimen_turno": "14x7",
     "exposicion_silice": "alta",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
-  },
-  {
-    "trabajador_id": "T-114",
-    "sueno_h": 6.1,
-    "dia_rotacion": 11,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "media",
-    "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-06-30"
-    }
-  },
-  {
-    "trabajador_id": "T-115",
-    "sueno_h": 7.5,
-    "dia_rotacion": 9,
-    "regimen_turno": "14x7",
-    "exposicion_silice": "media",
-    "datos_clinicos": {
-      "diagnosticos": [],
-      "restricciones": [],
-      "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      58,
+      57,
+      50,
+      46,
+      47,
+      53,
+      46,
+      47,
+      48,
+      47,
+      49,
+      42,
+      37,
+      40
+    ]
   },
   {
     "trabajador_id": "T-116",
-    "sueno_h": 5.9,
-    "dia_rotacion": 3,
-    "regimen_turno": "20x10",
-    "exposicion_silice": "alta",
+    "nombre": "Celia Huanca",
+    "cargo": "Electricista",
+    "empleador": "titular",
+    "empresa": "Aurifera Huayco Sintetica S.A.C.",
+    "seed": "celia-huanca",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 8.0,
+    "dia_rotacion": 8,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
     "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
       "diagnosticos": [],
       "restricciones": [],
       "emo_vigente_hasta": "2027-06-30"
-    }
+    },
+    "historial_energia": [
+      93,
+      91,
+      95,
+      95,
+      93,
+      87,
+      87,
+      93,
+      92,
+      91,
+      88,
+      83,
+      75,
+      75
+    ]
+  },
+  {
+    "trabajador_id": "T-117",
+    "nombre": "Abel Poma",
+    "cargo": "Mecánico",
+    "empleador": "contratista",
+    "empresa": "Contratista Minera Sintética S.A.C.",
+    "seed": "abel-poma",
+    "color_casco": "#F57C00",
+    "sueno_h": 5.0,
+    "dia_rotacion": 5,
+    "regimen_turno": "10x4",
+    "exposicion_silice": "baja",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      64,
+      57,
+      62,
+      60,
+      60,
+      54,
+      57,
+      50,
+      46,
+      41,
+      34,
+      37,
+      42,
+      40
+    ]
+  },
+  {
+    "trabajador_id": "T-118",
+    "nombre": "Lucía Torres",
+    "cargo": "Electricista",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "lucía-torres",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 4.8,
+    "dia_rotacion": 11,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "media",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      57,
+      58,
+      52,
+      45,
+      45,
+      47,
+      44,
+      38,
+      34,
+      27,
+      24,
+      21,
+      24,
+      20
+    ]
+  },
+  {
+    "trabajador_id": "T-119",
+    "nombre": "Rubén Ramos",
+    "cargo": "Perforista",
+    "empleador": "contratista",
+    "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+    "seed": "rubén-ramos",
+    "color_casco": "#F57C00",
+    "sueno_h": 5.6,
+    "dia_rotacion": 14,
+    "regimen_turno": "20x10",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      74,
+      71,
+      70,
+      74,
+      70,
+      67,
+      71,
+      72,
+      63,
+      63,
+      55,
+      47,
+      39,
+      35
+    ]
+  },
+  {
+    "trabajador_id": "T-120",
+    "nombre": "Flor Choque",
+    "cargo": "Perforista",
+    "empleador": "titular",
+    "empresa": "Minera Andina Sintetica S.A.",
+    "seed": "flor-choque",
+    "color_casco": "#FFFFFF",
+    "sueno_h": 4.7,
+    "dia_rotacion": 8,
+    "regimen_turno": "14x7",
+    "exposicion_silice": "alta",
+    "datos_clinicos": {
+      "alergias": "Ninguna conocida",
+      "medicacion_habitual": "Ninguna",
+      "controles_vencidos": 0,
+      "diagnosticos": [],
+      "restricciones": [],
+      "emo_vigente_hasta": "2027-06-30"
+    },
+    "historial_energia": [
+      50,
+      49,
+      42,
+      45,
+      51,
+      53,
+      52,
+      46,
+      37,
+      31,
+      31,
+      24,
+      16,
+      20
+    ]
   }
 ]

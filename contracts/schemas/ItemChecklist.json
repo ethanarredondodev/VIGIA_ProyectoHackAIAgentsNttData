@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "description": "Detalle interno de cada control del checklist IPERC (se guarda para auditoria).",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "control": {
+      "title": "Control",
+      "type": "string"
+    },
+    "riesgo_critico": {
+      "title": "Riesgo Critico",
+      "type": "string"
+    },
+    "trabajo_alto_riesgo": {
+      "title": "Trabajo Alto Riesgo",
+      "type": "boolean"
+    },
+    "jerarquia": {
+      "title": "Jerarquia",
+      "type": "string"
+    },
+    "base_legal": {
+      "title": "Base Legal",
+      "type": "string"
+    },
+    "origen": {
+      "enum": [
+        "base",
+        "extra"
+      ],
+      "title": "Origen",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "control",
+    "riesgo_critico",
+    "trabajo_alto_riesgo",
+    "jerarquia",
+    "base_legal",
+    "origen"
+  ],
+  "title": "ItemChecklist",
+  "type": "object"
+}

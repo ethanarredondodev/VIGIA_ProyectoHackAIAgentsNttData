@@ -1,0 +1,229 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: 'Barlow', system-ui, sans-serif;
+  --font-cond: 'Barlow Semi Condensed', 'Barlow', system-ui, sans-serif;
+
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-linea: var(--linea);
+  --color-azurita: var(--azurita);
+  --color-sobre-azurita: var(--sobre-azurita);
+  --color-lampara: var(--lampara);
+  --color-verde: var(--verde);
+  --color-sobre-verde: var(--sobre-verde);
+  --color-verde-texto: var(--verde-texto);
+  --color-ambar: var(--ambar);
+  --color-sobre-ambar: var(--sobre-ambar);
+  --color-ambar-texto: var(--ambar-texto);
+  --color-rojo: var(--rojo);
+  --color-sobre-rojo: var(--sobre-rojo);
+  --color-rojo-texto: var(--rojo-texto);
+
+  --animate-respirar: respirar 4.8s ease-in-out infinite;
+  --animate-latido: latido 1.4s ease-in-out infinite;
+  --animate-aparecer: aparecer 0.35s ease-out both;
+}
+
+/* Concreto lanzado (shotcrete) de día, andesita de noche. */
+:root {
+  --fondo: #e2e5e0;
+  --superficie: #f7f8f5;
+  --superficie-2: #eceee9;
+  --tinta: #1b232b;
+  --tinta-2: #4b5560;
+  --linea: #bfc5bf;
+  --azurita: #1f4e9c;
+  --sobre-azurita: #ffffff;
+  --lampara: #ffd45c;
+  --verde: #1f7a3c;
+  --sobre-verde: #ffffff;
+  --verde-texto: #1a6c35;
+  --ambar: #f2b01e;
+  --sobre-ambar: #2a1e00;
+  --ambar-texto: #7a5000;
+  --rojo: #b42318;
+  --sobre-rojo: #ffffff;
+  --rojo-texto: #a61f15;
+  color-scheme: light;
+}
+
+.dark {
+  --fondo: #1a2129;
+  --superficie: #222a33;
+  --superficie-2: #2b343e;
+  --tinta: #edefea;
+  --tinta-2: #a9b2ba;
+  --linea: #3d4955;
+  --azurita: #8db4ff;
+  --sobre-azurita: #0b1730;
+  --verde: #4cc273;
+  --sobre-verde: #0e2416;
+  --verde-texto: #6fd391;
+  --ambar: #f5be3c;
+  --sobre-ambar: #2a1e00;
+  --ambar-texto: #f5be3c;
+  --rojo: #ff6b5e;
+  --sobre-rojo: #2b0703;
+  --rojo-texto: #ff8a7f;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azurita);
+  outline-offset: 2px;
+}
+
+@keyframes respirar {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.012, 1.022);
+  }
+}
+
+@keyframes latido {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Sala de control del admin: tablero oscuro, igual en modo claro y oscuro. */
+.sala {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.sala .tubo {
+  fill: none;
+  stroke: #4a5866;
+  stroke-width: 2.5;
+  stroke-dasharray: 5 6;
+  transition: stroke 0.4s;
+}
+.sala .tubo.on {
+  stroke: #8db4ff;
+  stroke-dasharray: none;
+}
+.sala .chispa {
+  fill: #ffd45c;
+  filter: drop-shadow(0 0 4px #ffd45c);
+}
+.sala [role='button'] {
+  cursor: pointer;
+  outline: none;
+}
+.sala .nodo rect {
+  fill: #2b343e;
+  stroke: #4a5866;
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+  transition: fill 0.4s, stroke 0.4s;
+}
+.sala .nodo.fase-proceso rect {
+  stroke: #8db4ff;
+  stroke-dasharray: none;
+}
+.sala .nodo.fase-listo rect {
+  fill: #323d48;
+  stroke: #a9b2ba;
+  stroke-dasharray: none;
+}
+.sala .nodo.fase-error rect {
+  stroke: #ff6b5e;
+  stroke-dasharray: none;
+}
+.sala .nodo:hover rect,
+.sala .nodo:focus-visible rect {
+  stroke: #8db4ff;
+  stroke-width: 3;
+}
+.sala .titulo {
+  fill: #edefea;
+  font: 700 15px Barlow, sans-serif;
+}
+.sala .estado {
+  fill: #a9b2ba;
+  font: 12.5px Barlow, sans-serif;
+}
+.sala .grande {
+  fill: #14191f;
+  font: 700 24px 'Barlow Semi Condensed', sans-serif;
+}
+.sala .decision rect {
+  stroke-dasharray: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sello 0.55s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.sala .decision.nivel-verde rect {
+  fill: #4cc273;
+  stroke: #4cc273;
+}
+.sala .decision.nivel-ambar rect {
+  fill: #f5be3c;
+  stroke: #f5be3c;
+}
+.sala .decision.nivel-rojo rect {
+  fill: #ff6b5e;
+  stroke: #ff6b5e;
+}
+.sala .juan .nombre {
+  fill: #edefea;
+  font: 700 15px Barlow, sans-serif;
+}
+.sala .juan .cargo {
+  fill: #a9b2ba;
+  font: 12.5px Barlow, sans-serif;
+}
+.sala .burbuja {
+  animation: aparecer 0.4s ease-out both;
+}
+.sala .burbuja rect,
+.sala .burbuja path {
+  fill: #f7f8f5;
+}
+.sala .burbuja text {
+  fill: #1b232b;
+  font: 600 13px Barlow, sans-serif;
+}
+@keyframes sello {
+  from {
+    transform: scale(1.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

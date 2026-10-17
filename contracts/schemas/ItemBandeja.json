@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "description": "GET /ptw/bandeja: revision = ambar o alto riesgo; aviso = rojo. Los verdes no aparecen.",
+  "properties": {
+    "ptw_id": {
+      "title": "Ptw Id",
+      "type": "string"
+    },
+    "nivel": {
+      "enum": [
+        "verde",
+        "ambar",
+        "rojo"
+      ],
+      "title": "Nivel",
+      "type": "string"
+    },
+    "requiere_supervisor": {
+      "title": "Requiere Supervisor",
+      "type": "boolean"
+    },
+    "trabajador_nombre": {
+      "title": "Trabajador Nombre",
+      "type": "string"
+    },
+    "tarea": {
+      "title": "Tarea",
+      "type": "string"
+    },
+    "labor": {
+      "title": "Labor",
+      "type": "string"
+    },
+    "turno": {
+      "enum": [
+        "dia",
+        "noche"
+      ],
+      "title": "Turno",
+      "type": "string"
+    },
+    "creado_en": {
+      "format": "date-time",
+      "title": "Creado En",
+      "type": "string"
+    },
+    "tipo": {
+      "enum": [
+        "revision",
+        "aviso"
+      ],
+      "title": "Tipo",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ptw_id",
+    "nivel",
+    "requiere_supervisor",
+    "trabajador_nombre",
+    "tarea",
+    "labor",
+    "turno",
+    "creado_en",
+    "tipo"
+  ],
+  "title": "ItemBandeja",
+  "type": "object"
+}

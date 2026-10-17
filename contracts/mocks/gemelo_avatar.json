@@ -1,0 +1,33 @@
+{
+  "trabajador_id": "T-001",
+  "nombre": "Juan Mamani",
+  "cargo": "Perforista",
+  "empresa": "Servicios de Perforación Andes Sintético S.A.C.",
+  "empleador": "contratista",
+  "seed": "juan-mamani",
+  "color_casco": "#F57C00",
+  "estado_visual": {
+    "apto_para_tarea": "apto_con_observaciones",
+    "motivo_visible": "Descanso por debajo del umbral recomendado; Tramo final de la rotación; Requiere protección respiratoria reforzada",
+    "energia": 35,
+    "dia_rotacion": 12,
+    "total_rotacion": 14,
+    "exposicion_nivel": "alta",
+    "historial_energia": [
+      90,
+      88,
+      84,
+      81,
+      78,
+      74,
+      70,
+      66,
+      61,
+      56,
+      50,
+      45,
+      40,
+      35
+    ]
+  }
+}

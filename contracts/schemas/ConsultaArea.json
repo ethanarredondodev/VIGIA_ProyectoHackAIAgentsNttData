@@ -1,0 +1,14 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "labor": {
+      "title": "Labor",
+      "type": "string"
+    }
+  },
+  "required": [
+    "labor"
+  ],
+  "title": "ConsultaArea",
+  "type": "object"
+}

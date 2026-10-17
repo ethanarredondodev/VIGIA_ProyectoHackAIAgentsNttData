@@ -1,0 +1,56 @@
+{
+  "additionalProperties": false,
+  "description": "Propuesta calculada por reglas. requiere_supervisor = algun control aplicable es de alto riesgo.",
+  "properties": {
+    "decision": {
+      "enum": [
+        "autorizar",
+        "autorizar_con_controles",
+        "reasignar"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "nivel": {
+      "enum": [
+        "verde",
+        "ambar",
+        "rojo"
+      ],
+      "title": "Nivel",
+      "type": "string"
+    },
+    "requiere_supervisor": {
+      "title": "Requiere Supervisor",
+      "type": "boolean"
+    },
+    "porque": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Porque",
+      "type": "array"
+    },
+    "controles_extra": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Controles Extra",
+      "type": "array"
+    },
+    "alternativa": {
+      "title": "Alternativa",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision",
+    "nivel",
+    "requiere_supervisor",
+    "porque",
+    "controles_extra",
+    "alternativa"
+  ],
+  "title": "PropuestaSupervisor",
+  "type": "object"
+}

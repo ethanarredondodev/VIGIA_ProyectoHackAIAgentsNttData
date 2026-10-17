@@ -1,4 +1,4 @@
-"""Contratos JSON de Vigia. Estan fijados: ningun servicio los cambia.
+"""Contratos JSON de Vigía. Estan fijados: ningun servicio los cambia.
 
 Cada modelo se exporta a JSON Schema en contracts/schemas/ con
 `python -m contracts.exportar_schemas`.
@@ -19,7 +19,11 @@ Decision = Literal["autorizar", "autorizar_con_controles", "reasignar"]
 Nivel = Literal["verde", "ambar", "rojo"]
 AccionFirma = Literal["aceptar", "ajustar", "rechazar"]
 Resultado = Literal["sin_novedad", "casi_incidente", "incidente"]
-EstadoPetar = Literal["evaluando", "pendiente_firma", "autorizado", "reasignado", "rechazado", "cerrado"]
+NivelExposicion = Literal["baja", "media", "alta"]
+EstadoPtw = Literal[
+    "procesando", "emitido", "en_revision", "bloqueado",
+    "autorizado_con_controles", "rechazado", "en_ejecucion", "cerrado",
+]
 
 
 class Contrato(BaseModel):
@@ -40,11 +44,19 @@ class SolicitudPTW(Contrato):
     empleador: Empleador
 
 
+class SolicitudAceptada(Contrato):
+    """Respuesta de POST /ptw/solicitud: la evaluacion sigue en segundo plano."""
+
+    ptw_id: str
+    estado: Literal["procesando"] = "procesando"
+
+
 class PropuestaSupervisor(Contrato):
-    """Propuesta que el orquestador entrega al supervisor."""
+    """Propuesta calculada por reglas. requiere_supervisor = algun control aplicable es de alto riesgo."""
 
     decision: Decision
     nivel: Nivel
+    requiere_supervisor: bool
     porque: list[str]
     controles_extra: list[str]
     alternativa: str
@@ -67,12 +79,81 @@ class ResultadoTarea(Contrato):
 
 
 class ItemChecklist(Contrato):
+    """Detalle interno de cada control del checklist IPERC (se guarda para auditoria)."""
+
     id: str
     control: str
     riesgo_critico: str
+    trabajo_alto_riesgo: bool
     jerarquia: str
     base_legal: str
     origen: Literal["base", "extra"]
+
+
+class EvidenciaFirma(Contrato):
+    """Prueba de que el agente certificado emitio la respuesta: Ed25519 sobre `nonce` y el sha256 del cuerpo."""
+
+    nonce: str
+    sha256: str
+    firma: str
+    clave_publica: str
+
+
+class EstadoConsulta(Contrato):
+    estado: Literal["pendiente", "ok", "error"]
+    data: dict | None = None
+    evidencia: EvidenciaFirma | None = None
+
+
+class Consultas(Contrato):
+    incidentes: EstadoConsulta
+    area: EstadoConsulta
+    gemelo: EstadoConsulta
+
+
+class AgenteNanda(Contrato):
+    """`firma` es `valida` solo si la credencial de las autoridades es vigente, no esta revocada y la ficha cuadra."""
+
+    id: str
+    capabilities: list[str]
+    firma: Literal["valida", "invalida"]
+    emisores: list[str] = []
+    credencial_vence: datetime | None = None
+    motivo: str | None = None
+
+
+class PetarEmitido(Contrato):
+    numero: str
+    checklist: list[str]
+    firmado_por: str | None
+    emitido_en: datetime
+
+
+class Ptw(Contrato):
+    """GET /ptw/{id}. `consultas` se actualiza a medida que responde cada agente."""
+
+    ptw_id: str
+    estado: EstadoPtw
+    solicitud: SolicitudPTW
+    consultas: Consultas
+    nanda: list[AgenteNanda]
+    propuesta: PropuestaSupervisor | None = None
+    petar: PetarEmitido | None = None
+    explicacion: str | None = None
+
+
+class ItemBandeja(Contrato):
+    """GET /ptw/bandeja: revision = ambar o alto riesgo; aviso = rojo. Los verdes no aparecen."""
+
+    ptw_id: str
+    nivel: Nivel
+    requiere_supervisor: bool
+    trabajador_nombre: str
+    tarea: str
+    labor: str
+    turno: Turno
+    creado_en: datetime
+    tipo: Literal["revision", "aviso"]
 
 
 # --- Incidentes ------------------------------------------------------------
@@ -152,35 +233,38 @@ class RespuestaAptitud(Contrato):
     diagnostico: None = None
 
 
-# --- Registro PETAR (lectura) ----------------------------------------------
+class EstadoVisual(Contrato):
+    apto_para_tarea: Aptitud
+    motivo_visible: str
+    energia: int = Field(ge=0, le=100)
+    dia_rotacion: int
+    total_rotacion: int
+    exposicion_nivel: NivelExposicion
+    historial_energia: list[int] = Field(min_length=14, max_length=14)
 
-class Insumos(Contrato):
-    incidentes: RespuestaIncidentes | None = None
-    condiciones: RespuestaArea | None = None
-    aptitud: RespuestaAptitud | None = None
 
+class AvatarGemelo(Contrato):
+    """GET /gemelo/{id}/avatar y GET /trabajadores/{id}/avatar. Sin datos clinicos ni fotos."""
 
-class Petar(Contrato):
-    id: str
-    estado: EstadoPetar
-    solicitud: SolicitudPTW
-    propuesta: PropuestaSupervisor | None = None
-    checklist: list[ItemChecklist] = []
-    explicacion: str = ""
-    insumos: Insumos = Insumos()
-    errores: list[str] = []
-    firma: FirmaSupervisor | None = None
-    resultado: ResultadoTarea | None = None
-    creado_en: datetime | None = None
-    actualizado_en: datetime | None = None
+    trabajador_id: str
+    nombre: str
+    cargo: str
+    empresa: str
+    empleador: Empleador
+    seed: str
+    color_casco: str
+    estado_visual: EstadoVisual
 
 
 CONTRATOS = [
     SolicitudPTW,
+    SolicitudAceptada,
     PropuestaSupervisor,
     FirmaSupervisor,
     ResultadoTarea,
     ItemChecklist,
+    Ptw,
+    ItemBandeja,
     ConsultaIncidentes,
     RespuestaIncidentes,
     RegistroIncidente,
@@ -188,5 +272,5 @@ CONTRATOS = [
     RespuestaArea,
     ConsultaAptitud,
     RespuestaAptitud,
-    Petar,
+    AvatarGemelo,
 ]

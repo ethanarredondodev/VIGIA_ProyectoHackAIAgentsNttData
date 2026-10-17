@@ -2,7 +2,7 @@
   {
     "id": "INC-0001",
     "fecha": "2024-01-15",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "voladura",
     "labor_tipo": "frente_avance",
@@ -11,12 +11,16 @@
     "causa_probable": "Fulminante dañado y circuito sin verificar antes del carguío.",
     "potencial": "critico",
     "resumen_es": "Detonación prematura durante el carguío de taladros del frente; dos trabajadores con trauma acústico.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0002",
     "fecha": "2024-02-21",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "carguio",
     "labor_tipo": "galeria",
@@ -25,12 +29,16 @@
     "causa_probable": "Sin vigía ni separación entre tránsito peatonal y de equipos.",
     "potencial": "alto",
     "resumen_es": "Un scoop golpeó a un ayudante que transitaba por la galería con baja visibilidad.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0003",
     "fecha": "2024-03-29",
-    "unidad": "UM Ccori Huayco",
+    "unidad": "UM Santa Rita",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "perforacion",
     "labor_tipo": "frente_avance",
@@ -39,12 +47,16 @@
     "causa_probable": "Desatado incompleto en la corona.",
     "potencial": "medio",
     "resumen_es": "Roca suelta cayó cerca del perforista durante la perforación del frente en turno día; sin lesiones.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0004",
     "fecha": "2024-05-05",
-    "unidad": "UM Cerro Vigia",
+    "unidad": "UM Santa Rita",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "sostenimiento",
     "labor_tipo": "tajeo",
@@ -53,12 +65,16 @@
     "causa_probable": "Secuencia de sostenimiento no respetada.",
     "potencial": "medio",
     "resumen_es": "Durante la instalación de pernos se desprendió un bloque del hastial y golpeó el equipo.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0005",
     "fecha": "2024-06-11",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "desatado",
     "labor_tipo": "galeria",
@@ -67,7 +83,11 @@
     "causa_probable": "Barretilla de longitud inadecuada y posición debajo de la roca suelta.",
     "potencial": "alto",
     "resumen_es": "Un bloque de roca cayó sobre la barretilla del desatador y le provocó un esguince de muñeca.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0006",
@@ -81,12 +101,16 @@
     "causa_probable": "No se aplicó bloqueo y etiquetado.",
     "potencial": "medio",
     "resumen_es": "Descarga eléctrica leve al manipular un tablero de bombas en la rampa.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0007",
     "fecha": "2024-08-24",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Cerro Vigia",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "perforacion",
     "labor_tipo": "frente_avance",
@@ -95,12 +119,16 @@
     "causa_probable": "Desatado insuficiente después de la voladura del turno anterior.",
     "potencial": "alto",
     "resumen_es": "Desprendimiento de roca del techo durante la perforación del frente en turno noche; el perforista sufrió una contusión en el hombro.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0008",
     "fecha": "2024-09-30",
-    "unidad": "UM Cerro Vigia",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "perforacion",
     "labor_tipo": "tajeo",
@@ -109,7 +137,11 @@
     "causa_probable": "Ventilación auxiliar apagada y sin medición de gases antes del ingreso.",
     "potencial": "alto",
     "resumen_es": "El perforista presentó mareos por acumulación de gases después de la voladura en el tajeo.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0009",
@@ -123,7 +155,11 @@
     "causa_probable": "Fatiga del operador al final del turno.",
     "potencial": "critico",
     "resumen_es": "Un camión de acarreo se salió de la vía en la rampa del tajo durante el turno noche.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0010",
@@ -137,12 +173,16 @@
     "causa_probable": "Comunicación radial deficiente entre pala y camión.",
     "potencial": "medio",
     "resumen_es": "La pala golpeó la tolva del camión durante el carguío; el operador resultó ileso.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0011",
     "fecha": "2025-01-19",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "izaje",
     "labor_tipo": "chimenea",
@@ -151,7 +191,11 @@
     "causa_probable": "Mantenimiento preventivo vencido.",
     "potencial": "alto",
     "resumen_es": "Falla del freno del winche durante el izaje de materiales en la chimenea.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0012",
@@ -165,12 +209,16 @@
     "causa_probable": "Sostenimiento con pernos pendiente en los últimos 2 m del frente.",
     "potencial": "alto",
     "resumen_es": "Caída de un planchón desde la corona mientras se perforaba el frente de avance de noche; sin lesionados, daño a la perforadora.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0013",
     "fecha": "2025-04-03",
-    "unidad": "UM Ccori Huayco",
+    "unidad": "UM Santa Rita",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "sostenimiento",
     "labor_tipo": "chimenea",
@@ -179,12 +227,16 @@
     "causa_probable": "Ingreso sin medición de oxígeno.",
     "potencial": "alto",
     "resumen_es": "El operador de shotcrete presentó síntomas de hipoxia en una chimenea con ventilación deficiente.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0014",
     "fecha": "2025-05-10",
-    "unidad": "UM Ccori Huayco",
+    "unidad": "UM Santa Rita",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "trabajo_en_caliente",
     "labor_tipo": "galeria",
@@ -193,12 +245,16 @@
     "causa_probable": "Área de trabajo en caliente sin limpieza ni extintor.",
     "potencial": "medio",
     "resumen_es": "Amago de incendio por chispas de soldadura sobre material combustible en la galería.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0015",
     "fecha": "2025-06-16",
-    "unidad": "UM Santa Rita",
+    "unidad": "UM Cerro Vigia",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "acarreo",
     "labor_tipo": "rampa",
@@ -207,12 +263,16 @@
     "causa_probable": "Incumplimiento de los límites de velocidad.",
     "potencial": "alto",
     "resumen_es": "Un volquete y una camioneta casi colisionan en la rampa por exceso de velocidad.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0016",
     "fecha": "2025-07-23",
-    "unidad": "UM Ccori Huayco",
+    "unidad": "UM Cerro Vigia",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "trabajo_en_altura",
     "labor_tipo": "chimenea",
@@ -221,7 +281,11 @@
     "causa_probable": "Plataforma húmeda y sin baranda.",
     "potencial": "alto",
     "resumen_es": "Un trabajador resbaló en la plataforma de la chimenea; el arnés detuvo la caída.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0017",
@@ -235,7 +299,11 @@
     "causa_probable": "Sistema de supresión de polvo inoperativo.",
     "potencial": "medio",
     "resumen_es": "Exposición a polvo durante la perforación en seco en el banco.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0018",
@@ -249,12 +317,16 @@
     "causa_probable": "Iluminación insuficiente en el frente.",
     "potencial": "alto",
     "resumen_es": "Desatador lesionado por un planchón en el frente de avance durante el turno noche.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0019",
     "fecha": "2025-11-11",
-    "unidad": "UM Cerro Vigia",
+    "unidad": "UM Ccori Huayco",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "perforacion",
     "labor_tipo": "frente_avance",
@@ -263,7 +335,11 @@
     "causa_probable": "Iluminación deficiente que impidió identificar roca suelta durante el desatado.",
     "potencial": "alto",
     "resumen_es": "Lesión en la mano por roca suelta desprendida del hastial durante la perforación nocturna del frente.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0020",
@@ -277,12 +353,16 @@
     "causa_probable": "Ausencia de PETAR y de vigía en el ingreso.",
     "potencial": "alto",
     "resumen_es": "Un trabajador ingresó a una tolva sin permiso para destrabar mineral.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
   },
   {
     "id": "INC-0021",
     "fecha": "2026-01-24",
-    "unidad": "UM Ccori Huayco",
+    "unidad": "UM Cerro Vigia",
     "tipo_mineria": "subterranea",
     "tipo_tarea": "voladura",
     "labor_tipo": "tajeo",
@@ -291,6 +371,46 @@
     "causa_probable": "Vigía ubicado a distancia insegura.",
     "potencial": "alto",
     "resumen_es": "Proyección de rocas alcanzó la zona de un vigía mal ubicado.",
-    "origen": "sintetico"
+    "origen": "sintetico",
+    "trabajador_id": null,
+    "tipo_incidente": null,
+    "gravedad": null,
+    "estado": "cerrado"
+  },
+  {
+    "id": "INC-0022",
+    "fecha": "2024-03-18",
+    "unidad": "UM Cerro Vigia",
+    "tipo_mineria": "subterranea",
+    "tipo_tarea": "carguio",
+    "labor_tipo": "rampa",
+    "turno": "dia",
+    "riesgo_critico": "otro",
+    "causa_probable": "Sin causa registrada en el reporte.",
+    "potencial": "medio",
+    "resumen_es": "Caída en una rampa de la mina durante el acarreo con scooptram; esguince de tobillo.",
+    "origen": "sintetico",
+    "trabajador_id": "T-011",
+    "tipo_incidente": "Caída con lesión (esguince)",
+    "gravedad": "moderada",
+    "estado": "cerrado"
+  },
+  {
+    "id": "INC-0023",
+    "fecha": "2026-09-02",
+    "unidad": "UM Cerro Vigia",
+    "tipo_mineria": "subterranea",
+    "tipo_tarea": "carguio",
+    "labor_tipo": "galeria",
+    "turno": "dia",
+    "riesgo_critico": "silice",
+    "causa_probable": "Sin causa registrada en el reporte.",
+    "potencial": "alto",
+    "resumen_es": "Emergencia médica durante el acarreo con scooptram en la galería; atendido en el tópico y retirado de la tarea.",
+    "origen": "sintetico",
+    "trabajador_id": "T-011",
+    "tipo_incidente": "Emergencia médica",
+    "gravedad": "moderada",
+    "estado": "en_seguimiento"
   }
 ]

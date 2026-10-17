@@ -13,8 +13,9 @@ x-servicio: &servicio
   restart: unless-stopped
 
 services:
-  # Proyecto `operacion`: incidentes, PETAR y checkpoints de LangGraph.
-  db_operacion:
+  # Proyecto `operacion`: trabajadores, trabajos, historial de trabajos, labores, condiciones, clima, incidentes,
+  # PTW y checkpoints de LangGraph.
+  vigia-db-operacion:
     <<: *postgres
     environment:
       POSTGRES_DB: operacion
@@ -25,7 +26,7 @@ services:
     networks: [operacion]
 
   # Proyecto `clinica`: solo el gemelo. Red interna sin puerto publicado.
-  db_clinica:
+  vigia-db-clinica:
     <<: *postgres
     environment:
       POSTGRES_DB: clinica
@@ -34,7 +35,7 @@ services:
     volumes: [db_clinica:/var/lib/postgresql/data]
     networks: [clinica]
 
-  nanda_index:
+  vigia-nanda:
     <<: *servicio
     build: {context: ., dockerfile: nanda_index/Dockerfile}
     environment:
@@ -42,55 +43,56 @@ services:
     ports: ["8010:8000"]
     networks: [operacion]
 
-  incidentes:
+  vigia-incidentes:
     <<: *servicio
     build: {context: ., dockerfile: agents/incidentes/Dockerfile}
     environment:
-      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
-      NANDA_URL: http://nanda_index:8000
-      AGENT_URL: http://incidentes:8000
+      DATABASE_URL: postgresql://vigia:vigia_local@vigia-db-operacion:5432/operacion
+      NANDA_URL: http://vigia-nanda:8000
+      AGENT_URL: http://vigia-incidentes:8000
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     depends_on:
-      db_operacion: {condition: service_healthy}
+      vigia-db-operacion: {condition: service_healthy}
     ports: ["8011:8000"]
     networks: [operacion]
 
-  area:
+  vigia-area:
     <<: *servicio
     build: {context: ., dockerfile: agents/area/Dockerfile}
     environment:
-      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
-      NANDA_URL: http://nanda_index:8000
-      AGENT_URL: http://area:8000
+      DATABASE_URL: postgresql://vigia:vigia_local@vigia-db-operacion:5432/operacion
+      NANDA_URL: http://vigia-nanda:8000
+      AGENT_URL: http://vigia-area:8000
     depends_on:
-      db_operacion: {condition: service_healthy}
+      vigia-db-operacion: {condition: service_healthy}
     ports: ["8012:8000"]
     networks: [operacion]
 
-  # Zona clinica: sin puerto publicado; solo ptw lo llama. No recibe la clave de Claude.
-  gemelo:
+  # Zona clinica: sin puerto publicado; solo vigia-ptw lo llama. No recibe la clave de Claude.
+  vigia-gemelo:
     <<: *servicio
     build: {context: ., dockerfile: agents/gemelo/Dockerfile}
     environment:
-      DATABASE_URL: postgresql://vigia_clinica:vigia_clinica_local@db_clinica:5432/clinica
-      NANDA_URL: http://nanda_index:8000
-      AGENT_URL: http://gemelo:8000
+      DATABASE_URL: postgresql://vigia_clinica:vigia_clinica_local@vigia-db-clinica:5432/clinica
+      NANDA_URL: http://vigia-nanda:8000
+      AGENT_URL: http://vigia-gemelo:8000
       SHEETS_REGLAS_ZONA_CLINICA_URL: ${SHEETS_REGLAS_ZONA_CLINICA_URL:-}
     depends_on:
-      db_clinica: {condition: service_healthy}
+      vigia-db-clinica: {condition: service_healthy}
     networks: [operacion, clinica]
 
-  ptw:
+  vigia-ptw:
     <<: *servicio
     build: {context: ., dockerfile: agents/ptw/Dockerfile}
     environment:
-      DATABASE_URL: postgresql://vigia:vigia_local@db_operacion:5432/operacion
-      NANDA_URL: http://nanda_index:8000
-      AGENT_URL: http://ptw:8000
-      INCIDENTES_URL: http://incidentes:8000
-      AREA_URL: http://area:8000
-      GEMELO_URL: http://gemelo:8000
+      DATABASE_URL: postgresql://vigia:vigia_local@vigia-db-operacion:5432/operacion
+      NANDA_URL: http://vigia-nanda:8000
+      AGENT_URL: http://vigia-ptw:8000
+      INCIDENTES_URL: http://vigia-incidentes:8000
+      AREA_URL: http://vigia-area:8000
+      GEMELO_URL: http://vigia-gemelo:8000
       MOCK_MODE: ${MOCK_MODE:-false}
+      WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3000,http://localhost:5173}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
       LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
@@ -98,20 +100,20 @@ services:
       SHEETS_LIMITES_AREA_URL: ${SHEETS_LIMITES_AREA_URL:-}
       SHEETS_CONTROLES_IPERC_URL: ${SHEETS_CONTROLES_IPERC_URL:-}
     depends_on:
-      db_operacion: {condition: service_healthy}
-      nanda_index: {condition: service_started}
-      incidentes: {condition: service_started}
-      area: {condition: service_started}
-      gemelo: {condition: service_started}
+      vigia-db-operacion: {condition: service_healthy}
+      vigia-nanda: {condition: service_started}
+      vigia-incidentes: {condition: service_started}
+      vigia-area: {condition: service_started}
+      vigia-gemelo: {condition: service_started}
     ports: ["8000:8000"]
     networks: [operacion]
 
-  ui:
+  vigia-ui:
     <<: *servicio
     build: {context: ., dockerfile: ui/Dockerfile}
     environment:
-      PTW_URL: http://ptw:8000
-    depends_on: [ptw]
+      PTW_URL: http://vigia-ptw:8000
+    depends_on: [vigia-ptw]
     ports: ["8501:8501"]
     networks: [operacion]
 

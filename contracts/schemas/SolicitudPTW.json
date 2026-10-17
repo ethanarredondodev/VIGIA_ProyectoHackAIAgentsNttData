@@ -1,0 +1,62 @@
+{
+  "additionalProperties": false,
+  "description": "POST /ptw/solicitud",
+  "properties": {
+    "tarea": {
+      "minLength": 3,
+      "title": "Tarea",
+      "type": "string"
+    },
+    "labor": {
+      "minLength": 2,
+      "title": "Labor",
+      "type": "string"
+    },
+    "turno": {
+      "enum": [
+        "dia",
+        "noche"
+      ],
+      "title": "Turno",
+      "type": "string"
+    },
+    "trabajador_id": {
+      "minLength": 1,
+      "title": "Trabajador Id",
+      "type": "string"
+    },
+    "altitud_msnm": {
+      "maximum": 6500,
+      "minimum": 0,
+      "title": "Altitud Msnm",
+      "type": "integer"
+    },
+    "tipo_mineria": {
+      "enum": [
+        "subterranea",
+        "tajo_abierto"
+      ],
+      "title": "Tipo Mineria",
+      "type": "string"
+    },
+    "empleador": {
+      "enum": [
+        "titular",
+        "contratista"
+      ],
+      "title": "Empleador",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tarea",
+    "labor",
+    "turno",
+    "trabajador_id",
+    "altitud_msnm",
+    "tipo_mineria",
+    "empleador"
+  ],
+  "title": "SolicitudPTW",
+  "type": "object"
+}

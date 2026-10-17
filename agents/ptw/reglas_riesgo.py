@@ -1,7 +1,8 @@
-"""Calculo determinista del nivel de riesgo y del checklist IPERC.
+"""Calculo determinista del nivel de riesgo, del checklist IPERC y de si requiere supervisor.
 
 El nivel verde/ambar/rojo lo deciden estas reglas con base legal (limites_area.csv,
-controles_iperc.csv); el LLM nunca interviene aqui.
+controles_iperc.csv); el LLM nunca interviene aqui. Si algun control aplicable tiene
+trabajo_alto_riesgo = si (DS 024-2016-EM arts. 129-130), el PETAR va a firma aunque sea verde.
 """
 
 from agents.comun.reglas import comparar, cumple, parsear_disparador
@@ -105,7 +106,7 @@ def calcular_riesgo(
         if "aptitud" in causas_rojo:
             alternativas.append("Reasignar la tarea a otro trabajador apto del mismo turno.")
         if "area" in causas_rojo:
-            alternativas.append("No ingresar a la labor: corregir las condiciones y repetir la medición antes de reevaluar.")
+            alternativas.append("Esperar: no ingresar a la labor hasta corregir las condiciones y repetir la medición.")
         alternativa = " ".join(alternativas)
     elif nivel == "ambar":
         alternativa = "Si los controles no pueden aplicarse antes del inicio, reprogramar la tarea o reasignarla."
@@ -121,23 +122,26 @@ def calcular_riesgo(
 
 
 def armar_checklist(senales: dict, controles: list[dict]) -> list[dict]:
+    """Base: disparador `siempre` o que solo depende de `tipo_tarea`. Extra: el resto, si se cumple."""
     base, extra, vistos = [], [], set()
     for control in controles:
-        if control["trabajo_alto_riesgo"] not in ("*", senales["tipo_tarea"]) or control["control"] in vistos:
+        if control["control"] in vistos:
             continue
         disparador = parsear_disparador(control["disparador"])
         if disparador is not None and not cumple(senales, *disparador):
             continue
+        es_base = disparador is None or disparador[0] == "tipo_tarea"
         vistos.add(control["control"])
         item = ItemChecklist(
             id=control["id"],
             control=control["control"],
             riesgo_critico=control["riesgo_critico"],
+            trabajo_alto_riesgo=control["trabajo_alto_riesgo"] == "si",
             jerarquia=control["jerarquia"],
             base_legal=control["base_legal"],
-            origen="base" if disparador is None else "extra",
+            origen="base" if es_base else "extra",
         )
-        (base if disparador is None else extra).append(item.model_dump())
+        (base if es_base else extra).append(item.model_dump())
     return base + extra
 
 
@@ -145,23 +149,14 @@ def construir_propuesta(evaluacion: dict, checklist: list[dict]) -> PropuestaSup
     return PropuestaSupervisor(
         decision=evaluacion["decision"],
         nivel=evaluacion["nivel"],
+        requiere_supervisor=any(i["trabajo_alto_riesgo"] for i in checklist),
         porque=evaluacion["porque"],
         controles_extra=[i["control"] for i in checklist if i["origen"] == "extra"],
         alternativa=evaluacion["alternativa"],
     )
 
 
-def validar_firma(propuesta: PropuestaSupervisor, firma: FirmaSupervisor) -> str | None:
-    if firma.accion == "ajustar" and propuesta.nivel == "rojo":
-        return "Con nivel rojo solo se puede aceptar la reasignación o rechazar."
+def validar_firma(firma: FirmaSupervisor) -> str | None:
     if firma.accion == "ajustar" and not firma.controles_finales:
         return "Al ajustar debes indicar los controles finales."
     return None
-
-
-def estado_tras_firma(propuesta: dict, firma: dict) -> str:
-    if firma["accion"] == "rechazar":
-        return "rechazado"
-    if propuesta["decision"] == "reasignar":
-        return "reasignado"
-    return "autorizado"

@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "description": "POST /area/condiciones",
+  "properties": {
+    "labor": {
+      "title": "Labor",
+      "type": "string"
+    },
+    "co_ppm": {
+      "minimum": 0,
+      "title": "Co Ppm",
+      "type": "number"
+    },
+    "o2_pct": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "O2 Pct",
+      "type": "number"
+    },
+    "ventilacion": {
+      "enum": [
+        "operativa",
+        "deficiente",
+        "inoperativa",
+        "natural"
+      ],
+      "title": "Ventilacion",
+      "type": "string"
+    },
+    "ruido_dBA": {
+      "minimum": 0,
+      "title": "Ruido Dba",
+      "type": "number"
+    },
+    "ultimo_desatado_h": {
+      "minimum": 0,
+      "title": "Ultimo Desatado H",
+      "type": "number"
+    }
+  },
+  "required": [
+    "labor",
+    "co_ppm",
+    "o2_pct",
+    "ventilacion",
+    "ruido_dBA",
+    "ultimo_desatado_h"
+  ],
+  "title": "RespuestaArea",
+  "type": "object"
+}

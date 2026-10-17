@@ -1,0 +1,53 @@
+[
+  {
+    "historial_trabajo_id": "HT-0021",
+    "trabajador_id": "T-011",
+    "labor": "NV-3820 GA-07",
+    "trabajo_id": 11,
+    "descripcion_realizada": "Acarreo subterráneo con scooptram.",
+    "incidente_id": "INC-0022",
+    "fecha_inicio": "2024-03-18",
+    "fecha_fin": "2024-03-18",
+    "turno": "dia",
+    "estado_trabajo": "interrumpido",
+    "observaciones": "Caída en la rampa; tarea interrumpida.",
+    "validado_por": "Ing. Héctor Medina Salas",
+    "fecha_validacion": "2024-03-19",
+    "costo_real": 600.0,
+    "duracion_real": 3.0
+  },
+  {
+    "historial_trabajo_id": "HT-0022",
+    "trabajador_id": "T-011",
+    "labor": "NV-3820 GA-07",
+    "trabajo_id": 11,
+    "descripcion_realizada": "Acarreo subterráneo con scooptram.",
+    "incidente_id": null,
+    "fecha_inicio": "2026-08-24",
+    "fecha_fin": "2026-08-24",
+    "turno": "dia",
+    "estado_trabajo": "completado",
+    "observaciones": "Completado; el operador reportó una molestia de salud, derivada a salud ocupacional.",
+    "validado_por": "Ing. Héctor Medina Salas",
+    "fecha_validacion": "2026-08-25",
+    "costo_real": 2950.0,
+    "duracion_real": 12.0
+  },
+  {
+    "historial_trabajo_id": "HT-0023",
+    "trabajador_id": "T-011",
+    "labor": "NV-3820 GA-07",
+    "trabajo_id": 11,
+    "descripcion_realizada": "Acarreo subterráneo con scooptram.",
+    "incidente_id": "INC-0023",
+    "fecha_inicio": "2026-09-02",
+    "fecha_fin": "2026-09-02",
+    "turno": "dia",
+    "estado_trabajo": "interrumpido",
+    "observaciones": "Emergencia médica durante la labor; atendido en el tópico y retirado de la tarea.",
+    "validado_por": "Ing. Patricia Rojas Valdivia",
+    "fecha_validacion": "2026-09-03",
+    "costo_real": 1000.0,
+    "duracion_real": 4.0
+  }
+]

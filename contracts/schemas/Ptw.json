@@ -1,0 +1,399 @@
+{
+  "$defs": {
+    "AgenteNanda": {
+      "additionalProperties": false,
+      "description": "`firma` es `valida` solo si la credencial de las autoridades es vigente, no esta revocada y la ficha cuadra.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "capabilities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "firma": {
+          "enum": [
+            "valida",
+            "invalida"
+          ],
+          "title": "Firma",
+          "type": "string"
+        },
+        "emisores": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Emisores",
+          "type": "array"
+        },
+        "credencial_vence": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Credencial Vence"
+        },
+        "motivo": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Motivo"
+        }
+      },
+      "required": [
+        "id",
+        "capabilities",
+        "firma"
+      ],
+      "title": "AgenteNanda",
+      "type": "object"
+    },
+    "Consultas": {
+      "additionalProperties": false,
+      "properties": {
+        "incidentes": {
+          "$ref": "#/$defs/EstadoConsulta"
+        },
+        "area": {
+          "$ref": "#/$defs/EstadoConsulta"
+        },
+        "gemelo": {
+          "$ref": "#/$defs/EstadoConsulta"
+        }
+      },
+      "required": [
+        "incidentes",
+        "area",
+        "gemelo"
+      ],
+      "title": "Consultas",
+      "type": "object"
+    },
+    "EstadoConsulta": {
+      "additionalProperties": false,
+      "properties": {
+        "estado": {
+          "enum": [
+            "pendiente",
+            "ok",
+            "error"
+          ],
+          "title": "Estado",
+          "type": "string"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data"
+        },
+        "evidencia": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenciaFirma"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "estado"
+      ],
+      "title": "EstadoConsulta",
+      "type": "object"
+    },
+    "EvidenciaFirma": {
+      "additionalProperties": false,
+      "description": "Prueba de que el agente certificado emitio la respuesta: Ed25519 sobre `nonce` y el sha256 del cuerpo.",
+      "properties": {
+        "nonce": {
+          "title": "Nonce",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "firma": {
+          "title": "Firma",
+          "type": "string"
+        },
+        "clave_publica": {
+          "title": "Clave Publica",
+          "type": "string"
+        }
+      },
+      "required": [
+        "nonce",
+        "sha256",
+        "firma",
+        "clave_publica"
+      ],
+      "title": "EvidenciaFirma",
+      "type": "object"
+    },
+    "PetarEmitido": {
+      "additionalProperties": false,
+      "properties": {
+        "numero": {
+          "title": "Numero",
+          "type": "string"
+        },
+        "checklist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checklist",
+          "type": "array"
+        },
+        "firmado_por": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Firmado Por"
+        },
+        "emitido_en": {
+          "format": "date-time",
+          "title": "Emitido En",
+          "type": "string"
+        }
+      },
+      "required": [
+        "numero",
+        "checklist",
+        "firmado_por",
+        "emitido_en"
+      ],
+      "title": "PetarEmitido",
+      "type": "object"
+    },
+    "PropuestaSupervisor": {
+      "additionalProperties": false,
+      "description": "Propuesta calculada por reglas. requiere_supervisor = algun control aplicable es de alto riesgo.",
+      "properties": {
+        "decision": {
+          "enum": [
+            "autorizar",
+            "autorizar_con_controles",
+            "reasignar"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "nivel": {
+          "enum": [
+            "verde",
+            "ambar",
+            "rojo"
+          ],
+          "title": "Nivel",
+          "type": "string"
+        },
+        "requiere_supervisor": {
+          "title": "Requiere Supervisor",
+          "type": "boolean"
+        },
+        "porque": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Porque",
+          "type": "array"
+        },
+        "controles_extra": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Controles Extra",
+          "type": "array"
+        },
+        "alternativa": {
+          "title": "Alternativa",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision",
+        "nivel",
+        "requiere_supervisor",
+        "porque",
+        "controles_extra",
+        "alternativa"
+      ],
+      "title": "PropuestaSupervisor",
+      "type": "object"
+    },
+    "SolicitudPTW": {
+      "additionalProperties": false,
+      "description": "POST /ptw/solicitud",
+      "properties": {
+        "tarea": {
+          "minLength": 3,
+          "title": "Tarea",
+          "type": "string"
+        },
+        "labor": {
+          "minLength": 2,
+          "title": "Labor",
+          "type": "string"
+        },
+        "turno": {
+          "enum": [
+            "dia",
+            "noche"
+          ],
+          "title": "Turno",
+          "type": "string"
+        },
+        "trabajador_id": {
+          "minLength": 1,
+          "title": "Trabajador Id",
+          "type": "string"
+        },
+        "altitud_msnm": {
+          "maximum": 6500,
+          "minimum": 0,
+          "title": "Altitud Msnm",
+          "type": "integer"
+        },
+        "tipo_mineria": {
+          "enum": [
+            "subterranea",
+            "tajo_abierto"
+          ],
+          "title": "Tipo Mineria",
+          "type": "string"
+        },
+        "empleador": {
+          "enum": [
+            "titular",
+            "contratista"
+          ],
+          "title": "Empleador",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tarea",
+        "labor",
+        "turno",
+        "trabajador_id",
+        "altitud_msnm",
+        "tipo_mineria",
+        "empleador"
+      ],
+      "title": "SolicitudPTW",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "GET /ptw/{id}. `consultas` se actualiza a medida que responde cada agente.",
+  "properties": {
+    "ptw_id": {
+      "title": "Ptw Id",
+      "type": "string"
+    },
+    "estado": {
+      "enum": [
+        "procesando",
+        "emitido",
+        "en_revision",
+        "bloqueado",
+        "autorizado_con_controles",
+        "rechazado",
+        "en_ejecucion",
+        "cerrado"
+      ],
+      "title": "Estado",
+      "type": "string"
+    },
+    "solicitud": {
+      "$ref": "#/$defs/SolicitudPTW"
+    },
+    "consultas": {
+      "$ref": "#/$defs/Consultas"
+    },
+    "nanda": {
+      "items": {
+        "$ref": "#/$defs/AgenteNanda"
+      },
+      "title": "Nanda",
+      "type": "array"
+    },
+    "propuesta": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PropuestaSupervisor"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "petar": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PetarEmitido"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "explicacion": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Explicacion"
+    }
+  },
+  "required": [
+    "ptw_id",
+    "estado",
+    "solicitud",
+    "consultas",
+    "nanda"
+  ],
+  "title": "Ptw",
+  "type": "object"
+}

@@ -1,0 +1,244 @@
+{
+  "$defs": {
+    "AgentFacts": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "agent_name": {
+          "title": "Agent Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "provider": {
+          "$ref": "#/$defs/Proveedor"
+        },
+        "endpoints": {
+          "$ref": "#/$defs/Endpoints"
+        },
+        "skills": {
+          "items": {
+            "$ref": "#/$defs/Habilidad"
+          },
+          "title": "Skills",
+          "type": "array"
+        },
+        "capabilities": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Capabilities",
+          "type": "object"
+        },
+        "issued_at": {
+          "title": "Issued At",
+          "type": "string"
+        },
+        "expires_at": {
+          "title": "Expires At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "agent_name",
+        "label",
+        "description",
+        "version",
+        "provider",
+        "endpoints",
+        "skills",
+        "issued_at",
+        "expires_at"
+      ],
+      "title": "AgentFacts",
+      "type": "object"
+    },
+    "Credencial": {
+      "description": "Credencial verificable simplificada (W3C VC 2.0 sin JSON-LD): la emite la autoridad, no el agente.",
+      "properties": {
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "public_key": {
+          "title": "Public Key",
+          "type": "string"
+        },
+        "claims": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Claims",
+          "type": "object"
+        },
+        "valid_from": {
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "title": "Valid Until",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "public_key",
+        "valid_from",
+        "valid_until"
+      ],
+      "title": "Credencial",
+      "type": "object"
+    },
+    "CredencialFirmada": {
+      "properties": {
+        "credential": {
+          "$ref": "#/$defs/Credencial"
+        },
+        "proofs": {
+          "items": {
+            "$ref": "#/$defs/Prueba"
+          },
+          "title": "Proofs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "credential",
+        "proofs"
+      ],
+      "title": "CredencialFirmada",
+      "type": "object"
+    },
+    "Endpoints": {
+      "properties": {
+        "static": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Static",
+          "type": "array"
+        }
+      },
+      "required": [
+        "static"
+      ],
+      "title": "Endpoints",
+      "type": "object"
+    },
+    "Habilidad": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "input_modes": {
+          "default": [
+            "application/json"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Modes",
+          "type": "array"
+        },
+        "output_modes": {
+          "default": [
+            "application/json"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Output Modes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "description"
+      ],
+      "title": "Habilidad",
+      "type": "object"
+    },
+    "Proveedor": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "url": {
+          "default": "",
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Proveedor",
+      "type": "object"
+    },
+    "Prueba": {
+      "properties": {
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "proof_value": {
+          "title": "Proof Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuer",
+        "proof_value"
+      ],
+      "title": "Prueba",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "facts": {
+      "$ref": "#/$defs/AgentFacts"
+    },
+    "firma": {
+      "title": "Firma",
+      "type": "string"
+    },
+    "clave_publica": {
+      "title": "Clave Publica",
+      "type": "string"
+    },
+    "credencial": {
+      "$ref": "#/$defs/CredencialFirmada"
+    },
+    "algoritmo": {
+      "const": "Ed25519",
+      "default": "Ed25519",
+      "title": "Algoritmo",
+      "type": "string"
+    }
+  },
+  "required": [
+    "facts",
+    "firma",
+    "clave_publica",
+    "credencial"
+  ],
+  "title": "AgentFactsFirmadas",
+  "type": "object"
+}

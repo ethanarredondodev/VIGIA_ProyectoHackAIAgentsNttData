@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "EstadoVisual": {
+      "additionalProperties": false,
+      "properties": {
+        "apto_para_tarea": {
+          "enum": [
+            "apto",
+            "apto_con_observaciones",
+            "no_apto"
+          ],
+          "title": "Apto Para Tarea",
+          "type": "string"
+        },
+        "motivo_visible": {
+          "title": "Motivo Visible",
+          "type": "string"
+        },
+        "energia": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Energia",
+          "type": "integer"
+        },
+        "dia_rotacion": {
+          "title": "Dia Rotacion",
+          "type": "integer"
+        },
+        "total_rotacion": {
+          "title": "Total Rotacion",
+          "type": "integer"
+        },
+        "exposicion_nivel": {
+          "enum": [
+            "baja",
+            "media",
+            "alta"
+          ],
+          "title": "Exposicion Nivel",
+          "type": "string"
+        },
+        "historial_energia": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 14,
+          "minItems": 14,
+          "title": "Historial Energia",
+          "type": "array"
+        }
+      },
+      "required": [
+        "apto_para_tarea",
+        "motivo_visible",
+        "energia",
+        "dia_rotacion",
+        "total_rotacion",
+        "exposicion_nivel",
+        "historial_energia"
+      ],
+      "title": "EstadoVisual",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "GET /gemelo/{id}/avatar y GET /trabajadores/{id}/avatar. Sin datos clinicos ni fotos.",
+  "properties": {
+    "trabajador_id": {
+      "title": "Trabajador Id",
+      "type": "string"
+    },
+    "nombre": {
+      "title": "Nombre",
+      "type": "string"
+    },
+    "cargo": {
+      "title": "Cargo",
+      "type": "string"
+    },
+    "empresa": {
+      "title": "Empresa",
+      "type": "string"
+    },
+    "empleador": {
+      "enum": [
+        "titular",
+        "contratista"
+      ],
+      "title": "Empleador",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "string"
+    },
+    "color_casco": {
+      "title": "Color Casco",
+      "type": "string"
+    },
+    "estado_visual": {
+      "$ref": "#/$defs/EstadoVisual"
+    }
+  },
+  "required": [
+    "trabajador_id",
+    "nombre",
+    "cargo",
+    "empresa",
+    "empleador",
+    "seed",
+    "color_casco",
+    "estado_visual"
+  ],
+  "title": "AvatarGemelo",
+  "type": "object"
+}

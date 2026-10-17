@@ -1,6 +1,6 @@
 """Interfaz del indice de agentes y sus implementaciones.
 
-- IndiceLocal: en memoria; fija la clave publica del primer registro de cada id (TOFU).
+- IndiceLocal: en memoria. La app solo le entrega fichas con credencial valida.
 - IndiceNandaOficial: envuelve al local y ademas publica/consulta el registry oficial
   de NANDA (repositorio projnanda/adapter). Se activa con NANDA_OFICIAL_URL.
 """
@@ -11,13 +11,9 @@ from typing import Protocol
 import httpx
 from pydantic import ValidationError
 
-from contracts.agent_facts import AgentFactsFirmadas, verificar
+from contracts.agent_facts import AgentFactsFirmadas, motivo_rechazo
 
 log = logging.getLogger(__name__)
-
-
-class ClaveNoCoincide(Exception):
-    pass
 
 
 class IndiceAgentes(Protocol):
@@ -33,9 +29,6 @@ class IndiceLocal:
         self._facts: dict[str, AgentFactsFirmadas] = {}
 
     def registrar(self, firmadas: AgentFactsFirmadas) -> None:
-        previo = self._facts.get(firmadas.facts.id)
-        if previo and previo.clave_publica != firmadas.clave_publica:
-            raise ClaveNoCoincide(f"{firmadas.facts.id} ya esta registrado con otra clave publica")
         self._facts[firmadas.facts.id] = firmadas
 
     def resolver(self, agent_id: str) -> AgentFactsFirmadas | None:
@@ -49,9 +42,10 @@ class IndiceNandaOficial:
     """El registry oficial guarda id -> URL del agente; las AgentFacts firmadas se
     descargan del propio agente (/.well-known/agent-facts) y se verifican aqui."""
 
-    def __init__(self, url_registry: str, local: IndiceLocal) -> None:
+    def __init__(self, url_registry: str, local: IndiceLocal, emisores: dict[str, str]) -> None:
         self.url_registry = url_registry.rstrip("/")
         self.local = local
+        self.emisores = emisores
 
     def registrar(self, firmadas: AgentFactsFirmadas) -> None:
         self.local.registrar(firmadas)
@@ -79,8 +73,9 @@ class IndiceNandaOficial:
         except (httpx.HTTPError, KeyError, ValidationError) as e:
             log.warning("No se pudo resolver %s en el registry oficial: %s", agent_id, e)
             return None
-        if firmadas.facts.id != agent_id or not verificar(firmadas):
-            log.warning("AgentFacts de %s con firma invalida en el registry oficial", agent_id)
+        motivo = motivo_rechazo(firmadas, agent_id, self.emisores, set())
+        if motivo:
+            log.warning("AgentFacts de %s rechazadas desde el registry oficial: %s", agent_id, motivo)
             return None
         self.local.registrar(firmadas)
         return firmadas

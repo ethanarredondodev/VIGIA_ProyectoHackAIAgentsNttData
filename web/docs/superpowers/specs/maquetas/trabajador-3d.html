@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vigía: pantalla del trabajador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #e2e5e0; --superficie: #f7f8f5; --superficie-2: #eceee9; --tinta: #1b232b; --tinta-2: #4b5560; --linea: #bfc5bf;
+    --azurita: #1f4e9c; --ambar: #f2b01e; --sobre-ambar: #2a1e00; --ambar-texto: #7a5000; --verde: #1a6c35; --verde-relleno: #1f7a3c;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Barlow, system-ui, sans-serif; background: var(--fondo); color: var(--tinta); padding: 28px 20px 64px; }
+  main { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 410px 1fr; gap: 36px; align-items: start; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .telefono { width: 410px; border-radius: 38px; background: #11161b; padding: 10px; box-shadow: 0 24px 50px rgba(0, 0, 0, .28); }
+  .pantalla { border-radius: 30px; overflow: hidden; background: var(--fondo); height: 860px; overflow-y: auto; }
+  .barra { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: var(--superficie); border-bottom: 1px solid var(--linea); }
+  .barra b { font: 700 22px 'Barlow Semi Condensed', sans-serif; }
+  .barra .hola { margin-left: auto; color: var(--tinta-2); font-size: 15px; }
+
+  .gemelo { background: #12171c; color: #edefea; }
+  #avatar3d { display: block; width: 100%; height: 300px; touch-action: none; cursor: grab; }
+  .gemelo .datos { padding: 4px 16px 16px; }
+  .gemelo h2 { font: 700 22px 'Barlow Semi Condensed', sans-serif; }
+  .aptitud { font: 700 20px 'Barlow Semi Condensed', sans-serif; display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .aptitud .sello { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-size: 15px; }
+  .aptitud.am { color: #f5be3c; } .aptitud.am .sello { background: #f5be3c; color: var(--sobre-ambar); }
+  .aptitud.ok { color: #6fd391; } .aptitud.ok .sello { background: #4cc273; color: #0e2416; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chips span { border: 1px solid #3d4955; background: #222a33; border-radius: 4px; padding: 2px 8px; font-size: 14px; }
+  .motivo { color: #a9b2ba; font-size: 14.5px; margin-top: 8px; line-height: 1.4; }
+  .pista { color: #a9b2ba; font-size: 12.5px; text-align: center; padding-top: 2px; }
+
+  form { padding: 18px 16px 24px; display: grid; gap: 16px; font-size: 18px; }
+  form h2 { font: 700 28px 'Barlow Semi Condensed', sans-serif; }
+  textarea { width: 100%; min-height: 96px; font: 500 20px Barlow, sans-serif; padding: 12px 14px; border: 2px solid var(--linea); border-radius: 8px;
+             background: var(--superficie); color: var(--tinta); resize: none; }
+  textarea:focus-visible, button:focus-visible { outline: 3px solid var(--azurita); outline-offset: 2px; }
+  .entendio { background: var(--superficie); border-radius: 8px; border-left: 6px solid var(--azurita); padding: 12px 14px; display: grid; gap: 6px; }
+  .entendio[hidden] { display: none; }
+  .entendio .encabezado { font-size: 15px; color: var(--tinta-2); display: flex; align-items: center; gap: 8px; }
+  .entendio .encabezado .punto { width: 9px; height: 9px; border-radius: 50%; background: var(--azurita); }
+  .entendio.pensando .encabezado .punto { animation: latido .9s ease-in-out infinite; }
+  @keyframes latido { 50% { opacity: .25; } }
+  .entendio dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; }
+  .entendio dt { color: var(--tinta-2); font-size: 16px; }
+  .entendio dd { font: 700 21px 'Barlow Semi Condensed', sans-serif; }
+  .otra { font-size: 15px; color: var(--tinta-2); }
+  .opciones { display: flex; flex-wrap: wrap; gap: 6px; }
+  .opciones button { min-height: 44px; padding: 0 12px; border: 2px solid var(--linea); border-radius: 8px; background: var(--superficie-2);
+                     font: 600 16px Barlow, sans-serif; color: var(--tinta); }
+  .turno { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .turno button { min-height: 56px; border: 2px solid var(--linea); border-radius: 8px; background: var(--superficie); font: 600 18px Barlow, sans-serif; color: var(--tinta); }
+  .turno button[aria-pressed='true'] { border-color: var(--azurita); background: #d6dff0; }
+  .pedir { min-height: 64px; border: 0; border-radius: 8px; background: var(--azurita); color: #fff; font: 700 24px 'Barlow Semi Condensed', sans-serif; }
+  .pedir:disabled { opacity: .4; }
+
+  .notas h1 { font: 700 34px 'Barlow Semi Condensed', sans-serif; line-height: 1.1; }
+  .notas p, .notas li { font-size: 17px; line-height: 1.45; color: var(--tinta-2); }
+  .notas p { margin-top: 10px; }
+  .notas ul { margin-top: 10px; padding-left: 20px; display: grid; gap: 8px; }
+  .notas b { color: var(--tinta); }
+  .probar { margin-top: 18px; background: var(--superficie); border-radius: 10px; padding: 14px 16px; }
+  .probar h2 { font: 700 20px 'Barlow Semi Condensed', sans-serif; }
+  .probar .botones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .probar button { min-height: 44px; padding: 0 14px; border: 2px solid var(--linea); border-radius: 8px; background: var(--superficie-2); font: 600 16px Barlow, sans-serif; cursor: pointer; }
+  .probar button[aria-pressed='true'] { border-color: var(--azurita); background: #d6dff0; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="telefono">
+    <div class="pantalla">
+      <div class="barra">
+        <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><path d="M11 41c0-14 9.4-25 21-25s21 11 21 25z" fill="#1F4E9C"/><rect x="5" y="39" width="54" height="8" rx="4" fill="#1F4E9C"/><circle cx="32" cy="30" r="12" fill="#FFD45C" opacity=".35"/><circle cx="32" cy="30" r="6.5" fill="#FFF3C4" stroke="#163A78" stroke-width="2.5"/></svg>
+        <b>Vigía</b>
+        <span class="hola">Hola, Juan</span>
+      </div>
+
+      <section class="gemelo" aria-labelledby="t-gemelo">
+        <canvas id="avatar3d" role="img" aria-label="Gemelo de Juan Mamani en 3D: apto con observaciones. Descanso por debajo del umbral recomendado y tramo final de la rotación."></canvas>
+        <p class="pista">Arrastra para girar a tu gemelo</p>
+        <div class="datos">
+          <h2 id="t-gemelo">Tu gemelo hoy</h2>
+          <p class="aptitud am" id="aptitud"><span class="sello" aria-hidden="true">!</span><span id="aptitud-texto">Apto con observaciones</span></p>
+          <div class="chips"><span id="chip-dia">Día 12 de 14</span><span id="chip-expo">Exposición: alta</span><span id="chip-energia">Energía 35/100</span></div>
+          <p class="motivo" id="motivo">Descanso por debajo del umbral recomendado y tramo final de la rotación.</p>
+        </div>
+      </section>
+
+      <form id="pedido" onsubmit="event.preventDefault()">
+        <h2>¿Qué vas a hacer?</h2>
+        <label class="otra" for="texto">Escríbelo con tus palabras</label>
+        <textarea id="texto" rows="3" placeholder="Ej.: voy a perforar el frente del TJ-12"></textarea>
+
+        <div class="entendio pensando" id="entendio" aria-live="polite" hidden>
+          <p class="encabezado"><span class="punto"></span><span id="entendio-estado">Vigía está leyendo…</span></p>
+          <dl id="entendio-datos" hidden>
+            <dt>Tarea</dt><dd id="r-tarea">—</dd>
+            <dt>Lugar</dt><dd id="r-lugar">—</dd>
+          </dl>
+          <p class="otra" id="otra-texto">¿No es eso? Elige la tarea:</p>
+          <div class="opciones" id="opciones"></div>
+        </div>
+
+        <div>
+          <p class="otra" style="margin-bottom:6px">Turno (según la hora)</p>
+          <div class="turno">
+            <button type="button" aria-pressed="false" data-turno="dia">Día</button>
+            <button type="button" aria-pressed="true" data-turno="noche">Noche</button>
+          </div>
+        </div>
+        <button class="pedir" id="pedir" type="submit" disabled>Pedir permiso</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="notas">
+    <h1>¿Así quieres la pantalla del trabajador?</h1>
+    <ul>
+      <li><b>Avatar 3D.</b> Juan está en un socavón y su lámpara alumbra la roca; el brillo sigue a su energía. Puedes girarlo con el mouse o con el dedo.</li>
+      <li><b>Tarea en texto libre.</b> Juan escribe con sus palabras y Vigía le muestra qué tarea y qué lugar entendió, antes de pedir el permiso. Si no acierta, la cambia con un toque.</li>
+      <li>Aquí la interpretación es una simulación con palabras clave. En la app real la haría la IA de Vigía en el backend, comparando con las tareas disponibles.</li>
+      <li>En celulares sin 3D o con ahorro de batería se mostraría el avatar 2D actual.</li>
+    </ul>
+    <div class="probar">
+      <h2>Prueba los dos estados del gemelo</h2>
+      <div class="botones">
+        <button type="button" data-estado="cansado" aria-pressed="true">Hoy: energía 35</button>
+        <button type="button" data-estado="descansado" aria-pressed="false">Descansado: energía 85</button>
+      </div>
+      <p>Y escribe otras tareas en el celular, por ejemplo <q>desatado de la corona en GA-04</q> o <q>soldar una tolva</q>.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Interpretación simulada (en la app real la hace la IA de Vigía).
+  const TAREAS = [
+    ['Perforación', ['perfor', 'taladr', 'jumbo', 'jackleg']],
+    ['Voladura', ['voladura', 'disparo', 'explosiv', 'cargar taladros', 'carguio de taladros']],
+    ['Desatado', ['desat']],
+    ['Sostenimiento', ['sostenimiento', 'shotcrete', 'perno', 'malla', 'cimbra', 'enmaderado']],
+    ['Carguío y limpieza', ['limpieza', 'scoop', 'pala', 'carguio']],
+    ['Acarreo', ['acarreo', 'transporte', 'volquete', 'camion']],
+    ['Izaje', ['izaje', 'winche', 'jaula']],
+    ['Trabajo en altura', ['altura', 'andamio']],
+    ['Espacio confinado', ['confinado', 'tolva', 'tanque']],
+    ['Trabajo en caliente', ['soldar', 'soldadura', 'oxicorte', 'caliente']],
+    ['Mantenimiento', ['mantenimiento', 'reparacion', 'reparar']],
+  ]
+  const LUGARES = { TJ: 'tajeo', GA: 'galería', GL: 'galería', RP: 'rampa', CH: 'chimenea', XC: 'crucero', CX: 'crucero', BC: 'banco' }
+  const normal = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+
+  function interpretar(texto) {
+    const n = normal(texto)
+    const tarea = TAREAS.find(([, claves]) => claves.some((c) => n.includes(c)))
+    const codigo = texto.toUpperCase().match(/(NV-?\s?(\d{4}))?\s*\b(TJ|GA|GL|RP|CH|XC|CX|BC)\s?-?\s?(\d{1,3})\b/)
+    let lugar = null
+    if (codigo) {
+      const nivel = codigo[2] ? `NV-${codigo[2]}` : 'NV-3820'
+      const tipo = n.includes('frente') ? 'frente de avance' : LUGARES[codigo[3]]
+      lugar = `${nivel} ${codigo[3]}-${codigo[4]}, ${tipo}`
+    }
+    return { tarea: tarea ? tarea[0] : null, lugar }
+  }
+
+  const texto = document.getElementById('texto')
+  const caja = document.getElementById('entendio')
+  const estado = document.getElementById('entendio-estado')
+  const datos = document.getElementById('entendio-datos')
+  const rTarea = document.getElementById('r-tarea')
+  const rLugar = document.getElementById('r-lugar')
+  const opciones = document.getElementById('opciones')
+  const otraTexto = document.getElementById('otra-texto')
+  const pedir = document.getElementById('pedir')
+  let espera = null
+
+  function mostrar(resultado) {
+    caja.classList.remove('pensando')
+    datos.hidden = false
+    if (resultado.tarea) {
+      estado.textContent = 'Vigía entendió'
+      otraTexto.textContent = '¿No es eso? Elige la tarea:'
+    } else {
+      estado.textContent = 'No reconocí la tarea'
+      otraTexto.textContent = 'Elige la que vas a hacer:'
+    }
+    rTarea.textContent = resultado.tarea ?? 'Sin elegir'
+    rLugar.textContent = resultado.lugar ?? 'Escribe la labor, por ejemplo TJ-12'
+    opciones.innerHTML = ''
+    TAREAS.filter(([nombre]) => nombre !== resultado.tarea).slice(0, resultado.tarea ? 4 : 11).forEach(([nombre]) => {
+      const b = document.createElement('button')
+      b.type = 'button'
+      b.textContent = nombre
+      b.onclick = () => mostrar({ ...resultado, tarea: nombre })
+      opciones.appendChild(b)
+    })
+    pedir.disabled = !resultado.tarea || !resultado.lugar
+  }
+
+  texto.addEventListener('input', () => {
+    clearTimeout(espera)
+    if (texto.value.trim().length < 4) {
+      caja.hidden = true
+      pedir.disabled = true
+      return
+    }
+    caja.hidden = false
+    caja.classList.add('pensando')
+    estado.textContent = 'Vigía está leyendo…'
+    espera = setTimeout(() => mostrar(interpretar(texto.value)), 700)
+  })
+
+  document.querySelectorAll('.turno button').forEach((b) =>
+    b.addEventListener('click', () => document.querySelectorAll('.turno button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)))),
+  )
+
+  // Escribe el ejemplo solo, como si Juan lo tecleara.
+  const ejemplo = 'voy a perforar el frente del TJ-12'
+  let i = 0
+  const teclear = setInterval(() => {
+    if (document.activeElement === texto) return clearInterval(teclear)
+    texto.value = ejemplo.slice(0, ++i)
+    texto.dispatchEvent(new Event('input'))
+    if (i >= ejemplo.length) clearInterval(teclear)
+  }, 85)
+</script>
+
+<script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                 "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+  import * as THREE from 'three'
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
+  const lienzo = document.getElementById('avatar3d')
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const renderer = new THREE.WebGLRenderer({ canvas: lienzo, antialias: true })
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+  renderer.outputColorSpace = THREE.SRGBColorSpace
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.shadowMap.enabled = true
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+  const escena = new THREE.Scene()
+  escena.background = new THREE.Color('#12171c')
+  escena.fog = new THREE.Fog('#12171c', 4, 8)
+
+  const camara = new THREE.PerspectiveCamera(34, 1, 0.1, 30)
+  camara.position.set(0.3, 1.5, 3.7)
+  const controles = new OrbitControls(camara, lienzo)
+  controles.target.set(0, 1.28, 0)
+  controles.enableZoom = false
+  controles.enablePan = false
+  controles.enableDamping = true
+  controles.minPolarAngle = 1.15
+  controles.maxPolarAngle = 1.7
+  controles.minAzimuthAngle = -1.1
+  controles.maxAzimuthAngle = 1.1
+  controles.update()
+
+  escena.add(new THREE.HemisphereLight('#c8d4ea', '#2a241e', 1.1))
+  const principal = new THREE.DirectionalLight('#fff1dc', 1.6)
+  principal.position.set(1.5, 2.2, 3)
+  escena.add(principal)
+  const contraluz = new THREE.DirectionalLight('#8db4ff', 1.4)
+  contraluz.position.set(-2.5, 3, -3)
+  escena.add(contraluz)
+
+  function azar(semilla) {
+    let h = 1779033703 ^ semilla.length
+    for (let i = 0; i < semilla.length; i++) {
+      h = Math.imul(h ^ semilla.charCodeAt(i), 3432918353)
+      h = (h << 13) | (h >>> 19)
+    }
+    return () => {
+      h = Math.imul(h ^ (h >>> 16), 2246822507)
+      h = Math.imul(h ^ (h >>> 13), 3266489909)
+      h ^= h >>> 16
+      return (h >>> 0) / 4294967296
+    }
+  }
+
+  // Socavón: rocas facetadas alrededor y piso.
+  const r = azar('socavon-nv-3820')
+  const rocas = ['#4a4f55', '#58514a', '#3e4349', '#5b5f63'].map((c) => new THREE.MeshStandardMaterial({ color: c, roughness: 1, flatShading: true }))
+  // Detrás del minero, el arco completo; delante, solo las paredes bajas para no tapar la cámara.
+  for (let i = 0; i < 80; i++) {
+    const adelante = i >= 60
+    const angulo = adelante ? (r() < 0.5 ? 0.05 + 0.25 * r() : Math.PI - 0.3 + 0.25 * r()) : Math.PI * (0.02 + 0.96 * r())
+    const radio = adelante ? 1.95 + 0.3 * r() : 1.7 + 0.3 * r()
+    const roca = new THREE.Mesh(new THREE.IcosahedronGeometry(0.25 + 0.38 * r(), 0), rocas[i % rocas.length])
+    roca.position.set(Math.cos(angulo) * radio, 0.1 + Math.sin(angulo) * radio * 0.95, adelante ? 0.2 + 1.1 * r() : -2.6 + 2.8 * r())
+    roca.rotation.set(r() * 3, r() * 3, r() * 3)
+    roca.receiveShadow = true
+    escena.add(roca)
+  }
+  const piso = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: '#2a2d31', roughness: 1 }))
+  piso.rotation.x = -Math.PI / 2
+  piso.receiveShadow = true
+  escena.add(piso)
+
+  // Minero procedural (sin modelos externos): colores desde la seed y el empleador.
+  const PIEL = '#b07a4f', PIEL_SOMBRA = '#8d6240', PELO = '#1b1714', CASCO = '#ee7d2b', ROPA = '#46566b'
+  const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.8, ...extra })
+  const malla = (geo, material, x = 0, y = 0, z = 0) => {
+    const m = new THREE.Mesh(geo, material)
+    m.position.set(x, y, z)
+    m.castShadow = true
+    return m
+  }
+
+  const minero = new THREE.Group()
+  minero.rotation.y = -0.28
+  escena.add(minero)
+  const cuerpo = new THREE.Group()
+  minero.add(cuerpo)
+
+  const torso = malla(new THREE.CapsuleGeometry(0.34, 0.5, 8, 24), mat(ROPA), 0, 0.7, 0)
+  torso.scale.set(1.35, 1, 0.78)
+  cuerpo.add(torso)
+  // Chaleco sin mangas que sigue la forma del torso, abierto al frente.
+  const perfil = [[0.365, 0.36], [0.375, 0.6], [0.372, 0.86], [0.33, 1.0], [0.24, 1.08]].map(([x, y]) => new THREE.Vector2(x, y))
+  const chaleco = malla(new THREE.LatheGeometry(perfil, 40, 0.42, Math.PI * 2 - 0.84), mat('#d3e23a', { side: THREE.DoubleSide, roughness: 0.55 }))
+  chaleco.scale.set(1.36, 1, 0.8)
+  cuerpo.add(chaleco)
+  const reflectivo = mat('#d6dbe2', { roughness: 0.3, metalness: 0.4, emissive: '#3a3d42' })
+  ;[0.6, 0.8].forEach((y) => {
+    const giro = new THREE.Group()
+    giro.rotation.x = Math.PI / 2
+    giro.position.y = y
+    const banda = malla(new THREE.TorusGeometry(0.378, 0.02, 6, 48, Math.PI * 2 - 0.84), reflectivo)
+    banda.rotation.z = Math.PI / 2 + 0.42
+    banda.scale.set(1.36, 0.8, 1)
+    giro.add(banda)
+    cuerpo.add(giro)
+  })
+  ;[-1, 1].forEach((lado) => {
+    const brazo = malla(new THREE.CapsuleGeometry(0.1, 0.46, 6, 16), mat(ROPA), lado * 0.53, 0.74, 0)
+    brazo.rotation.z = lado * 0.16
+    cuerpo.add(brazo)
+    cuerpo.add(malla(new THREE.SphereGeometry(0.085, 14, 12), mat(PIEL_SOMBRA), lado * 0.585, 0.38, 0.02))
+  })
+
+  const respirador = new THREE.Group()
+  respirador.position.set(0, 0.92, 0.3)
+  const mascara = malla(new THREE.CapsuleGeometry(0.06, 0.08, 6, 16), mat('#8e979f', { roughness: 0.5 }))
+  mascara.rotation.z = Math.PI / 2
+  mascara.scale.set(1, 1, 0.75)
+  respirador.add(mascara)
+  ;[-0.12, 0.12].forEach((x) => {
+    const filtro = malla(new THREE.CylinderGeometry(0.055, 0.055, 0.05, 20), mat('#c23b78', { roughness: 0.45 }), x, -0.01, 0.02)
+    filtro.rotation.x = Math.PI / 2
+    respirador.add(filtro)
+  })
+  cuerpo.add(respirador)
+
+  cuerpo.add(malla(new THREE.CylinderGeometry(0.11, 0.12, 0.22, 20), mat(PIEL_SOMBRA), 0, 1.3, 0))
+
+  const cabeza = new THREE.Group()
+  cabeza.position.y = 1.55
+  minero.add(cabeza)
+  const craneo = malla(new THREE.SphereGeometry(0.27, 32, 24), mat(PIEL, { roughness: 0.7 }))
+  craneo.scale.set(0.92, 1.1, 0.95)
+  cabeza.add(craneo)
+  ;[-1, 1].forEach((lado) => {
+    const oreja = malla(new THREE.SphereGeometry(0.06, 12, 10), mat(PIEL_SOMBRA), lado * 0.245, 0, 0)
+    oreja.scale.set(0.6, 1, 0.8)
+    cabeza.add(oreja)
+    cabeza.add(malla(new THREE.BoxGeometry(0.05, 0.13, 0.06), mat(PELO), lado * 0.232, 0.02, 0.05))
+  })
+  const nariz = malla(new THREE.SphereGeometry(0.045, 12, 10), mat(PIEL_SOMBRA), 0, -0.02, 0.255)
+  nariz.scale.set(0.8, 1, 0.9)
+  cabeza.add(nariz)
+
+  const parpados = []
+  ;[-1, 1].forEach((lado) => {
+    const blanco = malla(new THREE.SphereGeometry(0.045, 16, 12), mat('#f3efe8', { roughness: 0.4 }), lado * 0.095, 0.04, 0.222)
+    blanco.scale.set(1, 0.75, 0.6)
+    cabeza.add(blanco)
+    cabeza.add(malla(new THREE.SphereGeometry(0.026, 12, 10), mat('#1d1410', { roughness: 0.3 }), lado * 0.095, 0.036, 0.247))
+    const ceja = malla(new THREE.BoxGeometry(0.09, 0.018, 0.02), mat(PELO), lado * 0.095, 0.11, 0.236)
+    ceja.rotation.z = lado * -0.08
+    cabeza.add(ceja)
+    const parpado = malla(new THREE.SphereGeometry(0.05, 16, 12), mat(PIEL, { roughness: 0.7 }), lado * 0.095, 0.09, 0.224)
+    parpado.scale.set(1.08, 0.62, 0.66)
+    cabeza.add(parpado)
+    parpados.push(parpado)
+  })
+  const boca = malla(new THREE.TorusGeometry(0.06, 0.011, 6, 16, Math.PI), mat('#5a2e22'), 0, -0.1, 0.236)
+  boca.rotation.z = Math.PI
+  cabeza.add(boca)
+
+  const colorCasco = mat(CASCO, { roughness: 0.42 })
+  const domo = malla(new THREE.SphereGeometry(0.31, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), colorCasco, 0, 0.06, 0)
+  domo.scale.set(1, 0.9, 1.08)
+  cabeza.add(domo)
+  const ala = malla(new THREE.CylinderGeometry(0.4, 0.4, 0.025, 40), colorCasco, 0, 0.06, 0.03)
+  ala.scale.set(1, 1, 1.15)
+  cabeza.add(ala)
+  const cresta = malla(new THREE.TorusGeometry(0.29, 0.022, 6, 24, Math.PI), colorCasco, 0, 0.06, 0)
+  cresta.rotation.y = Math.PI / 2
+  cresta.scale.set(1, 0.9, 1.08)
+  cabeza.add(cresta)
+
+  const portaLampara = malla(new THREE.BoxGeometry(0.12, 0.085, 0.06), mat('#2e353d', { roughness: 0.5 }), 0, 0.18, 0.305)
+  portaLampara.rotation.x = -0.35
+  cabeza.add(portaLampara)
+  const lente = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.036, 0.014, 20), new THREE.MeshStandardMaterial({ color: '#fff6cf', emissive: '#ffe29a', emissiveIntensity: 1 }))
+  lente.rotation.x = Math.PI / 2 - 0.35
+  lente.position.set(0, 0.185, 0.338)
+  cabeza.add(lente)
+  const cable = new THREE.Mesh(
+    new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0.06, 0.18, 0.31), new THREE.Vector3(0.26, 0.12, 0.18), new THREE.Vector3(0.31, 0, -0.1), new THREE.Vector3(0.2, -0.22, -0.25)]), 24, 0.009, 6),
+    mat('#1c2126'),
+  )
+  cabeza.add(cable)
+
+  // La lámpara alumbra de verdad: foco, haz visible y halo.
+  const foco = new THREE.SpotLight('#ffe2a0', 30, 0, 0.42, 0.55, 1.6)
+  foco.position.set(0, 0.185, 0.36)
+  foco.castShadow = true
+  foco.shadow.mapSize.set(512, 512)
+  const objetivo = new THREE.Object3D()
+  objetivo.position.set(0, -0.55, 3)
+  cabeza.add(foco, objetivo)
+  foco.target = objetivo
+
+  const haces = [[0.55, 0.06], [0.24, 0.1]].map(([radio, opacidad]) => {
+    const geo = new THREE.ConeGeometry(radio, 2.6, 32, 1, true)
+    geo.translate(0, -1.3, 0)
+    const haz = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: '#ffd76a', transparent: true, opacity: opacidad, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }))
+    haz.position.copy(foco.position)
+    haz.rotation.x = -Math.PI / 2 + 0.2
+    haz.userData.base = opacidad
+    cabeza.add(haz)
+    return haz
+  })
+  const textura = (() => {
+    const c = document.createElement('canvas')
+    c.width = c.height = 64
+    const g = c.getContext('2d')
+    const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32)
+    grad.addColorStop(0, 'rgba(255,246,207,1)')
+    grad.addColorStop(0.3, 'rgba(255,212,92,.55)')
+    grad.addColorStop(1, 'rgba(255,212,92,0)')
+    g.fillStyle = grad
+    g.fillRect(0, 0, 64, 64)
+    return new THREE.CanvasTexture(c)
+  })()
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: textura, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true }))
+  halo.position.set(0, 0.185, 0.36)
+  cabeza.add(halo)
+
+  // Anillo de aptitud en el piso.
+  const anillo = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.02, 8, 72), new THREE.MeshBasicMaterial({ color: '#f5be3c' }))
+  anillo.rotation.x = Math.PI / 2
+  anillo.position.y = 0.02
+  escena.add(anillo)
+
+  // Estado del gemelo: las transiciones son suaves.
+  const ESTADOS = {
+    cansado: { energia: 35, color: '#f5be3c', aptitud: 'Apto con observaciones', clase: 'am', sello: '!', dia: 'Día 12 de 14', expo: 'Exposición: alta',
+               motivo: 'Descanso por debajo del umbral recomendado y tramo final de la rotación.' },
+    descansado: { energia: 85, color: '#4cc273', aptitud: 'Apto', clase: 'ok', sello: '✓', dia: 'Día 3 de 14', expo: 'Exposición: baja',
+                  motivo: 'Descanso adecuado y en el inicio de la rotación.' },
+  }
+  let meta = ESTADOS.cansado
+  const actual = { luz: 0.35, parpado: 1, color: new THREE.Color(meta.color) }
+  document.querySelectorAll('[data-estado]').forEach((b) =>
+    b.addEventListener('click', () => {
+      meta = ESTADOS[b.dataset.estado]
+      document.querySelectorAll('[data-estado]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
+      const apt = document.getElementById('aptitud')
+      apt.className = 'aptitud ' + meta.clase
+      apt.querySelector('.sello').textContent = meta.sello
+      document.getElementById('aptitud-texto').textContent = meta.aptitud
+      document.getElementById('chip-dia').textContent = meta.dia
+      document.getElementById('chip-expo').textContent = meta.expo
+      document.getElementById('chip-energia').textContent = `Energía ${meta.energia}/100`
+      document.getElementById('motivo').textContent = meta.motivo
+      lienzo.setAttribute('aria-label', `Gemelo de Juan Mamani en 3D: ${meta.aptitud.toLowerCase()}. ${meta.motivo}`)
+    }),
+  )
+
+  function ajustar() {
+    const ancho = lienzo.clientWidth
+    const alto = lienzo.clientHeight
+    if (lienzo.width !== Math.round(ancho * renderer.getPixelRatio())) {
+      renderer.setSize(ancho, alto, false)
+      camara.aspect = ancho / alto
+      camara.updateProjectionMatrix()
+    }
+  }
+
+  const reloj = new THREE.Clock()
+  function cuadro() {
+    const dt = Math.min(reloj.getDelta(), 0.05)
+    const tiempo = reloj.elapsedTime
+    const paso = quieto ? 1 : Math.min(1, dt * 2.5)
+    actual.luz += (meta.energia / 100 - actual.luz) * paso
+    actual.parpado += ((meta.energia < 40 ? 1 : 0) - actual.parpado) * paso
+    actual.color.lerp(new THREE.Color(meta.color), paso)
+
+    foco.intensity = 4 + 46 * actual.luz
+    lente.material.emissiveIntensity = 0.3 + 2.4 * actual.luz
+    haces.forEach((h) => (h.material.opacity = h.userData.base * (0.25 + actual.luz)))
+    halo.scale.setScalar(0.12 + 0.42 * actual.luz)
+    parpados.forEach((p) => (p.position.y = 0.09 - 0.032 * actual.parpado))
+    boca.scale.y = 1 - 0.65 * actual.parpado
+    anillo.material.color.copy(actual.color)
+
+    if (!quieto) {
+      cabeza.rotation.y = 0.22 * Math.sin(tiempo * 0.55)
+      cabeza.rotation.x = 0.05 * Math.sin(tiempo * 0.35)
+      cuerpo.scale.y = 1 + 0.012 * Math.sin(tiempo * 1.4)
+    }
+    ajustar()
+    controles.update()
+    renderer.render(escena, camara)
+    requestAnimationFrame(cuadro)
+  }
+  cuadro()
+</script>
+</body>
+</html>

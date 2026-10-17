@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "trabajador_id": {
+      "title": "Trabajador Id",
+      "type": "string"
+    },
+    "tipo_tarea": {
+      "title": "Tipo Tarea",
+      "type": "string"
+    },
+    "turno": {
+      "enum": [
+        "dia",
+        "noche"
+      ],
+      "title": "Turno",
+      "type": "string"
+    },
+    "altitud_msnm": {
+      "title": "Altitud Msnm",
+      "type": "integer"
+    },
+    "tipo_mineria": {
+      "enum": [
+        "subterranea",
+        "tajo_abierto"
+      ],
+      "title": "Tipo Mineria",
+      "type": "string"
+    },
+    "empleador": {
+      "enum": [
+        "titular",
+        "contratista"
+      ],
+      "title": "Empleador",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trabajador_id",
+    "tipo_tarea",
+    "turno",
+    "altitud_msnm",
+    "tipo_mineria",
+    "empleador"
+  ],
+  "title": "ConsultaAptitud",
+  "type": "object"
+}

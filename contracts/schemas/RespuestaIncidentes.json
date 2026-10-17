@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "CasoIncidente": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "resumen_es": {
+          "title": "Resumen Es",
+          "type": "string"
+        },
+        "riesgo_critico": {
+          "title": "Riesgo Critico",
+          "type": "string"
+        },
+        "causa_probable": {
+          "title": "Causa Probable",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "resumen_es",
+        "riesgo_critico",
+        "causa_probable"
+      ],
+      "title": "CasoIncidente",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "POST /incidentes/similares",
+  "properties": {
+    "casos_similares": {
+      "minimum": 0,
+      "title": "Casos Similares",
+      "type": "integer"
+    },
+    "patron": {
+      "title": "Patron",
+      "type": "string"
+    },
+    "riesgo_potencial_max": {
+      "enum": [
+        "ninguno",
+        "bajo",
+        "medio",
+        "alto",
+        "critico"
+      ],
+      "title": "Riesgo Potencial Max",
+      "type": "string"
+    },
+    "casos": {
+      "items": {
+        "$ref": "#/$defs/CasoIncidente"
+      },
+      "title": "Casos",
+      "type": "array"
+    }
+  },
+  "required": [
+    "casos_similares",
+    "patron",
+    "riesgo_potencial_max",
+    "casos"
+  ],
+  "title": "RespuestaIncidentes",
+  "type": "object"
+}

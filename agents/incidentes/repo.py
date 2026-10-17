@@ -29,6 +29,13 @@ CREATE TABLE IF NOT EXISTS incidentes (
     resumen_es TEXT NOT NULL,
     origen TEXT NOT NULL DEFAULT 'sintetico'
 );
+-- Columnas de HISTORIAL_INCIDENTES y del PTW que lo reporto: el ALTER las agrega tambien en BD ya creadas.
+ALTER TABLE incidentes ADD COLUMN IF NOT EXISTS ptw_id TEXT;
+ALTER TABLE incidentes ADD COLUMN IF NOT EXISTS trabajador_id TEXT;
+ALTER TABLE incidentes ADD COLUMN IF NOT EXISTS tipo_incidente TEXT;
+ALTER TABLE incidentes ADD COLUMN IF NOT EXISTS gravedad TEXT CHECK (gravedad IN ('leve', 'moderada', 'grave'));
+ALTER TABLE incidentes ADD COLUMN IF NOT EXISTS estado TEXT NOT NULL DEFAULT 'cerrado'
+    CHECK (estado IN ('cerrado', 'en_investigacion', 'en_seguimiento'));
 CREATE INDEX IF NOT EXISTS ix_incidentes_filtro ON incidentes (tipo_mineria, tipo_tarea, labor_tipo, turno);
 """
 
@@ -66,11 +73,12 @@ class RepoPostgres:
         with self.pool.connection() as conexion:
             conexion.execute(ESQUEMA)
             if conexion.execute("SELECT count(*) AS n FROM incidentes").fetchone()["n"] == 0:
+                filas = semilla()
                 with conexion.cursor() as cursor:
                     cursor.executemany(
-                        f"INSERT INTO incidentes ({', '.join(COLUMNAS)}) "
-                        f"VALUES ({', '.join(f'%({c})s' for c in COLUMNAS)}) ON CONFLICT (id) DO NOTHING",
-                        semilla(),
+                        f"INSERT INTO incidentes ({', '.join(filas[0])}) "
+                        f"VALUES ({', '.join(f'%({c})s' for c in filas[0])}) ON CONFLICT (id) DO NOTHING",
+                        filas,
                     )
 
     def buscar(self, tipo_mineria: str, tipo_tarea: str, labor_tipo: str, turno: str | None) -> list[dict]:
@@ -86,10 +94,9 @@ class RepoPostgres:
             ).fetchall()
 
     def registrar(self, fila: dict) -> None:
-        columnas = [c for c in COLUMNAS if c in fila]
         with self.pool.connection() as conexion:
             conexion.execute(
-                f"INSERT INTO incidentes ({', '.join(columnas)}) "
-                f"VALUES ({', '.join(f'%({c})s' for c in columnas)}) ON CONFLICT (id) DO NOTHING",
+                f"INSERT INTO incidentes ({', '.join(fila)}) "
+                f"VALUES ({', '.join(f'%({c})s' for c in fila)}) ON CONFLICT (id) DO NOTHING",
                 fila,
             )

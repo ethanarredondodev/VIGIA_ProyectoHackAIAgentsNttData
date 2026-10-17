@@ -1,17 +1,19 @@
 id,riesgo_critico,trabajo_alto_riesgo,disparador,control,jerarquia,base_legal,fuente
-CI-01,otro,*,siempre,Llenar el IPERC continuo al inicio de la tarea y realizar la charla de 5 minutos,administrativo,DS 024-2016-EM art. 95 y Anexo 7,F-02
-CI-02,otro,*,siempre,Supervisor y jefe de área firman el PETAR en la labor antes de iniciar,administrativo,DS 024-2016-EM art. 130 y Anexo 18,F-02
-CI-03,silice,perforacion,siempre,Perforación húmeda: verificar el suministro de agua para controlar el polvo,ingenieria,DS 024-2016-EM art. 96; Anexo 15: sílice 0.05 mg/m3,F-02
-CI-04,otro,perforacion,siempre,Inspección pre-uso de la perforadora y del juego de barretillas,administrativo,DS 024-2016-EM arts. 96 y 218,F-01
-CI-05,equipo_movil,carguio,siempre,Comunicación radial y distancias de seguridad entre equipo y personal,administrativo,DS 024-2016-EM art. 96,F-01
-CI-06,desprendimiento_de_roca,desatado,siempre,Desatado manual siempre entre dos personas con barretillas adecuadas,administrativo,DS 024-2016-EM art. 224,F-01
-CI-07,otro,*,siempre,"EPP completo: casco, lentes, respirador, protección auditiva, guantes y botas",epp,DS 024-2016-EM art. 96,F-01
-CI-10,desprendimiento_de_roca,*,ultimo_desatado_h > 12,Desatado de rocas y verificación del sostenimiento hasta el tope del frente antes de iniciar,ingenieria,DS 024-2016-EM art. 224,F-01
-CI-11,atmosfera_peligrosa,*,tipo_mineria == subterranea,"Medir gases (O2, CO, CO2, NO2) con detector calibrado antes del ingreso y cada 2 h",administrativo,DS 024-2016-EM art. 246,F-01
-CI-12,fatiga,*,apto_para_tarea == apto_con_observaciones,Trabajo en pareja: no realizar la tarea en solitario,administrativo,DS 024-2016-EM arts. 96 y 273,F-01
-CI-13,fatiga,*,apto_para_tarea == apto_con_observaciones,Pausa activa obligatoria a las 2 h de iniciada la tarea,administrativo,DS 024-2016-EM art. 273,F-01
-CI-14,ruido,*,ruido_dBA > 85,Doble protección auditiva (tapones y orejeras) y rotación para limitar la exposición,epp,DS 024-2016-EM art. 103 y Anexo 12,F-04
-CI-15,atmosfera_peligrosa,*,ventilacion != operativa,No ingresar: restablecer la ventilación y repetir la medición de gases,eliminacion,DS 024-2016-EM arts. 246-248,F-01
-CI-16,atmosfera_peligrosa,*,o2_pct < 19.5,No ingresar hasta que el O2 sea al menos 19.5 %,eliminacion,DS 024-2016-EM art. 246 lit. b,F-01
-CI-17,atmosfera_peligrosa,*,co_ppm > 25,No ingresar hasta que el CO baje de 25 ppm,eliminacion,DS 024-2016-EM Anexo 15,F-03
-CI-18,fatiga,*,apto_para_tarea == no_apto,Reasignar la tarea a un trabajador apto,eliminacion,DS 024-2016-EM art. 96,F-01
+CI-01,otro,no,siempre,Llenar el IPERC continuo al inicio de la tarea y realizar la charla de 5 minutos,administrativo,DS 024-2016-EM art. 95 y Anexo 7,F-02
+CI-02,otro,si,tipo_tarea in trabajo_en_altura|espacio_confinado|trabajo_en_caliente|voladura,PETAR firmado por el supervisor y el jefe de área antes de iniciar (trabajo de alto riesgo),administrativo,DS 024-2016-EM arts. 129-130 y Anexo 18,F-01
+CI-03,silice,no,tipo_tarea == perforacion,Perforación húmeda: verificar el suministro de agua para controlar el polvo,ingenieria,DS 024-2016-EM art. 96; Anexo 15: sílice 0.05 mg/m3,F-02
+CI-04,otro,no,tipo_tarea == perforacion,Inspección pre-uso de la perforadora y del juego de barretillas,administrativo,DS 024-2016-EM arts. 96 y 218,F-01
+CI-05,equipo_movil,no,tipo_tarea == carguio,Comunicación radial y distancias de seguridad entre equipo y personal,administrativo,DS 024-2016-EM art. 96,F-01
+CI-06,desprendimiento_de_roca,no,tipo_tarea == desatado,Desatado manual siempre entre dos personas con barretillas adecuadas,administrativo,DS 024-2016-EM art. 224,F-01
+CI-07,otro,no,siempre,"EPP completo: casco, lentes, respirador, protección auditiva, guantes y botas",epp,DS 024-2016-EM art. 96,F-01
+CI-08,caida_de_altura,si,tipo_tarea == trabajo_en_altura,Arnés de cuerpo entero con línea de vida anclada a un punto certificado,ingenieria,DS 024-2016-EM art. 129,F-01
+CI-09,espacio_confinado,si,tipo_tarea == espacio_confinado,Medir la atmósfera antes de ingresar y mantener un vigía permanente en el acceso,administrativo,DS 024-2016-EM art. 129,F-01
+CI-10,desprendimiento_de_roca,no,ultimo_desatado_h > 12,Desatado de rocas y verificación del sostenimiento hasta el tope del frente antes de iniciar,ingenieria,DS 024-2016-EM art. 224,F-01
+CI-11,atmosfera_peligrosa,no,tipo_mineria == subterranea,"Medir gases (O2, CO, CO2, NO2) con detector calibrado antes del ingreso y cada 2 h",administrativo,DS 024-2016-EM art. 246,F-01
+CI-12,fatiga,no,apto_para_tarea == apto_con_observaciones,Trabajo en pareja: no realizar la tarea en solitario,administrativo,DS 024-2016-EM arts. 96 y 273,F-01
+CI-13,fatiga,no,apto_para_tarea == apto_con_observaciones,Pausa activa obligatoria a las 2 h de iniciada la tarea,administrativo,DS 024-2016-EM art. 273,F-01
+CI-14,ruido,no,ruido_dBA > 85,Doble protección auditiva (tapones y orejeras) y rotación para limitar la exposición,epp,DS 024-2016-EM art. 103 y Anexo 12,F-04
+CI-15,atmosfera_peligrosa,no,ventilacion in deficiente|inoperativa,No ingresar: restablecer la ventilación y repetir la medición de gases,eliminacion,DS 024-2016-EM arts. 246-248,F-01
+CI-16,atmosfera_peligrosa,no,o2_pct < 19.5,No ingresar hasta que el O2 sea al menos 19.5 %,eliminacion,DS 024-2016-EM art. 246 lit. b,F-01
+CI-17,atmosfera_peligrosa,no,co_ppm > 25,No ingresar hasta que el CO baje de 25 ppm,eliminacion,DS 024-2016-EM Anexo 15,F-03
+CI-18,fatiga,no,apto_para_tarea == no_apto,Reasignar la tarea a un trabajador apto,eliminacion,DS 024-2016-EM art. 96,F-01

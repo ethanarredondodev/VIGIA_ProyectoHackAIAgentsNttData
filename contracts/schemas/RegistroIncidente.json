@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "description": "POST /incidentes/registrar: el resultado de una tarea vuelve al historial.",
+  "properties": {
+    "petar_id": {
+      "title": "Petar Id",
+      "type": "string"
+    },
+    "tipo_tarea": {
+      "title": "Tipo Tarea",
+      "type": "string"
+    },
+    "labor": {
+      "title": "Labor",
+      "type": "string"
+    },
+    "tarea": {
+      "title": "Tarea",
+      "type": "string"
+    },
+    "turno": {
+      "enum": [
+        "dia",
+        "noche"
+      ],
+      "title": "Turno",
+      "type": "string"
+    },
+    "tipo_mineria": {
+      "enum": [
+        "subterranea",
+        "tajo_abierto"
+      ],
+      "title": "Tipo Mineria",
+      "type": "string"
+    },
+    "riesgo_critico": {
+      "title": "Riesgo Critico",
+      "type": "string"
+    },
+    "potencial": {
+      "enum": [
+        "bajo",
+        "medio",
+        "alto",
+        "critico"
+      ],
+      "title": "Potencial",
+      "type": "string"
+    },
+    "resumen_es": {
+      "title": "Resumen Es",
+      "type": "string"
+    }
+  },
+  "required": [
+    "petar_id",
+    "tipo_tarea",
+    "labor",
+    "tarea",
+    "turno",
+    "tipo_mineria",
+    "riesgo_critico",
+    "potencial",
+    "resumen_es"
+  ],
+  "title": "RegistroIncidente",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "additionalProperties": false,
+  "description": "POST /gemelo/aptitud. Nunca contiene detalle clinico: `diagnostico` es siempre null.",
+  "properties": {
+    "trabajador_id": {
+      "title": "Trabajador Id",
+      "type": "string"
+    },
+    "apto_para_tarea": {
+      "enum": [
+        "apto",
+        "apto_con_observaciones",
+        "no_apto"
+      ],
+      "title": "Apto Para Tarea",
+      "type": "string"
+    },
+    "motivo_visible": {
+      "title": "Motivo Visible",
+      "type": "string"
+    },
+    "diagnostico": {
+      "default": null,
+      "title": "Diagnostico",
+      "type": "null"
+    }
+  },
+  "required": [
+    "trabajador_id",
+    "apto_para_tarea",
+    "motivo_visible"
+  ],
+  "title": "RespuestaAptitud",
+  "type": "object"
+}

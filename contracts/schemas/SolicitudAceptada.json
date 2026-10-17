@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "description": "Respuesta de POST /ptw/solicitud: la evaluacion sigue en segundo plano.",
+  "properties": {
+    "ptw_id": {
+      "title": "Ptw Id",
+      "type": "string"
+    },
+    "estado": {
+      "const": "procesando",
+      "default": "procesando",
+      "title": "Estado",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ptw_id"
+  ],
+  "title": "SolicitudAceptada",
+  "type": "object"
+}

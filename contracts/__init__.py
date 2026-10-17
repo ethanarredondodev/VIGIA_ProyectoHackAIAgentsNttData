@@ -1,1 +1,1 @@
-"""Contratos compartidos de Vigia: modelos Pydantic, vocabulario y AgentFacts."""
+"""Contratos compartidos de Vigía: modelos Pydantic, vocabulario y AgentFacts."""

@@ -66,6 +66,7 @@ VARIABLES_PERMITIDAS = {
     "ventilacion",
     "turno",
     "tipo_tarea",
+    "tarea_restringida",
 }
 
 # Senales que el orquestador obtiene de otros agentes y que solo pueden usarse

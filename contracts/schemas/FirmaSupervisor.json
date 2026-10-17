@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "description": "POST /ptw/{id}/firma",
+  "properties": {
+    "accion": {
+      "enum": [
+        "aceptar",
+        "ajustar",
+        "rechazar"
+      ],
+      "title": "Accion",
+      "type": "string"
+    },
+    "supervisor": {
+      "minLength": 1,
+      "title": "Supervisor",
+      "type": "string"
+    },
+    "controles_finales": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Controles Finales",
+      "type": "array"
+    }
+  },
+  "required": [
+    "accion",
+    "supervisor"
+  ],
+  "title": "FirmaSupervisor",
+  "type": "object"
+}

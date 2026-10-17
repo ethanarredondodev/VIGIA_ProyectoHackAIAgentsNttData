@@ -12,5 +12,5 @@ F-10,Boletín estadístico SAT,https://www.gob.pe/institucion/mtpe/informes-publ
 F-11,projnanda/adapter,https://github.com/projnanda/adapter,Project NANDA,API del registry: POST /register y GET /lookup/{agent_id},2026-10-17
 F-12,projnanda/agentfacts-format,https://github.com/projnanda/agentfacts-format,Project NANDA,Campos de AgentFacts,2026-10-17
 F-13,NANDA: The Internet of AI Agents (arXiv 2507.14263),https://arxiv.org/abs/2507.14263,arXiv,AgentFacts firmadas como credenciales verificables,2026-10-17
-F-14,Datos sintéticos de Vigia,data/synthetic/generar.py,interno,"Trabajadores, labores, solicitudes e incidentes de demo",2026-10-17
-F-15,Criterio técnico del equipo Vigia (pendiente de validación con médico ocupacional),,interno,Umbrales de sueño y rotación,2026-10-17
+F-14,Datos sintéticos de Vigía,data/synthetic/generar.py,interno,"Trabajadores, labores, solicitudes e incidentes de demo",2026-10-17
+F-15,Criterio técnico del equipo Vigía (pendiente de validación con médico ocupacional),,interno,Umbrales de sueño y rotación,2026-10-17

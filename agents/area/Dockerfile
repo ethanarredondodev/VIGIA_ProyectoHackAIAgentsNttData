@@ -7,7 +7,7 @@ COPY contracts/ contracts/
 COPY agents/__init__.py agents/__init__.py
 COPY agents/comun/ agents/comun/
 COPY agents/area/ agents/area/
-COPY data/synthetic/labores.json data/synthetic/
+COPY data/synthetic/labores.json data/synthetic/clima.json data/synthetic/
 RUN useradd --create-home vigia
 USER vigia
 EXPOSE 8000
