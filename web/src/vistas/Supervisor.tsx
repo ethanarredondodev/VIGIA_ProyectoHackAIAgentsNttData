@@ -155,7 +155,7 @@ function Reportes({ reportes, estado }: { reportes: Ptw[]; estado: 'pending' | '
   )
 }
 
-// Si el backend aún no envía el reporte, la tarea cerrada aparece sin su detalle.
+// Un PETAR solo llega a cerrado con el reporte; si el backend aún no envía su detalle, la fila lo dice.
 function FilaReporte({ ptw }: { ptw: Ptw }) {
   const { solicitud: s, resultado: r } = ptw
   const { data: avatar } = useAvatar(s.trabajador_id)
@@ -183,7 +183,7 @@ function FilaReporte({ ptw }: { ptw: Ptw }) {
             <p className="text-sm">{r.observacion}</p>
           </>
         ) : (
-          <p className="text-sm text-tinta-2">Sin reporte del trabajador.</p>
+          <p className="text-sm text-tinta-2">Reporte enviado; el detalle aún no está disponible.</p>
         )}
       </div>
     </li>

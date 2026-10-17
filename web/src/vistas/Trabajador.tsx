@@ -9,7 +9,12 @@ import { IconoEstado } from '../componentes/Sello'
 import { TEXTO_APTITUD, TEXTO_RESULTADO, textoVentilacion } from '../negocio'
 import type { Ptw, ResultadoTarea } from '../tipos'
 
-const AvatarGemelo3D = lazy(() => import('../componentes/AvatarGemelo3D'))
+// Si el archivo del 3D no descarga (mala señal o un despliegue nuevo), queda el gemelo 2D.
+const AvatarGemelo3D = lazy(() =>
+  import('../componentes/AvatarGemelo3D').catch(() => ({
+    default: ({ trabajadorId }: { trabajadorId: string }) => <AvatarGemelo trabajadorId={trabajadorId} size="md" />,
+  })),
+)
 
 // Perfil del trabajador con sesión iniciada: lo que no pregunta el formulario.
 const PERFIL: PerfilTrabajador = {

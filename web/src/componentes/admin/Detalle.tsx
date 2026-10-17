@@ -49,7 +49,10 @@ function Tabla({ filas }: { filas: ReglaEvaluada[] }) {
       <tbody>
         {filas.map((f) => (
           <tr key={f.dato} className="border-t border-linea">
-            <td className="py-1 pr-2">{f.dato}</td>
+            <td className="py-1 pr-2">
+              {f.dato}
+              {f.base_legal && <span className="block text-xs text-tinta-2">{f.base_legal}</span>}
+            </td>
             <td className="py-1 pr-2 font-cond font-semibold">{f.dato === 'Aptitud' ? TEXTO_APTITUD[f.valor as keyof typeof TEXTO_APTITUD] ?? f.valor : f.valor}</td>
             <td className="py-1 pr-2 text-tinta-2">{f.limite ?? '—'}</td>
             <td className="py-1">

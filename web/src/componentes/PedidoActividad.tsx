@@ -14,7 +14,7 @@ import {
 import type { Actividad, Turno } from '../tipos'
 
 const CHIP =
-  'min-h-12 rounded-md border-2 border-linea bg-superficie-2 px-3 text-left text-base font-semibold aria-pressed:border-azurita aria-pressed:bg-azurita/10'
+  'min-h-14 rounded-md border-2 border-linea bg-superficie-2 px-3 text-left text-base font-semibold aria-pressed:border-azurita aria-pressed:bg-azurita/10'
 
 export default function PedidoActividad({ perfil, onCreado }: { perfil: PerfilTrabajador; onCreado: (ptwId: string) => void }) {
   const [texto, setTexto] = useState('')
@@ -45,7 +45,8 @@ export default function PedidoActividad({ perfil, onCreado }: { perfil: PerfilTr
 
   const actividad = actividadConfirmada(interp, elegida)
   const labor = interp?.labor ?? laborEscrita
-  const opciones = interp ? interp.alternativas : (actividades.data ?? ACTIVIDADES_BASE)
+  // La lista completa: así el trabajador siempre puede volver a la actividad que propuso Vigía.
+  const opciones = actividades.data ?? ACTIVIDADES_BASE
   const preguntar = interp?.actividad && interp.confianza !== 'alta' && !elegida
   const puedePedir =
     !!actividad && laborValida(labor, labores.data) && (actividad.id !== OTRA.id || texto.trim().length >= 3) && !crear.isPending
@@ -91,7 +92,7 @@ export default function PedidoActividad({ perfil, onCreado }: { perfil: PerfilTr
               {interp && !interp.actividad && <p className="text-tinta-2">No reconocí la actividad.</p>}
               {(actividad || preguntar) && (
                 <>
-                  <p className="font-semibold text-tinta-2">{preguntar ? '¿Es esto?' : 'Vigía entendió'}</p>
+                  <p className="font-semibold text-tinta-2">{preguntar ? '¿Es esto?' : elegida ? 'Elegiste' : 'Vigía entendió'}</p>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
                     <dt className="text-tinta-2">Actividad</dt>
                     <dd className="font-cond text-xl font-bold">{(actividad ?? interp?.actividad)?.actividad}</dd>
@@ -111,7 +112,7 @@ export default function PedidoActividad({ perfil, onCreado }: { perfil: PerfilTr
                   <button
                     key={a.id}
                     type="button"
-                    aria-pressed={elegida?.id === a.id}
+                    aria-pressed={actividad?.id === a.id}
                     className={CHIP}
                     onClick={() => setElegida(a)}
                   >

@@ -38,7 +38,10 @@ Parámetros de la URL, válidos en cualquier vista y también antes de elegir us
 - `?escenario=verde` y `?escenario=rojo` lo muestran descansado (día 3).
 - `?reiniciar` borra los PETAR creados y vuelve a sembrar la demo: 11 trabajadores y 11 casos (4 por revisar, 4 avisos y 3 tareas cerradas con reporte).
 
-Para el pitch, abre cada usuario en su propia pestaña del mismo navegador: la sesión es por pestaña (`sessionStorage`) y los mocks guardan el estado en `localStorage`. Así, lo que pide Juan aparece en la bandeja de Rosa y en la sala de control. La sala sigue la solicitud más nueva, `?ptw=PTW-XXXXXX` fija una y el botón **Nueva solicitud de demo** crea el caso de Juan en TJ-12.
+Para el pitch, abre cada usuario en su propia pestaña del mismo navegador: la sesión es por pestaña (`sessionStorage`) y los mocks guardan el estado en `localStorage`. Así, lo que pide Juan aparece en la bandeja de Rosa y en la sala de control. La sala sigue la solicitud más nueva y `?ptw=PTW-XXXXXX` fija una. Dos botones lanzan los casos guionados de Juan:
+
+- **Demo: caso aprobado**: Juan descansado en GA-07, turno día. Sale verde y el PETAR llega directo al trabajador.
+- **Demo: caso para el supervisor**: Juan en TJ-12, turno noche. Sale ámbar y va a la bandeja de la supervisora.
 
 Cada consulta simulada responde entre 0.8 y 2 s, en un orden distinto cada vez.
 

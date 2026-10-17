@@ -65,7 +65,7 @@ describe('pestaña Reportes del supervisor', () => {
     renderizar(<Supervisor />, '/supervisor', ROSA)
     fireEvent.click(await screen.findByRole('tab', { name: /Reportes\s*0/ }))
     expect(await screen.findByText('Desatado de rocas', {}, { timeout: 3000 })).toBeTruthy()
-    expect(screen.getByText('Sin reporte del trabajador.')).toBeTruthy()
+    expect(screen.getByText('Reporte enviado; el detalle aún no está disponible.')).toBeTruthy()
   })
 
   it('Reportes avisa si todavía no hay tareas cerradas', async () => {

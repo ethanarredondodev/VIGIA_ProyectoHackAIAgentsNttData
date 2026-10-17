@@ -42,6 +42,20 @@ describe('contratos nuevos (simulados con los datos de la base de datos)', () =>
     for (const [id, nivel] of Object.entries(esperado)) expect((await obtenerPtw(id)).propuesta?.nivel).toBe(nivel)
   })
 
+  it('perforar con la actividad de la lista en GA-07 respeta la galería y sale verde', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    const { ptw_id } = await crearSolicitud({
+      ...SOLICITUD_JUAN,
+      tarea: ACTIVIDADES_BASE[0].actividad,
+      labor: 'NV-3820 GA-07',
+      turno: 'dia',
+      trabajador_id: 'T-001-D3',
+    })
+    vi.setSystemTime(Date.now() + 10_000)
+    expect((await obtenerPtw(ptw_id)).propuesta?.nivel).toBe('verde')
+    vi.useRealTimers()
+  })
+
   it('GET /ptw trae los cerrados con su resultado y el gemelo sin diagnóstico', async () => {
     const lista = await listarPtw()
     expect(lista.filter((p) => p.estado === 'cerrado').map((p) => p.resultado?.resultado).sort()).toEqual([

@@ -65,4 +65,20 @@ describe('gemelo 3D en la vista del trabajador', () => {
     expect(await screen.findByRole('img', { name: /Juan Mamani: Apto con observaciones/ })).toBeTruthy()
     expect(document.querySelector('canvas')).toBeNull()
   })
+
+  it('si el archivo del 3D no descarga, la vista del trabajador sigue en pie con el 2D', async () => {
+    vi.resetModules()
+    vi.doMock('../componentes/AvatarGemelo3D', () => {
+      throw new Error('Failed to fetch dynamically imported module')
+    })
+    const { default: Trabajador } = await import('../vistas/Trabajador')
+    const { renderizar: renderizarDeNuevo } = await import('./render')
+    const { USUARIOS } = await import('../sesion')
+    renderizarDeNuevo(<Trabajador />, '/trabajador', USUARIOS[0])
+    expect(await screen.findByRole('heading', { name: '¿Qué actividad vas a realizar?' })).toBeTruthy()
+    await new Promise((r) => setTimeout(r, 300))
+    expect(screen.getByRole('heading', { name: '¿Qué actividad vas a realizar?' })).toBeTruthy()
+    expect(screen.getByRole('img', { name: /Juan Mamani/ })).toBeTruthy()
+    vi.doUnmock('../componentes/AvatarGemelo3D')
+  })
 })

@@ -9,16 +9,18 @@ import { capitalizar, haceCuanto, TEXTO_TURNO } from '../negocio'
 import { useSala } from '../sala'
 import type { Solicitud } from '../tipos'
 
-// El caso guionado de Juan en la base de datos: perforación de frente en TJ-12, turno noche.
-const SOLICITUD_DEMO: Solicitud = {
-  tarea: 'Perforación de frente',
-  labor: 'NV-3820 TJ-12',
-  turno: 'noche',
-  trabajador_id: 'T-001',
-  altitud_msnm: 4210,
-  tipo_mineria: 'subterranea',
-  empleador: 'contratista',
-}
+// Los casos guionados de Juan en la base de datos: descansado en GA-07 sale verde; en TJ-12 de noche, ámbar.
+const PERFIL_JUAN = { altitud_msnm: 4210, tipo_mineria: 'subterranea', empleador: 'contratista' } as const
+const DEMOS: { texto: string; solicitud: Solicitud }[] = [
+  {
+    texto: 'Demo: caso aprobado',
+    solicitud: { ...PERFIL_JUAN, tarea: 'Perforación en galería', labor: 'NV-3820 GA-07', turno: 'dia', trabajador_id: 'T-001-D3' },
+  },
+  {
+    texto: 'Demo: caso para el supervisor',
+    solicitud: { ...PERFIL_JUAN, tarea: 'Perforación de frente', labor: 'NV-3820 TJ-12', turno: 'noche', trabajador_id: 'T-001' },
+  },
+]
 
 function useMedia(consulta: string) {
   const [coincide, setCoincide] = useState(() => window.matchMedia?.(consulta).matches ?? true)
@@ -54,7 +56,7 @@ export default function Admin() {
     params.set('ptw', id)
     setParams(params)
   }
-  const demo = useMutation({ mutationFn: () => crearSolicitud(SOLICITUD_DEMO), onSuccess: ({ ptw_id }) => elegir(ptw_id) })
+  const demo = useMutation({ mutationFn: crearSolicitud, onSuccess: ({ ptw_id }) => elegir(ptw_id) })
 
   return (
     <main className="mx-auto max-w-[110rem] px-4 py-6 xl:px-8">
@@ -67,14 +69,19 @@ export default function Admin() {
               : 'Esperando una solicitud'}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => demo.mutate()}
-          disabled={demo.isPending}
-          className="min-h-12 rounded-md bg-azurita px-5 font-cond text-xl font-semibold text-sobre-azurita disabled:opacity-40"
-        >
-          {demo.isPending ? 'Enviando…' : 'Nueva solicitud de demo'}
-        </button>
+        <div className="flex flex-wrap gap-2">
+          {DEMOS.map((d) => (
+            <button
+              key={d.texto}
+              type="button"
+              onClick={() => demo.mutate(d.solicitud)}
+              disabled={demo.isPending}
+              className="min-h-12 rounded-md bg-azurita px-5 font-cond text-xl font-semibold text-sobre-azurita disabled:opacity-40"
+            >
+              {d.texto}
+            </button>
+          ))}
+        </div>
       </header>
 
       {!!lista.data?.length && (

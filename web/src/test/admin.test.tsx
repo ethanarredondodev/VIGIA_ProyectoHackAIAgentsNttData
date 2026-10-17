@@ -58,6 +58,7 @@ describe('sala de control del admin', () => {
     expect(within(detalle).getByText('15 h')).toBeTruthy()
     expect(within(detalle).getByText('máximo 12 h')).toBeTruthy()
     expect(within(detalle).getAllByText('! Ámbar').length).toBeGreaterThan(0)
+    expect(within(detalle).getAllByText(/DS 024-2016-EM/).length).toBeGreaterThan(0)
   })
 
   it('el detalle del Gemelo prueba diagnostico: null', async () => {
@@ -105,6 +106,23 @@ describe('sala de control del admin', () => {
   it('un PETAR cerrado muestra la tarea cerrada en la burbuja', async () => {
     renderizar(<Admin />, '/admin?ptw=PTW-SEED-04')
     expect(await screen.findByText('Tarea cerrada con reporte', {}, { timeout: 3000 })).toBeTruthy()
+  })
+
+  it('lanza un caso que se aprueba solo y uno que pasa al supervisor', async () => {
+    const cuerpos: Record<string, unknown>[] = []
+    servidor.use(
+      http.post('*/ptw/solicitud', async ({ request }) => {
+        cuerpos.push((await request.json()) as Record<string, unknown>)
+        return HttpResponse.json({ ptw_id: 'PTW-SEED-07', estado: 'procesando' }, { status: 201 })
+      }),
+    )
+    renderizar(<Admin />, '/admin?ptw=PTW-SEED-07')
+    fireEvent.click(await screen.findByRole('button', { name: 'Demo: caso aprobado' }, { timeout: 3000 }))
+    await waitFor(() => expect(cuerpos).toHaveLength(1))
+    fireEvent.click(screen.getByRole('button', { name: 'Demo: caso para el supervisor' }))
+    await waitFor(() => expect(cuerpos).toHaveLength(2))
+    expect(cuerpos[0]).toMatchObject({ trabajador_id: 'T-001-D3', labor: 'NV-3820 GA-07', turno: 'dia' })
+    expect(cuerpos[1]).toMatchObject({ trabajador_id: 'T-001', labor: 'NV-3820 TJ-12', turno: 'noche' })
   })
 
   it('la lista de solicitudes permite cambiar de PETAR', async () => {

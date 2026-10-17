@@ -3,7 +3,7 @@ import type { Actividad, Interpretacion, Labor, Solicitud, Turno } from './tipos
 // Las filas con que arranca la tabla de actividades: una por cada tipo de tarea que Vigía conoce.
 // Se usan cuando el backend todavía no ofrece GET /actividades.
 export const ACTIVIDADES_BASE: Actividad[] = [
-  { id: 'ACT-01', actividad: 'Perforación de frente', tipo_tarea: 'perforacion' },
+  { id: 'ACT-01', actividad: 'Perforación', tipo_tarea: 'perforacion' },
   { id: 'ACT-02', actividad: 'Voladura', tipo_tarea: 'voladura' },
   { id: 'ACT-03', actividad: 'Desatado de rocas', tipo_tarea: 'desatado' },
   { id: 'ACT-04', actividad: 'Sostenimiento con pernos y malla', tipo_tarea: 'sostenimiento' },

@@ -27,7 +27,7 @@ describe('reglas del pedido', () => {
   it('la solicitud lleva la actividad de la tabla y no el texto libre', () => {
     expect(armarSolicitud({ actividad: ACTIVIDADES_BASE[0], texto: 'voy a perforar', labor: 'NV-3820 TJ-12', turno: 'noche', interp: interpAlta, perfil })).toEqual({
       ...perfil,
-      tarea: 'Perforación de frente',
+      tarea: 'Perforación',
       labor: 'NV-3820 TJ-12',
       turno: 'noche',
       actividad_id: 'ACT-01',
@@ -74,13 +74,24 @@ describe('pedido de actividad en texto libre', () => {
     renderizar(<PedidoActividad perfil={perfil} onCreado={onCreado} />)
     escribir('voy a perforar el frente del TJ-12')
     expect(await screen.findByText('Vigía entendió', {}, { timeout: 3000 })).toBeTruthy()
-    expect(screen.getByText('Perforación de frente')).toBeTruthy()
+    expect(screen.getByText('Perforación', { selector: 'dd' })).toBeTruthy()
     expect(screen.getByText('NV-3820 TJ-12')).toBeTruthy()
     fireEvent.click(boton())
     await waitFor(() => expect(onCreado).toHaveBeenCalledWith('PTW-TEST'))
-    expect(cuerpos[0]).toMatchObject({ actividad_id: 'ACT-01', tarea: 'Perforación de frente', labor: 'NV-3820 TJ-12' })
+    expect(cuerpos[0]).toMatchObject({ actividad_id: 'ACT-01', tarea: 'Perforación', labor: 'NV-3820 TJ-12' })
     expect(cuerpos[0]).not.toHaveProperty('tipo_tarea')
     expect(JSON.stringify(cuerpos[0])).not.toContain('voy a perforar')
+  })
+
+  it('después de tocar otra actividad se puede volver a la que propuso Vigía', async () => {
+    renderizar(<PedidoActividad perfil={perfil} onCreado={vi.fn()} />)
+    escribir('voy a perforar el frente del TJ-12')
+    expect(await screen.findByText('Vigía entendió', {}, { timeout: 3000 })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Voladura' }))
+    expect(screen.getByText('Elegiste')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Perforación' }))
+    expect(screen.getByText('Perforación', { selector: 'dd' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Perforación' }).getAttribute('aria-pressed')).toBe('true')
   })
 
   it('con confianza baja hay que tocar una actividad', async () => {
@@ -99,7 +110,7 @@ describe('pedido de actividad en texto libre', () => {
     renderizar(<PedidoActividad perfil={perfil} onCreado={vi.fn()} />)
     escribir('voy a perforar el frente del TJ-12')
     expect(await screen.findByText('Elige la actividad', {}, { timeout: 3000 })).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: 'Perforación de frente' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Perforación' }))
     fireEvent.change(screen.getByRole('combobox', { name: '¿En qué labor?' }), { target: { value: 'NV-3820 TJ-12' } })
     await waitFor(() => expect(boton().disabled).toBe(false))
     fireEvent.click(boton())
@@ -119,7 +130,7 @@ describe('pedido de actividad en texto libre', () => {
     escribir('voy a perforar el frente del TJ-12')
     expect(await screen.findByText('Elige la actividad', {}, { timeout: 3000 })).toBeTruthy()
     for (const a of ACTIVIDADES_BASE) expect(screen.getByRole('button', { name: a.actividad })).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: 'Perforación de frente' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Perforación' }))
     fireEvent.change(screen.getByRole('combobox', { name: '¿En qué labor?' }), { target: { value: 'NV-3820 TJ-12' } })
     await waitFor(() => expect(boton().disabled).toBe(false))
     fireEvent.click(boton())
@@ -144,7 +155,7 @@ describe('pedido de actividad en texto libre', () => {
     expect(await screen.findByText('Vigía entendió', {}, { timeout: 3000 })).toBeTruthy()
     await new Promise((r) => setTimeout(r, 1200))
     expect(screen.getAllByText('Desatado de rocas').length).toBeGreaterThan(0)
-    expect(screen.queryByText('Perforación de frente', { selector: 'dd' })).toBeNull()
+    expect(screen.queryByText('Perforación', { selector: 'dd' })).toBeNull()
   })
 
   it('una labor que no existe no habilita el pedido', async () => {
